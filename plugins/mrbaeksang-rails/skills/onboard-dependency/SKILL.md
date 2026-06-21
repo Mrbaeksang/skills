@@ -24,7 +24,17 @@ description: Onboard any new external dependency before using it — research th
 1. **Research (live).** Find the current version, the official docs, and the *recommended* usage — not the first StackOverflow answer. Note version + retrieval date. If a sibling `/grill` is running, feed it: "latest is X, the options are A/B/C, recommend A — which?"
 2. **Vendor.** Write the official reference into `docs/official/<dep>/` with a header line: `> source: <url> · version: <v> · retrieved: <date>`. Vendoring (not symlinking) survives clean clones and CI. Record it in `docs/official/INDEX.md`.
 3. **Extract rules.** From the vendored docs, list the deterministic "always do X / never do Y" facts you can grep for (banned imports, required call shapes, deprecated APIs). Judgment calls go to human review, not the hook.
-4. **Guard.** Add the rules to the project's PreToolUse guard so future edits that violate official usage are **denied** with a pointer to the vendored doc. See `scripts/onboard-dependency-guard.sh` for the reference guard.
+4. **Guard.** Don't hand-write a guard script — **append rules to `.claude/usage-rules.tsv`** (the
+   generic `usage-guard` hook reads it; the hook code never changes). One TAB-separated line per
+   rule, grounded in the **actually-installed** source (venv `site-packages` / `node_modules` `.d.ts`),
+   not just docs:
+   ```
+   exts<TAB>severity<TAB>regex<TAB>message<TAB>unless(optional)
+   ```
+   `exts` = comma-separated extensions (`py` or `ts,tsx,js,jsx`); `severity` = `block` (unambiguous
+   bug) or `warn` (fuzzy); `regex` = an ERE grep can match in changed content; `unless` = an optional
+   ERE exemption. Prefer `block` only for high-confidence patterns (deprecated/removed APIs, injection,
+   wrong-field bugs); everything fuzzy is `warn`. See `rules/starter-usage-rules.tsv` for examples.
 
 ## Frameworks need a CONSIDERATIONS doc
 

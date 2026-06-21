@@ -19,19 +19,36 @@ records it and confirms the enforcing hooks are live. Run it once per repo.
 
    Recommend L2 unless the user says it's a throwaway. **Never assume — always ask.**
 
-2. **Write `docs/agents/deployment-level.md`** with the machine-readable marker on its own line:
+2. **Write `docs/agents/deployment-level.md`** with two machine-readable markers, each on its own line:
    ```
-   <!-- mrbaeksang:level=L2 -->
+   <!-- mrbaeksang:current=L1 -->
+   <!-- mrbaeksang:target=L2 -->
    ```
-   Then the human-readable dial table (copy from the plugin's `docs/agents/deployment-level.md`
-   template). The marker is the single source of truth that hooks grep; the table is reference.
+   `current` = what hooks enforce now (block/warn/off); `target` = what you design toward (seams).
+   Then the human-readable dial table. The markers are the single source of truth hooks grep.
 
-3. **Confirm the rails are active.** Tell the user `/reload-plugins` should report the
-   `mrbaeksang-rails` hooks. Smoke-test the guard: attempt to add an un-onboarded dependency to a
-   manifest and confirm it is blocked at L2 (warned at L1, ignored at L0).
+3. **Seed `.claude/usage-rules.tsv`** from the plugin's `rules/starter-usage-rules.tsv` (common deps'
+   official-usage rules). The generic `usage-guard` hook reads this file; `/onboard-dependency`
+   appends a line per new dependency. The hook code never changes — only this data grows.
 
-4. **Point at the official-docs source of truth.** Ensure `docs/official/INDEX.md` exists; the
-   `/onboard-dependency` rail vendors new dependencies' official docs there.
+4. **Write the `## Engineering rails` section into `CLAUDE.md`** (or `AGENTS.md` if that's the repo's
+   file) so a fresh agent reads the conventions before hooks ever fire:
+   ```markdown
+   ## Engineering rails (mrbaeksang)
+   - Deployment level: docs/agents/deployment-level.md (current/target). Build for target, run at current.
+   - External dependency? Onboard first (/onboard-dependency): research official usage grounded in the
+     installed source → vendor docs/official/<dep>/CONSIDERATIONS.md → append usage rules. Don't use a
+     library you haven't onboarded.
+   - No dodge: never ship "overkill / blocked-on-credential / not sure" — check level / use a test
+     double or local instance / research first.
+   - Mechanism lives in code: ERD = the migration, API = generated OpenAPI. Don't hand-author
+     erd.md/api.md. Decisions → docs/adr/, terms → CONTEXT.md.
+   - Hooks (.claude, level-calibrated): onboard-dependency-guard, doc-discipline-guard, usage-guard.
+   ```
+
+5. **Confirm rails are active.** `/reload-plugins` should report the `mrbaeksang-rails` hooks.
+   Smoke-test: add an un-onboarded dependency to a manifest (blocked at L2 / warned at L1), and ensure
+   `docs/official/INDEX.md` exists for vendored sources.
 
 ## Which skills now read this
 

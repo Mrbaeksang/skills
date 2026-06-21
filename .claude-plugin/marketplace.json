@@ -8,7 +8,7 @@
       "name": "mrbaeksang-rails",
       "source": "./plugins/mrbaeksang-rails",
       "description": "Enforced engineering rails: dependency-onboarding, smoke-gate, deployment-level calibration. Ships blocking hooks that activate on install.",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "author": { "name": "Mrbaeksang" },
       "keywords": ["rails", "guardrails", "hooks", "discipline", "verification"]
     }

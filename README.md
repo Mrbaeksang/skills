@@ -94,7 +94,7 @@ deployment dial are *steps inside*, not separate skills.
 | `/onboard-dependency` | New dependency ⇒ research → vendor official docs → **feature survey** → decisions ledger → blocking hook. Unconditional. |
 | `/no-dodge` | The rigor gate. Refuses "overkill / blocked-on-credential / I'm-not-sure / hand-authored spec": calibrates to deployment level, forces a **test-double or local instance** before "blocked", research before asserting, doc-discipline (mechanism lives in code), and chains `/onboard-dependency`. |
 
-Hooks shipped: `onboard-dependency-guard` (un-onboarded dep) + `doc-discipline-guard` (hand-authored `erd.md`/`api.md`/schema specs). Both calibrate block/warn/off by deployment level.
+Hooks shipped: `onboard-dependency-guard` (un-onboarded dep) · `doc-discipline-guard` (hand-authored `erd.md`/`api.md` specs) · **`usage-guard`** (data-driven: reads `.claude/usage-rules.tsv`, which `/onboard-dependency` feeds one line per dep — the hook code never changes, only the rules grow). All calibrate block/warn/off by deployment level. A `rules/starter-usage-rules.tsv` ships official-usage rules for a common stack (pydantic-ai, AG-UI, assistant-ui, Next 16, Better Auth, psycopg3/PG18, OpenRouter).
 
 ### Deployment-level dial (draft — under review)
 

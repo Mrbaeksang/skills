@@ -1,0 +1,36 @@
+# exts	severity	regex	message	unless(optional)   -- delimiter 	 -> TAB. Fed by /onboard-dependency.
+# --- pydantic-ai + AG-UI (py) ---
+py	block	\.to_ag_ui\(|AGUIApp	pydantic-ai: to_ag_ui()/AGUIApp deprecated -> pydantic_ai.ui.ag_ui.AGUIAdapter
+py	block	from pydantic_ai\.ag_ui import|import pydantic_ai\.ag_ui([^.]|$)	pydantic-ai: pydantic_ai.ag_ui deprecated -> pydantic_ai.ui.ag_ui
+py	block	THINKING_[A-Z]	AG-UI: THINKING_* events deprecated -> REASONING_* (or skip)
+py	warn	VercelAIAdapter	stack: we chose AG-UI, not the Vercel adapter
+# --- psycopg3 / Postgres 18 (py/sql) ---
+py	block	^[[:space:]]*(import[[:space:]]+psycopg2|from[[:space:]]+psycopg2)	psycopg: use psycopg3 (import psycopg), not psycopg2
+py	block	\.execute\([[:space:]]*f["']	SQL injection: f-string into .execute() -> %s params, data as 2nd arg
+py	block	\.execute\([^)]*\.format\(	SQL injection: .format() into .execute() -> %s params	sql\.(SQL|Identifier)
+py	block	\.execute\(.*%s.*["'][[:space:]]*%[[:space:]]*[(a-zA-Z_]	SQL injection: %-merging values into SQL -> pass params as 2nd arg
+py	block	\.execute\([^,]*["']%s["']	psycopg: quoted %s breaks adaptation -> unquoted %s
+py	block	\.callproc\(	psycopg3: callproc() removed -> SELECT func(...) / CALL proc(...)
+py	warn	\bIN[[:space:]]+%s	psycopg3: IN %s removed -> = ANY(%s) with a list
+py	warn	RealDictCursor|NamedTupleCursor	psycopg3: cursor subclasses gone -> psycopg.rows.dict_row
+sql	warn	GENERATED[[:space:]]+ALWAYS[[:space:]]+AS[[:space:]]*\(	PG18: GENERATED column defaults to VIRTUAL (not indexable) -> add STORED if persisted	STORED
+sql	warn	(CREATE|ALTER)[[:space:]]+ROLE.*md5	PG18: md5 auth deprecated -> SCRAM
+# --- OpenRouter (py) ---
+py	block	\.usage\.total_cost|usage\[["']total_cost|get\(["']total_cost	OpenRouter: no usage.total_cost field -> use usage.cost (else silent zero-charge)
+py	block	stream_options.*include_usage	OpenRouter: stream_options.include_usage deprecated/no-effect -> remove
+py	block	api\.openai\.com	stack: use the OpenRouter base_url, not api.openai.com
+# --- assistant-ui (ts/tsx/js/jsx) ---
+ts,tsx,js,jsx	block	makeAssistantToolUI|useAssistantToolUI|makeAssistantTool|useAssistantTool|hitlTool|generativeTools	assistant-ui: deprecated make*ToolUI/*Tool -> defineToolkit + render
+ts,tsx,js,jsx	block	AssistantModal	assistant-ui: we chose AssistantSidebar (full pane), not AssistantModal
+# --- Next.js 16 + Better Auth (ts/tsx/js/jsx/mjs) ---
+ts,tsx,js,jsx,mjs	block	next-auth|getServerSession	auth: use Better Auth (auth.api.getSession), not next-auth/getServerSession
+ts,tsx,js,jsx,mjs	block	unstable_cache|unstable_cacheLife|unstable_cacheTag|unstable_rootParams	Next16: unstable_cache removed -> 'use cache' / cacheLife / cacheTag
+ts,tsx,js,jsx,mjs	block	export[[:space:]]+(default[[:space:]]+)?(async[[:space:]]+)?function[[:space:]]+middleware\b	Next16: middleware() renamed -> proxy() in proxy.ts (Node-only)
+ts,tsx,js,jsx,mjs	block	serverRuntimeConfig|publicRuntimeConfig	Next16: serverRuntimeConfig removed -> process.env / NEXT_PUBLIC_*
+ts,tsx,js,jsx,mjs	block	skipMiddlewareUrlNormalize	Next16: skipMiddlewareUrlNormalize -> skipProxyUrlNormalize
+ts,tsx,js,jsx,mjs	block	next/legacy/image	Next16: next/legacy/image deprecated -> next/image
+ts,tsx,js,jsx,mjs	block	experimental_ppr|experimental[[:space:]]*:[[:space:]]*\{[^}]*(ppr|dynamicIO|useCache)	Next16: PPR/dynamicIO/useCache removed -> cacheComponents: true
+ts,tsx,js,jsx,mjs	block	next/amp|useAmp	Next16: AMP removed
+ts,tsx,js,jsx,mjs	block	revalidateTag\([[:space:]]*["'][^"']+["'][[:space:]]*\)	Next16: revalidateTag needs a 2nd cacheLife arg
+ts,tsx,js,jsx,mjs	warn	runtime[[:space:]]*=[[:space:]]*["']edge	Next16/BetterAuth: auth/DB code needs the Node runtime, not edge
+ts,tsx,js,jsx,mjs	warn	images[[:space:]]*:[[:space:]]*\{[^}]*domains	Next16: images.domains deprecated -> images.remotePatterns
