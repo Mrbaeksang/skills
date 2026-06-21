@@ -1,7 +1,7 @@
 {
   "name": "mrbaeksang-rails",
   "description": "Enforced engineering rails — dependency-onboarding, smoke-gate, deployment-level calibration. Guidance becomes hooks that block.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": { "name": "Mrbaeksang", "email": "qortkdgus95@gmail.com" },
   "homepage": "https://github.com/Mrbaeksang/skills",
   "repository": "https://github.com/Mrbaeksang/skills",

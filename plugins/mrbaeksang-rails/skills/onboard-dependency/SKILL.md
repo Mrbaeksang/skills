@@ -26,9 +26,45 @@ description: Onboard any new external dependency before using it — research th
 3. **Extract rules.** From the vendored docs, list the deterministic "always do X / never do Y" facts you can grep for (banned imports, required call shapes, deprecated APIs). Judgment calls go to human review, not the hook.
 4. **Guard.** Add the rules to the project's PreToolUse guard so future edits that violate official usage are **denied** with a pointer to the vendored doc. See `scripts/onboard-dependency-guard.sh` for the reference guard.
 
+## Frameworks need a CONSIDERATIONS doc
+
+A framework (Next.js, FastAPI, a major SDK) is not just "a dependency" — adopting it commits
+architecture. So beyond vendoring its docs, write `docs/official/<framework>/CONSIDERATIONS.md`
+covering the footguns people miss: runtime (Node vs Edge), rendering/caching model, auth
+integration, secret exposure, streaming, deploy target, i18n/SEO, version migration. Derive it
+from the **latest** official docs, not memory — frameworks move fast.
+
+Resist the reflex to call thoroughness "overkill": at a production **target**, this research is
+required, not optional. And design to the **target** level — leave seams for what's coming
+(global auth, billing) even if the current level doesn't implement them yet.
+
+### Feature survey — choose deliberately, don't default to the basics
+
+LLMs wire the two features they remember and ignore the rest. Before building on a dependency,
+**enumerate its FULL feature surface** (from the official docs at the pinned version) and tag each
+**USE / SKIP / MAYBE** with a one-line reason for *this* project. Put the survey in
+`CONSIDERATIONS.md` and end it with a "minimum viable feature set we actually wire". You can't
+choose what you never listed.
+
+### CONSIDERATIONS.md must carry a Decisions ledger
+
+The most dangerous gap is the decision the agent never *surfaced* — a load-bearing choice the
+SDK has an official pattern for, silently skipped. Kill it with a visible ledger. Every
+framework/SDK `CONSIDERATIONS.md` ends with a `## Decisions (official SDK patterns)` table:
+
+| concern | official pattern / options | our decision | status |
+|---|---|---|---|
+
+Enumerate the load-bearing concerns the SDK forces you to choose on — typically **memory /
+conversation history, state injection, tool registration, error/retry, streaming, usage &
+cost limits, auth, caching, deployment** (tailor per SDK). An undecided row is **`TBD` (visible)**,
+never absent. No silent skips. Proactively raise these *before* building — the user shouldn't
+have to notice they were missing.
+
 ## Deployment-level calibration
 
-Read the repo's level from `docs/agents/deployment-level.md` and scale rigor:
+Read `docs/agents/deployment-level.md`: `current` scales the guard (block/warn/off), `target`
+scales the considerations + architectural seams. Build for target, run at current.
 
 | | L0 local / prototype | L1 staging / internal | L2 production |
 |---|---|---|---|

@@ -23,12 +23,13 @@ case "$file" in
 esac
 
 # Deployment level (default L2 = strictest, per "production unless told otherwise").
-# Read ONLY the explicit marker `mrbaeksang:level=L<n>` — never grep the whole file,
-# because the dial table itself names every level.
+# Enforcement tracks the CURRENT level (blocking hooks). Read ONLY the explicit marker
+# `mrbaeksang:current=L<n>` — never grep the whole file, because the dial names every level.
+# (TARGET level governs architectural seams/considerations, read by skills, not this hook.)
 level="L2"
 lvl_file="$proj/docs/agents/deployment-level.md"
 if [ -f "$lvl_file" ]; then
-  m="$(grep -oiE 'mrbaeksang:level=L[0-9]' "$lvl_file" | grep -oiE 'L[0-9]' | head -1)"
+  m="$(grep -oiE 'mrbaeksang:current=L[0-9]' "$lvl_file" | grep -oiE 'L[0-9]' | head -1)"
   [ -n "$m" ] && level="$(printf '%s' "$m" | tr '[:lower:]' '[:upper:]')"
 fi
 [ "$level" = "L0" ] && exit 0

@@ -1,14 +1,18 @@
 # Deployment level
 
-<!-- mrbaeksang:level=L2 -->
+<!-- mrbaeksang:current=L2 -->
+<!-- mrbaeksang:target=L2 -->
 
-**Current level: L2 — production.**
-Rationale: this is a public marketplace package; other people install it and depend on its
-rails. A broken rail here breaks other people's repos. Full enforcement applies to building it.
+**Current: L2 · Target: L2 — production.**
+Rationale: a public marketplace package others install and depend on. A broken rail here breaks
+other people's repos, so enforcement is full from day one and the target equals the current.
 
-Every mrbaeksang skill reads the marker above (`mrbaeksang:level=L2`) and scales its rigor.
-To change level, edit the marker — that one token is the source of truth; the table below is
-human reference only.
+Two markers, two jobs:
+- **`current`** — what blocking hooks enforce *right now* (block / warn / off).
+- **`target`** — what skills design *toward* (architectural seams, considerations). Build for
+  target, run at current. If current < target, leave seams (auth, billing) even if unbuilt.
+
+Edit the markers to change level; they are the source of truth, the table is reference.
 
 ## The dial
 

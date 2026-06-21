@@ -84,14 +84,17 @@ We committed to a stack before checking it, and de-risked the cheap assumptions 
 
 > Status: **charter stage.** This README is the contract we build against. Skills land here as they're written and verified (by their own smoke-gate).
 
+**Compact on purpose** — three skills, not a sprawl (adding skills mindlessly *is* the dodge).
+One gate chains the rest; doc-discipline, feature-survey, research-first grilling, and the
+deployment dial are *steps inside*, not separate skills.
+
 | Skill | Rail it enforces |
 |---|---|
-| `/setup-mrbaeksang-skills` | Records deployment level; installs hooks + `docs/agents/` config |
-| `/onboard-dependency` | New dependency ⇒ research → vendor official docs → blocking hook. Unconditional. |
-| `/smoke-gate` | Nothing is "done" until rendered and looked at (HITL or agent vision) |
-| `/due-diligence` | Parallel deep research before committing to a stack (level-calibrated) |
-| `/spike-first` | Kill the most expensive assumption with the cheapest experiment, before the PRD |
-| `/agent-loop` | Design agentic loops: depth-nested tools (progressive disclosure) + a real verification signal + loop-until-verified |
+| `/setup-mrbaeksang-skills` | Records deployment level (current/target); installs the blocking hooks |
+| `/onboard-dependency` | New dependency ⇒ research → vendor official docs → **feature survey** → decisions ledger → blocking hook. Unconditional. |
+| `/no-dodge` | The rigor gate. Refuses "overkill / blocked-on-credential / I'm-not-sure / hand-authored spec": calibrates to deployment level, forces a **test-double or local instance** before "blocked", research before asserting, doc-discipline (mechanism lives in code), and chains `/onboard-dependency`. |
+
+Hooks shipped: `onboard-dependency-guard` (un-onboarded dep) + `doc-discipline-guard` (hand-authored `erd.md`/`api.md`/schema specs). Both calibrate block/warn/off by deployment level.
 
 ### Deployment-level dial (draft — under review)
 
