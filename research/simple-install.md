@@ -22,4 +22,4 @@ Claude Code 2.1.317과 Codex CLI 0.166.0에서 임시 설정 디렉터리를 chi
 
 수정 commit 7a19e6d를 GitHub tree URL로 지정해 실제 `npm run smoke:install -- <URL>`을 실행했다. Windows Node.js v24.22.0에서 Codex와 Claude 프로젝트 설치 각각 7개 PASS. 전체 설치 파일 byte equality, local reference closure, 공통 원본과 복사본 일치, 기존 unrelated skill 보존을 확인했다. 모델 요청은 수행하지 않았다.
 
-Node 유지보수 check와 node:test 6개도 통과했다. 테스트는 metadata/참조 오류, drift, 기존 파일 보존과 symlink 경계를 포함한다. 사용자 설치에는 자체 Python/Node installer를 제공하지 않으며 기존 Skills CLI/native installer를 사용한다.
+Node 유지보수 check와 node:test 11개도 통과했다. 테스트는 metadata/참조 오류, drift, 기존 파일 보존과 symlink 경계를 포함한다. 사용자 설치에는 자체 Python/Node installer를 제공하지 않으며 기존 Skills CLI/native installer를 사용한다.
