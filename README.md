@@ -89,7 +89,7 @@ npx skills@latest update
 | `test` | use case 중심 테스트 설계·구현·실행 |
 | `verify` | 실제 API·CLI·UI 실행과 완료 증거 확인 |
 | `clean` | 동작을 보존하는 코드 정리·과잉 추상화와 AI식 코드 점검 |
-| `polish` | 기존 UI·사용자 문구의 위계·일관성·완성도 개선 |
+| `polish` | 기존 브랜드·사용자 과제에 맞춰 UI·문구를 정리하고 상투적 AI식 장식을 맥락에 따라 개선 |
 | `optimize` | 성능·메모리·CSS·프론트 병목 측정과 개선 |
 | `upgrade` | 의존성 호환 판단·버전 변경·코드 이행·검증 |
 

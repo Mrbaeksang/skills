@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>동네 게시판 예시</title>
+<style>
+body { margin:0; font:16px/1.6 system-ui,sans-serif; background:#f6f7ff; color:#202034 }
+main { max-width:720px; margin:0 auto; padding:28px 16px }
+.hero { background:linear-gradient(120deg,#8b4dff,#416eff); color:white; border-radius:28px; padding:42px 32px; box-shadow:0 16px 30px #40308c30 }
+.hero h1 { font-size:36px; margin:8px 0 }
+.hero p { margin:0 0 20px }
+.pill { display:inline-block; background:#ffffff36; border-radius:99px; padding:5px 14px; font-size:13px }
+a.cta { display:inline-block; background:white; color:#5138a8; border-radius:99px; padding:12px 28px; text-decoration:none; font-weight:700 }
+.section { margin-top:24px; padding:28px; background:white; border-radius:28px; box-shadow:0 12px 28px #6a69aa20 }
+h2 { margin-top:0 } input { width:100%; box-sizing:border-box; padding:14px; border-radius:99px; border:1px solid #aaa; font:inherit }
+.story { padding:22px; border:1px solid #eeedff; border-radius:24px; margin-top:16px; box-shadow:0 8px 20px #c7c5e940 }
+.story h3 { margin:0 } .story p { margin:0; color:#52546c } .label { border-radius:99px; background:#e9e0ff; padding:4px 10px; font-size:12px }
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<span class="pill">✨ 실시간 HOT · NEW</span>
+<h1>🌈 새로운 연결의 시작</h1>
+<p>우리 동네의 무한한 가능성을 경험하세요!</p>
+<a href="#stories" class="cta">🚀 지금 시작하기</a>
+</header>
+<section class="section" aria-labelledby="search-title">
+<h2 id="search-title">🔎 우리 동네를 탐색하세요</h2>
+<label for="query">게시글 검색</label>
+<input id="query" type="search" placeholder="검색어를 입력하세요">
+</section>
+<section id="stories" class="section" aria-labelledby="stories-title">
+<span class="pill" style="background:#7d5cf1;color:white">TRENDING NOW</span>
+<h2 id="stories-title">🔥 새로운 연결의 시작</h2>
+<div class="story" data-title="붕어빵 파는 곳 아시는 분"><span class="label">🏆 NEW</span><h3>붕어빵 파는 곳 아시는 분</h3><p>맛집 · 8일 전</p></div>
+<div class="story" data-title="엔마트 캡틴큐"><span class="label">🏆 NEW</span><h3>엔마트 캡틴큐</h3><p>생활/편의 · 7일 전</p></div>
+</section>
+</main>
+<script>
+const query = document.getElementById('query');
+const stories = [...document.querySelectorAll('.story')];
+query.addEventListener('input', () => {
+ const term = query.value.trim().toLocaleLowerCase('ko');
+ for (const story of stories) story.hidden = !story.dataset.title.toLocaleLowerCase('ko').includes(term);
+});
+</script>
+</body>
+</html>
