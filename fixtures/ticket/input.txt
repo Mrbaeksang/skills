@@ -1,0 +1,5 @@
+/ticket
+이 호출은 로컬 행동 평가다. 외부 게시·구현·파일 변경 없이 완성된 티켓과 상태 변경 계획을 답변하라. 승인 재질문은 필요 없다.
+명세 key=booking-v1. R1 회원은 본인 예약을 취소한다. 24시간 이전만 허용하며 이미 취소된 요청은 같은 성공이다. R2 운영자는 예약 상태를 조회한다. 일반 회원의 운영자 조회는 거부한다. R3 예약 도메인이 오류 의미를 소유하고 공통 API 경계는 오류 코드·안전한 메시지·trace ID를 변환한다. 인증 기반과 공통 오류 경계는 하나의 선행 티켓으로 재사용한다. R4 저장 장애는 성공으로 표시하지 않고 재시도 가능 오류를 반환한다. 삭제·환불은 제외한다.
+현재 tracker snapshot: parent P와 foundation F가 있고 F는 open,status:active,feature다. 취소 C는 open,status:blocked,bug로 F에 의존한다. C의 stable marker는 ticket-key: booking-v1/cancel이며 이미 완성된 동일 본문이 있다. C 생성 응답이 timeout 났으나 이후 전체 목록 readback에서 marker가 일치하는 C 1건을 확인했다. 운영자 조회 티켓은 없다. 이번 입력에서 실제 서버에 연결할 수 없으므로 snapshot 기반 계획임을 구분하라.
+F 완료 전 frontier, 검증 통과로 F 완료 후 frontier, C 구현/검증/완료 후 C 재개 때 상태를 각각 제시하라. 무관한 bug/feature 라벨을 보존하라. native sub-issue와 blocking 관계 및 미지원 tracker 대체도 설명하라. 각 티켓을 대화 없이 실행할 수 있게 상세하게 작성하고 요구사항 coverage와 누락/중복/순환 검사를 제시하라.
