@@ -1,6 +1,6 @@
 # Packaging research
 
-Checked: 2026-11-05. Implementation: original project instructions, no upstream skill/code copied. Documentation was consulted, not redistributed. Repository license remains an owner decision; no upstream license is asserted to cover this original repository.
+Checked: 2026-11-05. Implementation: original project instructions, no upstream skill/code copied. Documentation was consulted, not redistributed. Original repository content uses the root MIT LICENSE; no upstream license is asserted to cover this original repository.
 
 | Source | Version / original revision | License / reuse boundary | Decision |
 |---|---|---|---|
@@ -28,6 +28,7 @@ The minimal install refuses any existing skill name. It provides no force/overwr
 | Windows, Claude Code 2.1.317, project skill folder, existing subscription auth | PASS: assembled local project directory | See [smoke record](spec-smoke.md) | See smoke record; only minimal decided conversation |
 | Windows, Codex CLI 0.166.0, project skill folder, existing auth | PASS: assembled directory | Found requested skill; shell read blocked in read-only mode | NOT PASS: generated fallback is not full skill execution |
 | Native Codex CLI 0.166.0, Windows, fresh config home, local marketplace | PASS including update/reinstall/removal | Installed/enabled list PASS; authenticated native invocation NOTRUN | BLOCKED in separate shared-auth project-skill fixture: shell read denied |
-| Native Claude plugins, other OS/hosts, GitHub remote install | NOTRUN here | NOTRUN here | NOTRUN here |
+| Native Claude Code 2.1.317, Windows, local marketplace | See [Claude lifecycle](claude-lifecycle.md) | Separate existing-auth session plugin test in that record | Bounded spec fixture; see record |
+| Other OS/hosts, GitHub remote install | NOTRUN here | NOTRUN here | NOTRUN here |
 
 Fresh working directories isolate task artifacts, not authentication or every inherited instruction. No credentials were copied, user configuration edited, or denied tool action bypassed. Marketplace lifecycle and broad platform acceptance remain separate work.
