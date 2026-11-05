@@ -13,7 +13,7 @@ Revisions/license identifiers were retrieved through `gh api repos/<owner>/<repo
 
 ## Source and adapter boundary
 
-`skills/<name>/SKILL.md` is canonical. It links to `references/execution-contract.md`; that link is intentionally resolved during assembly, from the sole `common/execution-contract.md` source. Conditional domain references remain inside the owning skill directory and are read only on their documented trigger. No hardcoded spec-only list exists in the assembler.
+`skills/<name>/SKILL.md` is canonical. It links to `references/execution-contract.md`; that link is intentionally resolved during assembly, from the sole `common/execution-contract.md` source. The assembler copies Markdown contracts from `common/` into every standalone skill; `common/tracker-state.md` is the sole state vocabulary/transition source, conditionally read by build and ticket for ticket state work. `common/workspace-lifecycle.md` is conditionally read by build/diagnose/improve for code modification and workspace integration/cleanup. Conditional domain references remain inside the owning skill directory and are read only on their documented trigger. No hardcoded spec-only list exists in the assembler.
 
 `python scripts/package.py install --dest <skills-directory>` materializes all current skills into a new destination. It checks supported metadata, local links/containment, collisions, and obvious personal path/credential patterns before copying. This is a focused repository validator, not a full YAML or secret scanner. Human release inspection remains required for non-Markdown/binary assets and unrecognized secrets.
 

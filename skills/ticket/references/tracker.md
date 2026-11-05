@@ -19,21 +19,6 @@ GitHub에서는 containment와 execution dependency를 구분한다. parent의 n
 
 선행 이슈가 닫혔다는 것만으로 해소하지 않는다. 필요한 산출물과 검증이 충족됐는지 확인한다. wontfix/중복 종료는 계약을 공급하지 않을 수 있다. 해소된 관계는 이력을 보존하고, 현재 open blocker와 증거를 기준으로 계산한다. 선행 재개 시 의존 이슈의 영향을 재평가한다.
 
-## 단일 상태와 전환
-
-기존 tracker vocabulary 대응을 확인한다. 아래 여섯 상태 중 정확히 하나를 유지한다. 허용된 범위에서 필요한 라벨을 생성한다. 변경 직전 라벨을 읽고 이 상태 집합의 이전 라벨만 제거하며 feature/bug 등 무관한 라벨은 보존한다. 전체 라벨 덮어쓰기를 피한다. 변경 후 전체 라벨을 읽어 상태 수=1과 무관 라벨 보존을 확인한다. 동시 편집으로 불일치하면 조정하고 성공을 단정하지 않는다.
-
-| 상태 | 진입 조건 |
-|---|---|
-| `status:triage` | 범위·실행 가능성을 정리 중 |
-| `status:ready` | 계약과 수용 기준 준비, 실제 미해결 선행/외부 blocker 없음 |
-| `status:active` | 구현 또는 검증을 실제 수행 중 |
-| `status:blocked` | 미해결 의존성·권한·중요 미결정; 원인, 필요한 조치, 재개 조건 기록 |
-| `status:done` | 필요한 수용 기준별 검증 증거가 충족되고 완료 요약 기록 |
-| `status:wontfix` | 수행하지 않는 결정과 이유 기록 |
-
-검증은 active에서 수행한다. 사용자 검수 대기 라벨은 만들지 않는다. ready→active→done을 실제 작업과 연결하고 done은 completed 종료와 일치시킨다. wontfix는 사유에 맞게 not planned 종료한다. 재개 요청이면 과거 증거를 남기고 reopen한 뒤 남은 계약에 따라 ready/blocked/active로 전환한다. 재개 자체가 active의 증거는 아니다.
-
-선행 완료 후에는 의존 티켓의 blocker와 완료 증거를 다시 읽고 해소된 것만 ready로 바꾼다. 상태·종료 변경과 관계는 별도 요청일 수 있으므로 각 단계 readback으로 부분 성공을 기록한다. 전환 성공을 확인한 뒤 새 frontier를 보고한다.
+상태 판정·완료·재개에는 [공유 상태 계약](tracker-state.md)을 적용한다.
 
 공식 API 참고 (실행 시 현재 지원 재확인): [Sub-issues](https://docs.github.com/en/rest/issues/sub-issues), [Issue dependencies](https://docs.github.com/en/rest/issues/issue-dependencies), [Issue labels](https://docs.github.com/en/rest/issues/labels), [Issues](https://docs.github.com/en/rest/issues/issues).

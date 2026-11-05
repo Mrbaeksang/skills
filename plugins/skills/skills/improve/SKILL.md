@@ -5,7 +5,7 @@ description: 코드베이스의 구조·의존성·병목을 체계적으로 조
 
 # Improve
 
-먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 분석-only 요청은 읽기와 허용된 관찰로 끝내며 코드·설정·보고서 파일을 임의로 쓰지 않는다. 실행 권한이 있으면 기존 작업을 보존하면서 근거가 있는 최소 개선까지 이어간다.
+먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 코드 수정을 시작하거나 작업 branch/worktree를 통합·정리할 때는 [작업 공간 수명주기](references/workspace-lifecycle.md)를 읽고 생성부터 안전한 정리 영수증까지 적용한다. 분석-only 요청은 읽기와 허용된 관찰로 끝내며 코드·설정·보고서 파일을 임의로 쓰지 않는다. 실행 권한이 있으면 기존 작업을 보존하면서 근거가 있는 최소 개선까지 이어간다.
 
 1. **범위와 상태.** cwd, branch/worktree, 지침, 변경 파일, 도구와 목표를 확인한다. 분석/구현 권한, 대상 subsystem, 사용자 use case, 시간·실행 비용 한도를 기록한다. 이미 정해진 목표는 재질문하지 않는다.
 2. **지도와 coverage.** [탐색 절차](references/exploration.md)를 읽고 전체 디렉터리·manifest·entrypoint에서 시작한다. 모듈 소유 데이터, 공개 계약, 의존 edge와 주요 use case의 호출/데이터 경로를 근거 위치와 연결한다. 각 subsystem을 목록만 확인/소스 추적/실행 확인/미탐색으로 구분한다. 일부 경로 추적을 전체 코드베이스 검증이라고 부르지 않는다.
