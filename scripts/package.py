@@ -95,6 +95,10 @@ def bundle(source, destination):
     for path, _ in manifests:
         check_portability(path)
     count = install(source, destination / 'skills')
+    if (source / 'LICENSE').is_file():
+        shutil.copyfile(source / 'LICENSE', destination / 'LICENSE')
+    if (source / 'adapters/README.md').is_file():
+        shutil.copyfile(source / 'adapters/README.md', destination / 'README.md')
     for path, relative in manifests:
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
