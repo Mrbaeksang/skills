@@ -9,11 +9,11 @@ On Claude Code use `/skills:shape`, `/skills:spec`, `/skills:ticket`, `/skills:b
 `/skills:diagnose`, `/skills:improve`, or `/skills:review`. On Codex select the installed
 skill by its source and invoke `$shape`, `$spec`, and the equivalent names.
 
-This is an integration candidate, not evidence of a published main release. Windows
-Claude Code has bounded fixture evidence. Codex installation lifecycle is verified,
-but actual skill execution is policy-blocked; UI acceptance is also blocked. Remote
-marketplace installation, other hosts and other operating systems remain NOTRUN.
-Consult the source release receipt for precise evidence and remaining gates.
+Install through the native marketplace or `npx skills@latest add Mrbaeksang/skills`;
+see the source repository for host-specific commands. No package build is required.
+Windows Claude Code has bounded fixture evidence. Installation checks are separate
+from model execution: Codex runtime and UI acceptance remain policy-blocked.
+Consult the source verification records for tested versions and remaining gates.
 
 The host supplies file reading and task-specific shell, tracker and browser tools.
 Missing tools and policy denials must be reported; this plugin does not install
