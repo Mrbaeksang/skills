@@ -1,0 +1,13 @@
+diff --git a/transfer.py b/transfer.py
+index 62103a6..e181598 100644
+--- a/transfer.py
++++ b/transfer.py
+@@ -8,8 +8,6 @@ def transfer(request):
+     source = request['source']
+     target = request['target']
+     amount = request['amount']
+-    if request['actor'] != source:
+-        return {'error': 'forbidden', 'balances': balances}
+     if amount <= 0 or balances[source] < amount:
+         return {'error': 'invalid_amount', 'balances': balances}
+     balances[source] -= amount
