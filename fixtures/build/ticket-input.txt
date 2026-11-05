@@ -1,0 +1,9 @@
+/build 아래 티켓을 직접 구현하라. 이 fixture만 사용하고 quote.py, test_quote.py, evidence.md만 수정한다. keep.txt와 기존 변경을 보존한다. 다른 스킬, 설치, network, tracker, 하위 agent, git 수정은 범위 밖이다.
+
+티켓: Quote CLI. 목표는 Python standard library만 사용하는 stateless 배송비 CLI다. shipment가 무게 규칙/가격을 소유하고 CLI adapter가 오류를 JSON으로 변환한다.
+R1: python quote.py 1 => exit 0, stdout JSON {"total":5000}.
+R2: 정수 1..5는 5000, 6..10은 8000. 5,6,10 경계를 검증한다.
+R3: 0,11,소수/문자/인자 누락 => exit 2, stdout 없음, stderr JSON {"error":"INVALID_WEIGHT","retryable":false}. traceback이나 경로 노출 없음.
+R4: 실패 후 정상 호출 성공. 영속 상태/외부 서비스 없음.
+R5: keep.txt와 기존 변경 보존. 권한 시나리오는 인증 없는 공개 stateless CLI에 해당하지 않는다.
+공개 CLI 프로세스 동작을 test_quote.py로 검증하고 quote.py를 구현한다. 실제 실행과 요구별 증거를 evidence.md에 남긴다. 도구가 없으면 필수 runtime은 NOTRUN이며 done으로 판단하지 않는다. 선행 티켓은 없다.

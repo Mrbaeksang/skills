@@ -1,0 +1,1 @@
+/build help.txt의 delivry 오타를 delivery로 고쳐라. 문구만 바꾸는 저위험 작업이다. 이 디렉터리의 help.txt만 수정하고 다른 파일 생성, 설치, network, 다른 스킬 호출은 하지 않는다. 읽어서 결과를 확인하라.
