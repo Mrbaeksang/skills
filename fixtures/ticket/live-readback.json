@@ -1,0 +1,178 @@
+[
+  {
+    "create": {
+      "number": 16,
+      "state": "open",
+      "state_reason": null,
+      "title": "TEST ONLY ticket smoke parent",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/parent -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:active"
+      ]
+    }
+  },
+  {
+    "create": {
+      "number": 17,
+      "state": "open",
+      "state_reason": null,
+      "title": "TEST ONLY ticket smoke foundation",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/foundation -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:active"
+      ]
+    }
+  },
+  {
+    "create": {
+      "number": 18,
+      "state": "open",
+      "state_reason": null,
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:blocked"
+      ]
+    }
+  },
+  {
+    "native_parent": 16,
+    "children": [
+      17,
+      18
+    ],
+    "consumer": 18,
+    "blocked_by": [
+      17
+    ],
+    "frontier": []
+  },
+  {
+    "simulated_lost_response_reconciled": 18,
+    "additional_creates": 0
+  },
+  {
+    "transition": {
+      "number": 17,
+      "state": "closed",
+      "state_reason": "completed",
+      "title": "TEST ONLY ticket smoke foundation",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/foundation -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:done"
+      ]
+    }
+  },
+  {
+    "transition": {
+      "number": 18,
+      "state": "open",
+      "state_reason": null,
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:ready"
+      ]
+    }
+  },
+  {
+    "frontier": [
+      18
+    ]
+  },
+  {
+    "transition": {
+      "number": 18,
+      "state": "open",
+      "state_reason": null,
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:active"
+      ]
+    }
+  },
+  {
+    "transition": {
+      "number": 18,
+      "state": "closed",
+      "state_reason": "completed",
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:done"
+      ]
+    }
+  },
+  {
+    "transition": {
+      "number": 18,
+      "state": "open",
+      "state_reason": "reopened",
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:ready"
+      ]
+    }
+  },
+  {
+    "reopened_frontier": [
+      18
+    ]
+  },
+  {
+    "transition": {
+      "number": 18,
+      "state": "closed",
+      "state_reason": "completed",
+      "title": "TEST ONLY ticket smoke consumer",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/consumer -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:done"
+      ]
+    }
+  },
+  {
+    "transition": {
+      "number": 17,
+      "state": "closed",
+      "state_reason": "completed",
+      "title": "TEST ONLY ticket smoke foundation",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/foundation -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:done"
+      ]
+    }
+  },
+  {
+    "transition": {
+      "number": 16,
+      "state": "closed",
+      "state_reason": "completed",
+      "title": "TEST ONLY ticket smoke parent",
+      "body": "<!-- ticket-key: ticket-smoke-20261105-native-v1/parent -->\nTEST ONLY: ticket skill API smoke. No product implementation requested.\nAcceptance: native relationship and state readback; preserve documentation label. Close after verification.",
+      "labels": [
+        "documentation",
+        "status:done"
+      ]
+    }
+  },
+  {
+    "cleanup_closed": [
+      16,
+      17,
+      18
+    ]
+  }
+]
