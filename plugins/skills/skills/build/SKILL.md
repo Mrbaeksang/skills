@@ -1,9 +1,11 @@
 ---
 name: build
-description: 명세나 티켓을 직접 받아 도메인 동작을 구현하고 use case 테스트와 실제 API·CLI·UI 실행 증거로 완료를 판단한다. 구현 요청에 사용한다.
+description: 명세·티켓·실행 가능한 개선 항목을 받아 기존 공통 구현을 재사용하고 use case 테스트와 실제 API·CLI·UI 실행 증거로 완료를 판단한다. 기능 구현·개선 실행 요청에 사용한다.
 ---
 
 # Build
+
+개선 항목도 직접 입력으로 받는다. 문제와 근거 위치, 변경 범위, 보존할 계약, 수용 기준이 충분하면 명세·티켓을 다시 만들지 않는다. 구현 전에 [재사용 탐색과 연결 검증](references/integration.md)을 읽고 적용한다. 의존성 버전을 변경할 때만 [업그레이드 절차](references/dependency-upgrades.md)를 읽는다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 코드 수정을 시작하거나 작업 branch/worktree를 통합·정리할 때는 [작업 공간 수명주기](references/workspace-lifecycle.md)를 읽고 생성부터 안전한 정리 영수증까지 적용한다. 입력이 파일 명세든 tracker 티켓이든 아래 같은 요구 → use case → 검증 연결을 사용한다. 다른 스킬 설치나 shape/spec/ticket 호출은 선행 조건이 아니다.
 

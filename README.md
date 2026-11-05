@@ -36,6 +36,34 @@ npx skills@latest add Mrbaeksang/skills
 
 안내에 따라 스킬과 에이전트를 선택합니다. 모든 프로젝트에서 사용하려면 `-g`를 추가하세요. `npx skills@latest update`로 업데이트할 수 있습니다. 설치 도구는 [Vercel Skills CLI](https://github.com/vercel-labs/skills)를 사용합니다.
 
+## 업데이트
+
+기존 설치 방식에 맞춰 실행하고 새 세션을 시작하세요. 재설치·파일 복사·빌드는 필요 없습니다.
+
+**Claude Code**
+
+```sh
+claude plugin marketplace update baeksang-skills
+claude plugin update skills@baeksang-skills
+```
+
+매번 실행하지 않으려면 `/plugin` → Marketplaces → `baeksang-skills` → Enable auto-update를 켜세요. 제3자 marketplace의 자동 업데이트는 기본으로 꺼져 있습니다. [공식 업데이트 안내](https://code.claude.com/docs/en/discover-plugins#keep-plugins-updated)
+
+**Codex CLI**
+
+```sh
+codex plugin marketplace upgrade baeksang-skills
+codex plugin add skills@baeksang-skills
+```
+
+**npx로 설치한 경우**
+
+```sh
+npx skills@latest update
+```
+
+이 명령은 Skills CLI가 관리하는 다른 스킬도 업데이트할 수 있습니다. Native plugin 업데이트와는 별개입니다. [변경 내역](CHANGELOG.md) · [릴리스](https://github.com/Mrbaeksang/skills/releases)
+
 ## 사용할 스킬
 
 | 스킬 | 하는 일 |
@@ -49,6 +77,8 @@ npx skills@latest add Mrbaeksang/skills
 | `review` | 명세와 고정된 변경 범위를 독립적으로 검토 |
 
 `shape → spec → ticket → build`로 이어 쓰거나 필요한 스킬만 직접 호출하세요. 작은 수정에도 전체 절차를 강제하지 않습니다. 작업 공간은 필요할 때 격리하고, 병합·변경 상태를 확인한 뒤 자신이 만든 worktree와 branch만 정리합니다.
+
+각 스킬은 과잉 설계·불필요한 코드·상투적인 문구를 기본으로 점검합니다. 화면 작업에서만 UI·문구 상세 기준을 읽으며 별도 명령이나 추가 도구는 필요하지 않습니다. 설치만으로 스킬을 사용하지 않는 일반 대화까지 적용되지는 않습니다.
 
 ## 지원과 검증
 

@@ -105,12 +105,17 @@ function plan(source) {
     }
     for (const [file, data] of inventory) plugin.set(`skills/${name}/${file}`, data);
   }
+  let releaseVersion;
   for (const host of ['codex', 'claude']) {
     const file = path.join(source, 'adapters', host, 'plugin.json');
     noLinks(file);
     const content = text(file);
     portable(file, content);
-    if (JSON.parse(content).skills !== './skills/') throw new Error(`${host}: plugin must consume assembled skills`);
+    const manifest = JSON.parse(content);
+    if (manifest.skills !== './skills/') throw new Error(`${host}: plugin must consume assembled skills`);
+    if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(manifest.version)) throw new Error(`${host}: expected stable major.minor.patch version`);
+    if (releaseVersion && manifest.version !== releaseVersion) throw new Error('Plugin adapter versions must match');
+    releaseVersion = manifest.version;
     plugin.set(`.${host}-plugin/plugin.json`, bytes(file));
   }
   for (const [sourceFile, target] of [['LICENSE', 'LICENSE'], ['adapters/README.md', 'README.md']]) {
