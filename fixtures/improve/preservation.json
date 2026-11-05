@@ -1,0 +1,46 @@
+{
+  "algorithm": "SHA-256",
+  "before_equals_after": true,
+  "files": [
+    {
+      "Hash": "C0F4DA29A13A9C8876E44D0C6773FDE1CE5E6089B8EC66D2892EF691B54FA0FA",
+      "Name": "app.py"
+    },
+    {
+      "Hash": "33C105C208BD7A7A103D6E36183D48B7E8C31A8849AAB4D0C2D77D831FBC1FF0",
+      "Name": "archive.py"
+    },
+    {
+      "Hash": "5C0C0AD782B4A00AF5028FDC89FE3D96DD5FF16401576B52BC973996D2A44F12",
+      "Name": "catalog.py"
+    },
+    {
+      "Hash": "2886FD5404D4E979530A4DEB7A4B9DBAAD72179F41BD768536612A8429D60BAB",
+      "Name": "CONTRACT.md"
+    },
+    {
+      "Hash": "92B7A4FFF6E69E68754C10446A0F876AAF2F39DEC5A2A8E695BF45C004C83B23",
+      "Name": "measure.py"
+    },
+    {
+      "Hash": "FDAA38E8AA9696F9FE98852C9AE08C1BC8CCC9F9644C2708F8EBE3B7E63C9184",
+      "Name": "orders.py"
+    },
+    {
+      "Hash": "173DF02482047304C4FE0909B76580B5CE6180A750DF16E846FDE8CF922DFF35",
+      "Name": "pricing_after.py"
+    },
+    {
+      "Hash": "9EAFABA41CB5E110FB0BBEDE0668E0447F8462D5C4E1200A8339F8DED3F928CC",
+      "Name": "pricing.py"
+    },
+    {
+      "Hash": "9026D1C03AF26708F8BF6E2A7F9DB0CDF18A9874DE48B91C6203257776896882",
+      "Name": "reports.py"
+    },
+    {
+      "Hash": "8D7E04F659398507E525F504439483EB54CF9A17FEDDDD64244E6452A1FC5D55",
+      "Name": "test_preview.py"
+    }
+  ]
+}

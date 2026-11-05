@@ -1,0 +1,8 @@
+{
+  "name": "skills",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Portable development workflows from requirements to verified delivery",
+  "author": {"name": "Baeksang Skills contributors"},
+  "skills": "./skills/"
+}

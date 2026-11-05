@@ -1,0 +1,76 @@
+[
+  {
+    "tool": "Skill",
+    "input": {
+      "skill": "improve",
+      "args": "Analyze this small multi-module preview project only. Read-only: no file changes, no code execution, no installs, no network. Read fixture Python sources and CONTRACT.md. Return concise Korean AS-IS → TO-BE recommendations. No HTML."
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\improve\\references\\execution-contract.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\improve\\references\\exploration.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\improve\\references\\performance.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\CONTRACT.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\app.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\archive.py",
+      "limit": 15
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\orders.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\reports.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\pricing.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\catalog.py"
+    }
+  }
+]

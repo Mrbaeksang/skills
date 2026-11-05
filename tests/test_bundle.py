@@ -20,6 +20,11 @@ class BundleTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             manifest = json.loads((dest / '.codex-plugin/plugin.json').read_text())
             self.assertEqual(manifest['skills'], './skills/')
+            claude = json.loads((dest / '.claude-plugin/plugin.json').read_text())
+            self.assertEqual(claude['skills'], './skills/')
+            self.assertEqual(claude['license'], 'MIT')
+            self.assertEqual((dest / 'LICENSE').read_bytes(), (ROOT / 'LICENSE').read_bytes())
+            self.assertEqual((dest / 'README.md').read_bytes(), (ROOT / 'adapters/README.md').read_bytes())
             self.assertEqual((dest / 'skills/spec/references/execution-contract.md').read_bytes(),
                              (ROOT / 'common/execution-contract.md').read_bytes())
             self.assertEqual(self.run_cli('check-bundle', dest).returncode, 0)
