@@ -6,6 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { files, validateSkill } from '../scripts/package.mjs';
+import { checkRelease } from '../scripts/check-release.mjs';
+import { execFileSync } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cli = (command, source, ...args) => spawnSync(process.execPath, [path.join(root, 'scripts/package.mjs'), command, '--source', source, ...args], { encoding: 'utf8' });
@@ -15,6 +17,35 @@ function fixture(t) {
   for (const name of ['skills', 'common', 'adapters', 'LICENSE']) fs.cpSync(path.join(root, name), path.join(dir, name), { recursive: true });
   return dir;
 }
+test('release check permits docs, requires a version increase for shipped changes, and rejects mismatched adapters', t => {
+  const source = fixture(t);
+  const git = (...args) => execFileSync('git', args, { cwd: source, encoding: 'utf8' }).trim();
+  assert.equal(cli('sync', source).status, 0);
+  git('init');
+  git('config', 'core.autocrlf', 'false');
+  git('add', '.');
+  git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'baseline');
+  const base = git('rev-parse', 'HEAD');
+  fs.writeFileSync(path.join(source, 'README.md'), 'Documentation only');
+  assert.equal(checkRelease(base, source), 'No shipped content changes');
+  fs.appendFileSync(path.join(source, 'common/execution-contract.md'), '\nChanged contract.\n');
+  assert.equal(cli('sync', source).status, 0);
+  assert.throws(() => checkRelease(base, source), /bump both adapter versions/);
+  const setVersion = (host, version) => {
+    const file = path.join(source, 'adapters', host, 'plugin.json');
+    const manifest = JSON.parse(fs.readFileSync(file));
+    manifest.version = version;
+    fs.writeFileSync(file, JSON.stringify(manifest));
+  };
+  setVersion('claude', '1.0.0');
+  assert.match(cli('sync', source).stderr, /versions must match/);
+  setVersion('codex', '1.0.0');
+  assert.equal(cli('sync', source).status, 0);
+  assert.match(checkRelease(base, source), /-> 1.0.0/);
+  for (const host of ['claude', 'codex']) setVersion(host, '0.0.1');
+  assert.equal(cli('sync', source).status, 0);
+  assert.throws(() => checkRelease(base, source), /bump both adapter versions/);
+});
 test('standalone source contains all shared references and check detects drift', t => {
   const source = fixture(t);
   assert.equal(cli('sync', source).status, 0);

@@ -8,9 +8,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: npm run check
+      - run: npm run check:release
+        env:
+          RELEASE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
       - run: npm test
       - run: git diff --check

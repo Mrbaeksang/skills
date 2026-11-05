@@ -5,6 +5,7 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "check": "node scripts/package.mjs check",
+    "check:release": "node scripts/check-release.mjs",
     "sync": "node scripts/package.mjs sync",
     "test": "node --test tests/*.test.mjs",
     "smoke:install": "node scripts/smoke-install.mjs"

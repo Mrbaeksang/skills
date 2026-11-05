@@ -4,6 +4,8 @@ This repository publishes portable Markdown skills. Canonical instructions live 
 
 Maintainer scripts use Node.js 22+ and built-in modules; no dependency installation is required. Ordinary users install with native marketplaces or `npx skills@latest add Mrbaeksang/skills`, without running maintainer scripts.
 
+When shipped skills, shared contracts, adapters, or marketplace content changes, increment both adapter manifest versions together, update CHANGELOG.md, and sync the bundle. Run `npm run check:release -- <base-commit>` before publishing. Follow docs/development.md for releases; a new Git commit alone does not update a versioned native plugin.
+
 - Validate standalone references and native bundle drift: `npm run check`
 - Test validation, containment, and preservation behavior: `npm test`
 - Exercise the existing skills installer in an isolated project: `npm run smoke:install`
