@@ -1,0 +1,46 @@
+{
+  "python": "3.12.15",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "workload": "preview: 2000 unique SKUs, quantity 2; warm in-process catalog; 7 A/B pairs",
+  "workload_sha256": "b6d81d569144723d1305918a40bf75878689592a00e6e1a057ccbe81a4e43723",
+  "samples_ms": {
+    "before": [
+      52.96460026875138,
+      52.525300066918135,
+      52.41480004042387,
+      52.183200139552355,
+      50.752699840813875,
+      52.34949989244342,
+      52.38319979980588
+    ],
+    "after": [
+      0.40380004793405533,
+      0.30510034412145615,
+      0.6862003356218338,
+      0.4257000982761383,
+      0.30819978564977646,
+      0.3088996745646,
+      0.29719993472099304
+    ]
+  },
+  "summary_ms": {
+    "before": {
+      "median": 52.38319979980588,
+      "min": 50.752699840813875,
+      "max": 52.96460026875138
+    },
+    "after": {
+      "median": 0.3088996745646,
+      "min": 0.29719993472099304,
+      "max": 0.6862003356218338
+    }
+  },
+  "errors": 0,
+  "output_total": 4002000,
+  "output_rows": 2000,
+  "regression_before": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n",
+  "regression_after": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n",
+  "baseline_profile": "         6006 function calls in 0.051 seconds\n\n   Ordered by: cumulative time\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.051    0.051 <fixture>\\app.py:4(preview)\n     4000    0.050    0.000    0.050    0.000 <fixture>\\pricing.py:3(price)\n        1    0.001    0.001    0.026    0.026 <fixture>\\reports.py:3(sales_report)\n        1    0.000    0.000    0.025    0.025 <fixture>\\orders.py:3(quote)\n        1    0.000    0.000    0.025    0.025 {built-in method builtins.sum}\n     2001    0.000    0.000    0.025    0.000 <fixture>\\orders.py:4(<genexpr>)\n        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}\n\n\n",
+  "after_profile": "         6006 function calls in 0.001 seconds\n\n   Ordered by: cumulative time\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.001    0.001 <fixture>\\app.py:4(preview)\n        1    0.000    0.000    0.000    0.000 <fixture>\\orders.py:3(quote)\n        1    0.000    0.000    0.000    0.000 {built-in method builtins.sum}\n     2001    0.000    0.000    0.000    0.000 <fixture>\\orders.py:4(<genexpr>)\n        1    0.000    0.000    0.000    0.000 <fixture>\\reports.py:3(sales_report)\n     4000    0.000    0.000    0.000    0.000 <fixture>\\pricing.py:6(price)\n        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}\n\n\n",
+  "limits": "Synthetic in-process end-to-end preview only; excludes process startup/index construction; memory and concurrent machine load unmeasured; no service/production speedup claim."
+}
