@@ -9,7 +9,7 @@ Launching skill: diagnose
 ## Tool: Read
 {"file_path":"<fixture>\\.claude\\skills\\diagnose\\references\\execution-contract.md"}
 1	# 공통 실행 계약
-2	
+2
 3	- 한국어로 결론부터 간결히 보고한다. 기술 용어와 식별자는 원어를 유지한다.
 4	- 현재 사용자 지시와 실제 파일을 기준으로 사실, 확정 결정, 추정, 미결정 사항을 구분한다. 추정은 추정으로 표시한다.
 5	- 이미 요청·승인된 범위의 되돌릴 수 있는 작업은 이어서 수행한다. 같은 결정을 재확인하지 않는다. 필요한 중대한 결정이나 실제 권한 부족만 묻고, 독립 질문은 묶는다.
@@ -17,14 +17,14 @@ Launching skill: diagnose
 7	- 문서 작성 권한을 외부 게시, 구현, 배포, 삭제 권한으로 확대하지 않는다. 요청된 산출물과 허용된 대상에 한정한다.
 8	- 필요한 도구가 없으면 가능한 대체 경로를 실행하거나 구체적인 차단 원인과 재개 조건을 밝힌다.
 9	- 완료 보고는 결과, 수행한 검증, 남은 문제로 끝낸다. 정적 검사, 설치, 발견, 호출, 실제 행동 검증을 구분하며 미실행 검증은 NOTRUN으로 남긴다.
-10	
+10
 
 ## Tool: Read
 {"file_path":"<fixture>\\.claude\\skills\\diagnose\\references\\experiments.md"}
 1	# 실험 선택
-2	
+2
 3	도구 이름보다 가설을 구분하는 관측값을 먼저 정한다. 기존 설치된 도구를 사용하며 도구가 없으면 같은 경계를 관찰하는 허용된 대안을 찾는다. 무거운 도구 설치를 진단의 기본 전제로 삼지 않는다.
-4	
+4
 5	| 조건 | 실험과 증거 | 해석 한계 |
 6	|---|---|---|
 7	| 잘못된 CLI/API 결과 | 같은 입력의 실제 process/request, 파싱한 응답·채널·exit/status; 정상 대조군 | 내부 함수 호출만으로 실제 entrypoint를 검증하지 못함 |
@@ -34,19 +34,19 @@ Launching skill: diagnose
 11	| 지연/처리량 저하 | workload, baseline, 시간/메모리 등 목표 지표와 분산; profiler/trace로 비용 구간 확인 | 평균 하나나 복잡도 수치만으로 병목을 확정하지 않음 |
 12	| 자원 병목 의심 | 관련 자원의 utilization, saturation, errors를 같은 시간 창에서 관찰 | 높은 사용률은 원인 후보; 요청 지연/실행 경로와 연결해야 함 |
 13	| 외부 서비스 오류 | 실제 응답·timeout·설정, 가능한 안전한 대조 요청 | mock 성공은 provider 복구 증거가 아님; 외부 변경/재시도 권한 확대 금지 |
-14	
+14
 15	성능 개선은 데이터 크기·동시성·warmup/cache·반복 횟수·환경을 고정하고 baseline과 수정 후 분포를 비교한다. profile 비용과 측정 잡음을 밝힌다. 유의미한 개선이 보이지 않으면 개선 성공을 주장하지 않는다.
-16	
+16
 17	이 절차는 Google SRE의 가설-실험 접근과 Brendan Gregg의 자원/측정 중심 진단을 적용해 새로 작성했다. 원본 문구나 실행 코드를 포함하지 않는다. 방법의 출처: [Effective Troubleshooting](https://sre.google/sre-book/effective-troubleshooting/), [USE Method](https://www.brendangregg.com/usemethod.html). 최신 도구/API 사용법이 필요할 때는 해당 환경의 공식 문서를 별도로 확인한다.
-18	
+18
 
 ## Tool: Read
 {"file_path":"<fixture>\\quote.py"}
 1	"""Shipping quote CLI: subtotal is a nonnegative integer in won."""
 2	import json
 3	import sys
-4	
-5	
+4
+5
 6	def main():
 7	    if len(sys.argv) != 2:
 8	        print(json.dumps({"error": "usage"}), file=sys.stderr)
@@ -61,11 +61,11 @@ Launching skill: diagnose
 17	    fee = 0 if subtotal > 50000 else 3000
 18	    print(json.dumps({"subtotal": subtotal, "shipping": fee, "total": subtotal + fee}))
 19	    return 0
-20	
-21	
+20
+21
 22	if __name__ == "__main__":
 23	    sys.exit(main())
-24	
+24
 
 ## Tool: PowerShell
 {"command":"python --version; python quote.py 50000; \"exit=$LASTEXITCODE\"","description":"Reproduce the reported defect via the CLI"}
@@ -124,7 +124,7 @@ File created successfully at: <fixture>\test_quote.py (file state is current in 
 Exit code 1
 test_above_threshold_ships_free (test_quote.QuoteCliTest.test_above_threshold_ships_free) ... ok
 test_below_threshold_charges_shipping (test_quote.QuoteCliTest.test_below_threshold_charges_shipping) ... ok
-test_equivalent_threshold_notations_ship_free (test_quote.QuoteCliTest.test_equivalent_threshold_notations_ship_free) ... 
+test_equivalent_threshold_notations_ship_free (test_quote.QuoteCliTest.test_equivalent_threshold_notations_ship_free) ...
   test_equivalent_threshold_notations_ship_free (test_quote.QuoteCliTest.test_equivalent_threshold_notations_ship_free) (arg='+50000') ... FAIL
   test_equivalent_threshold_notations_ship_free (test_quote.QuoteCliTest.test_equivalent_threshold_notations_ship_free) (arg=' 50000') ... FAIL
   test_equivalent_threshold_notations_ship_free (test_quote.QuoteCliTest.test_equivalent_threshold_notations_ship_free) (arg='050000') ... FAIL
@@ -271,4 +271,3 @@ pycache False
 ## Tool: Edit
 File: <fixture>\evidence.md (body retained in observed files)
 The file <fixture>\evidence.md has been updated successfully. (file state is current in your context — no need to Read it back)
-
