@@ -18,4 +18,3 @@
 검증은 active에서 수행한다. 사용자 검수 대기 라벨은 만들지 않는다. ready→active→done을 실제 작업과 연결하고 done은 completed 종료와 일치시킨다. wontfix는 사유에 맞게 not planned 종료한다. 재개 요청이면 과거 증거를 남기고 reopen한 뒤 남은 계약에 따라 ready/blocked/active로 전환한다. 재개 자체가 active의 증거는 아니다.
 
 선행 완료 후에는 의존 티켓의 blocker와 완료 증거를 다시 읽고 해소된 것만 ready로 바꾼다. 상태·종료 변경과 관계는 별도 요청일 수 있으므로 각 단계 readback으로 부분 성공을 기록한다. 전환 성공을 확인한 뒤 새 frontier를 보고한다.
-
