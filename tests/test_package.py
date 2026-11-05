@@ -24,6 +24,13 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual((skill / 'user-note.txt').read_text(), 'preserve me')
 
 class StandaloneTests(unittest.TestCase):
+    def test_repository_skills_are_ready_for_direct_copy_installers(self):
+        for entry in (ROOT / 'skills').glob('*/SKILL.md'):
+            for shared in (ROOT / 'common').glob('*.md'):
+                mirror = entry.parent / 'references' / shared.name
+                self.assertTrue(mirror.is_file(), str(mirror))
+                self.assertEqual(mirror.read_bytes(), shared.read_bytes())
+
     def test_workflow_references_survive_without_sibling_skills(self):
         for name in ('build', 'ticket', 'diagnose', 'improve'):
             with self.subTest(skill=name), tempfile.TemporaryDirectory() as temp:
