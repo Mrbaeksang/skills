@@ -4,6 +4,7 @@ import pathlib
 import re
 import shutil
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
@@ -83,9 +84,44 @@ def install(source, destination):
     return len(entries)
 
 
+def bundle(source, destination):
+    if destination.exists():
+        raise ValueError('Bundle destination exists; build into a new directory and review the diff')
+    manifests = [(source / 'adapters' / host / 'plugin.json', f'.{host}-plugin/plugin.json')
+                 for host in ('codex', 'claude')]
+    manifests = [(path, target) for path, target in manifests if path.is_file()]
+    if not manifests:
+        raise ValueError('No native plugin adapters found')
+    for path, _ in manifests:
+        check_portability(path)
+    count = install(source, destination / 'skills')
+    for path, relative in manifests:
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(path, target)
+    return count
+
+
+def check_bundle(source, destination):
+    with tempfile.TemporaryDirectory() as temp:
+        expected = pathlib.Path(temp) / 'plugin'
+        count = bundle(source, expected)
+        def files(root):
+            result = {}
+            for file in root.rglob('*'):
+                if file.is_symlink():
+                    raise ValueError('Bundle must not contain symbolic links')
+                if file.is_file():
+                    result[file.relative_to(root).as_posix()] = file.read_bytes()
+            return result
+        if files(expected) != files(destination):
+            raise ValueError('Shipping bundle is stale or contains unexpected files; rebuild and review')
+    return count
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['check', 'install'])
+    parser.add_argument('command', choices=['check', 'install', 'bundle', 'check-bundle'])
     parser.add_argument('--source', type=pathlib.Path, default=ROOT)
     parser.add_argument('--dest', type=pathlib.Path)
     args = parser.parse_args()
@@ -94,8 +130,9 @@ def main():
             count = len(collect(args.source))
         else:
             if args.dest is None:
-                parser.error('install requires --dest (the agent skills directory)')
-            count = install(args.source.resolve(), args.dest.resolve())
+                parser.error(f'{args.command} requires --dest')
+            operation = {'install': install, 'bundle': bundle, 'check-bundle': check_bundle}[args.command]
+            count = operation(args.source.resolve(), args.dest.resolve())
         print(f'{args.command}: {count} skill(s) passed')
     except (ValueError, OSError) as error:
         print(str(error), file=sys.stderr)

@@ -17,7 +17,7 @@ Revisions/license identifiers were retrieved through `gh api repos/<owner>/<repo
 
 `python scripts/package.py install --dest <skills-directory>` materializes all current skills into a new destination. It checks supported metadata, local links/containment, collisions, and obvious personal path/credential patterns before copying. This is a focused repository validator, not a full YAML or secret scanner. Human release inspection remains required for non-Markdown/binary assets and unrecognized secrets.
 
-Native plugin/marketplace adapters must package the **assembled output**, not point at raw `skills/`, because raw sources do not contain the generated contract reference. Future adapters may generate a plugin root whose `skills/` is assembled by this CLI. They must keep canonical common content single-sourced and verify the materialized copies.
+Native plugin/marketplace adapters package the **assembled output**, not raw `skills/`, because raw sources do not contain the generated contract reference. `bundle --dest <new-plugin-root>` assembles skills and native manifests from `adapters/`; tracked `plugins/skills/` ships the result for direct marketplace consumption. `check-bundle --dest plugins/skills` compares the entire generated file inventory and bytes against canonical sources. See [Codex lifecycle](codex-lifecycle.md) for actual installation results and the separate runtime blocker.
 
 The minimal install refuses any existing skill name. It provides no force/overwrite, update, uninstall, marketplace mutation, or credential handling. Collisions across other scopes must be inspected by the platform adapter; directory preflight only covers the explicit destination. Plain files avoid symlink privileges and cache portability risks. No agent-specific tool is required by the common skill beyond reading relevant input/resources.
 
@@ -27,6 +27,7 @@ The minimal install refuses any existing skill name. It provides no force/overwr
 |---|---|---|---|
 | Windows, Claude Code 2.1.317, project skill folder, existing subscription auth | PASS: assembled local project directory | See [smoke record](spec-smoke.md) | See smoke record; only minimal decided conversation |
 | Windows, Codex CLI 0.166.0, project skill folder, existing auth | PASS: assembled directory | Found requested skill; shell read blocked in read-only mode | NOT PASS: generated fallback is not full skill execution |
-| Native Claude/Codex plugins, fresh auth/config home, other OS/hosts | NOTRUN | NOTRUN | NOTRUN |
+| Native Codex CLI 0.166.0, Windows, fresh config home, local marketplace | PASS including update/reinstall/removal | Installed/enabled list PASS; authenticated native invocation NOTRUN | BLOCKED in separate shared-auth project-skill fixture: shell read denied |
+| Native Claude plugins, other OS/hosts, GitHub remote install | NOTRUN here | NOTRUN here | NOTRUN here |
 
 Fresh working directories isolate task artifacts, not authentication or every inherited instruction. No credentials were copied, user configuration edited, or denied tool action bypassed. Marketplace lifecycle and broad platform acceptance remain separate work.
