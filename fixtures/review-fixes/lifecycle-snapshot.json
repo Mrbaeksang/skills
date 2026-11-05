@@ -1,0 +1,32 @@
+[
+  {
+    "owned_worktree": "clean",
+    "owned_branch": "clean",
+    "open_pr": false,
+    "tip": "a36a3aa1382381e0218810e3bbdb4f7cf9d9c29f",
+    "integration_tip": "a36a3aa1382381e0218810e3bbdb4f7cf9d9c29f",
+    "ancestor_exit": 0,
+    "status_porcelain": "",
+    "ignored_files": ""
+  },
+  {
+    "owned_worktree": "ignored",
+    "owned_branch": "ignored",
+    "open_pr": false,
+    "tip": "a36a3aa1382381e0218810e3bbdb4f7cf9d9c29f",
+    "integration_tip": "a36a3aa1382381e0218810e3bbdb4f7cf9d9c29f",
+    "ancestor_exit": 0,
+    "status_porcelain": "",
+    "ignored_files": "private/receipt.txt"
+  },
+  {
+    "owned_worktree": "unmerged",
+    "owned_branch": "unmerged",
+    "open_pr": false,
+    "tip": "1edc6017d9f0e8c3daacd5ab5ce77d50816b67e5",
+    "integration_tip": "a36a3aa1382381e0218810e3bbdb4f7cf9d9c29f",
+    "ancestor_exit": 1,
+    "status_porcelain": "",
+    "ignored_files": ""
+  }
+]

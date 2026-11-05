@@ -24,7 +24,9 @@ def collect(source):
     contract = source / 'common/execution-contract.md'
     if not contract.is_file():
         raise ValueError('Missing common execution contract')
-    check_portability(contract)
+    shared_contracts = {file.name: file for file in (source / 'common').glob('*.md')}
+    for shared_contract in shared_contracts.values():
+        check_portability(shared_contract)
     names = set()
     for entry in skills:
         text = entry.read_text(encoding='utf-8-sig')
@@ -50,6 +52,7 @@ def collect(source):
             raise ValueError(f'{name}: unsupported metadata: {sorted(unknown)}')
         if 'compatibility' in metadata and not 1 <= len(metadata['compatibility']) <= 500:
             raise ValueError(f'{name}: invalid compatibility')
+        shared_paths = {(entry.parent / 'references' / shared_name).resolve() for shared_name in shared_contracts}
         for file in entry.parent.rglob('*'):
             if file.is_symlink():
                 raise ValueError(f'{name}: symbolic links are not portable')
@@ -61,12 +64,11 @@ def collect(source):
                     path = (file.parent / target.split('#')[0]).resolve()
                     if not path.is_relative_to(entry.parent.resolve()):
                         raise ValueError(f'{name}: reference escapes skill: {target}')
-                    shared = entry.parent / 'references/execution-contract.md'
-                    if path != shared.resolve() and not path.is_file():
+                    if path not in shared_paths and not path.is_file():
                         raise ValueError(f'{name}: missing reference: {target}')
-        shared = entry.parent / 'references/execution-contract.md'
-        if shared.exists():
-            raise ValueError(f'{name}: shared contract must only exist in common/')
+        for shared_name in shared_contracts:
+            if (entry.parent / 'references' / shared_name).exists():
+                raise ValueError(f'{name}: shared contract must only exist in common/')
     return skills
 
 
@@ -80,7 +82,8 @@ def install(source, destination):
         target = destination / entry.parent.name
         shutil.copytree(entry.parent, target)
         (target / 'references').mkdir(exist_ok=True)
-        shutil.copyfile(source / 'common/execution-contract.md', target / 'references/execution-contract.md')
+        for shared in (source / 'common').glob('*.md'):
+            shutil.copyfile(shared, target / 'references' / shared.name)
     return len(entries)
 
 
