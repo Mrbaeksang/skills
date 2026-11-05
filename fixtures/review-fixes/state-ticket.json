@@ -1,0 +1,16 @@
+{
+  "id": 7,
+  "title": "Fix help text typo",
+  "state": "closed",
+  "state_reason": "completed",
+  "labels": [
+    "feature",
+    "urgent",
+    "status:done"
+  ],
+  "evidence": [
+    "Prior completion: initial help text shipped.",
+    "Reopen completion: corrected delivry to delivery in help.txt; native Read after Edit observed line 1 as exact sentence 'Show delivery quote.'. Plain-text fixture, so no application runtime; shell-based git/diff preflight NOTRUN because shell was not permitted."
+  ],
+  "request": "Reopen to correct delivry to delivery in help.txt. Acceptance: exact sentence Show delivery quote. No application runtime is needed for this plain text fixture."
+}

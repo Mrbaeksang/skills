@@ -1,0 +1,131 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\build\\references\\execution-contract.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\build\\references\\tracker-state.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\build\\references\\completion-evidence.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\help.txt"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "  \"state\": \"closed\",\n  \"state_reason\": \"completed\",",
+      "new_string": "  \"state\": \"open\",\n  \"state_reason\": \"reopened\","
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "    \"status:done\"",
+      "new_string": "    \"status:ready\""
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "    \"status:ready\"",
+      "new_string": "    \"status:active\""
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\help.txt",
+      "old_string": "Show delivry quote.",
+      "new_string": "Show delivery quote."
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\help.txt"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "    \"Prior completion: initial help text shipped.\"\n  ],",
+      "new_string": "    \"Prior completion: initial help text shipped.\",\n    \"Reopen completion: corrected delivry to delivery in help.txt; native Read after Edit observed line 1 as exact sentence 'Show delivery quote.'. Plain-text fixture, so no application runtime; shell-based git/diff preflight NOTRUN because shell was not permitted.\"\n  ],"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "    \"status:active\"",
+      "new_string": "    \"status:done\""
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  },
+  {
+    "tool": "Edit",
+    "input": {
+      "replace_all": false,
+      "file_path": "<fixture>\\ticket.json",
+      "old_string": "  \"state\": \"open\",\n  \"state_reason\": \"reopened\",",
+      "new_string": "  \"state\": \"closed\",\n  \"state_reason\": \"completed\","
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\ticket.json"
+    }
+  }
+]
