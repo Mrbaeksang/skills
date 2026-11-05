@@ -2,7 +2,7 @@
 
 요구 구체화부터 구현·진단·개선·검토까지 연결하는 7개 Agent Skills입니다. `skills/`가 원본이고 `common/execution-contract.md`가 공통 실행 계약입니다.
 
-**상태: 통합 후보, 전체 acceptance 미완료.** 이 안내는 integration branch의 내용이며 main에 게시된 릴리스라고 주장하지 않습니다. #7 UI 검증과 #11 Codex 실제 실행이 정책에 막혀 #13 전체 통합 acceptance도 blocked입니다. [Release receipt](research/release-receipt.md)에 A01–A20, US1–40과 실제 증거·미실행 경계를 기록합니다.
+**상태: main 병합 완료, 전체 acceptance는 후속 검증 중.** 2026-11-05 사용자 승인으로 PR #14를 병합했습니다. #7 UI 검증과 #11 Codex 실제 실행이 정책에 막혀 #13 전체 통합 acceptance도 blocked입니다. [Release receipt](research/release-receipt.md)에 A01–A20, US1–40과 실제 증거·미실행 경계를 기록합니다.
 
 | 스킬 | 직접 입력과 결과 |
 |---|---|
@@ -43,7 +43,7 @@ codex plugin marketplace add <absolute-checkout-path>
 codex plugin add skills@baeksang-skills --json
 ```
 
-등록은 실제 사용자 marketplace 설정을 변경합니다. 기존 동명 등록이 있으면 출처부터 확인합니다. Claude native 호출은 `/skills:shape` 등 namespace를 사용합니다. Codex는 설치 출처를 확인한 스킬을 선택합니다. 원격 `Mrbaeksang/skills` 경로는 이 후보가 게시된 뒤 사용할 수 있으며 이번 원격 설치는 NOTRUN입니다. 업데이트·재설치·제거와 scope 안내: [Claude](docs/claude.md), [Codex](docs/codex.md).
+등록은 실제 사용자 marketplace 설정을 변경합니다. 기존 동명 등록이 있으면 출처부터 확인합니다. Claude native 호출은 `/skills:shape` 등 namespace를 사용합니다. Codex는 설치 출처를 확인한 스킬을 선택합니다. 원격 `Mrbaeksang/skills` 저장소의 main에 패키지가 게시되어 있습니다. 원격 설치 자체의 실행 검증은 NOTRUN입니다. 업데이트·재설치·제거와 scope 안내: [Claude](docs/claude.md), [Codex](docs/codex.md).
 
 ## 확인된 지원 범위
 
