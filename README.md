@@ -17,3 +17,5 @@ Claude Code에서는 동일 산출물을 프로젝트 `.claude/skills`에 설치
 호환성과 공식 출처: [packaging 조사](research/packaging.md). 실제 검증 경계: [spec smoke evidence](research/spec-smoke.md). 행동 회귀 입력과 rubric: [fixtures/spec](fixtures/spec/rubric.md).
 
 Codex native plugin 설치·업데이트·재설치·제거는 [Codex 안내](docs/codex.md)를 따릅니다. 로컬 marketplace lifecycle은 검증했고, 실제 spec 실행은 현재 Windows shell 정책에 막혀 있습니다. GitHub 설치용 생성 산출물은 `plugins/skills/`에 있으며 공통 참조가 포함됩니다.
+
+Claude native plugin 설치와 검증 경계는 [Claude 안내](docs/claude.md)를 따릅니다.
