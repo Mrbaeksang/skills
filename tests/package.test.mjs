@@ -199,3 +199,19 @@ for (const conflict of ['skills/build/references/workspace-lifecycle.md', 'plugi
     assert.deepEqual(fs.readdirSync(target), []);
   });
 }
+
+test('visual quality reference follows UI skills without leaking into unrelated skills', t => {
+  const source = fixture(t);
+  assert.equal(cli('sync', source).status, 0);
+  assert.equal(cli('check', source).status, 0);
+  const canonical = fs.readFileSync(path.join(source, 'common/workflows/polish/visual-quality.md'));
+  for (const name of ['build', 'improve', 'polish', 'review', 'shape', 'spec', 'ticket']) {
+    const reference = path.join(source, 'skills', name, 'references/workflows/polish/visual-quality.md');
+    assert.deepEqual(fs.readFileSync(reference), canonical, name);
+    const packaged = path.join(source, 'plugins/skills/skills', name, 'references/workflows/polish/visual-quality.md');
+    assert.deepEqual(fs.readFileSync(packaged), canonical, name);
+  }
+  for (const name of ['talk', 'optimize']) {
+    assert.equal(fs.existsSync(path.join(source, 'skills', name, 'references/workflows/polish/visual-quality.md')), false, name);
+  }
+});
