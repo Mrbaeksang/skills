@@ -1,0 +1,22 @@
+# 탐색과 후보 검증
+
+## 지도부터 경로까지
+
+파일 목록과 manifest/workspace 설정, entrypoint(route/CLI/worker/scheduler), 배포 단위를 먼저 읽는다. vendor·generated·archive 제외 이유를 기록한다. 각 subsystem에 `역할 / 소유 데이터 / 공개 계약 / 의존 대상 / 조사 깊이 / 근거 파일:위치`를 남긴다. 디렉터리 하나를 읽었다고 모듈 전체를 이해했다고 표시하지 않는다.
+
+언어 서버의 references/call hierarchy, 기존 dependency 도구를 우선 활용한다. 없으면 import/export·등록 코드 검색과 직접 읽기로 `caller → callee` edge 목록을 만든다. static import 그래프와 런타임 호출 그래프를 구분하고 DI, reflection, plugin loading, SQL/queue 같은 누락 edge를 별도로 표시한다. 새 도구 설치는 기본 전제가 아니다.
+
+대표 use case마다 입력 → 경계 validation → 도메인 판단 → 저장소/외부 호출 → 응답 경로와 실패/복구 분기를 추적한다. 파일·symbol, 데이터 소유자, 상태 변화, 테스트 경계를 연결한다. 호출되지 않는 것으로 보이는 코드는 등록/동적 호출을 확인하기 전 dead code로 확정하지 않는다.
+
+## 신호 수집
+
+| 신호 | 가능한 조사 | 해석 한계와 다음 검증 |
+|---|---|---|
+| churn | Git 사용 가능 시 기간/기준 revision을 정하고 `git log --since=<date> --numstat -- <scope>`로 파일별 변경 횟수·추가/삭제량과 함께 바뀐 파일 확인 | rename·generated·대량 포맷 commit을 분리. 이력이 없으면 unknown. 변경이 많다는 이유만으로 결함 아님 |
+| complexity | 설치된 언어 도구의 함수별 branch/cognitive complexity; 없으면 분기·중첩·예외 경로를 직접 열거 | 수동 분기 수를 정식 complexity 점수로 표시하지 않음. use case 이해 비용/누락 경로로 검증 |
+| coupling | edge에서 distinct 직접 caller 수(fan-in), callee 수(fan-out), A→B→A 등의 cycle 경로 확인 | 집계 대상·edge 종류 명시. 공통 안정 계약의 fan-in은 정상일 수 있음 |
+| duplication | 반복 로직 검색 후 규칙·불변식·변경 이유 비교 | 비슷한 구문과 같은 책임을 구분. 서로 다른 도메인의 우연한 유사성은 합치지 않음 |
+
+후보를 `관찰 / 가설 / 반증 실험 / 확인 결과`로 기록한다. 예: 두 모듈이 같은 할인 규칙을 소유한다는 가설은 두 호출 경로와 계약, 경계값 결과의 불일치로 검증한다. 영향×빈도와 근거의 신뢰도를 먼저 보고, 비용·위험·가역성으로 순서를 조정한다. 근거가 약한 대규모 재구성보다 좁고 확인 가능한 개선을 앞세운다.
+
+완료 조건: 범위의 모든 subsystem에 조사 깊이가 있고, 우선순위 후보가 근거와 연결되며, 대표 경로·누락 edge·미탐색 영역이 명시되어 있다. 시간 한도에 도달하면 실제 coverage에서 종료한다.
