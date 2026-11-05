@@ -51,3 +51,35 @@ A-1 adds strict lexical integer rules not specified by the user; they remain lab
 Fresh-session interruption/resume, live tracker posting/status/dependencies/readback, high-risk review, native plugin all-skill invocation, Codex execution and UI remain NOTRUN or independently BLOCKED. Historical individual seven-skill invocations are linked in the release receipt; they are not rerun here. The new workspace lifecycle amendment requires separate evidence.
 
 Final source checks for this documentation slice: package check (7 skills), bundle equality, four existing packaging tests, isolated project installation and diff hygiene PASS. These static checks do not close the runtime gates.
+
+
+## Seven-skill Claude invocation reconciliation
+
+All seven have an actual Claude invocation in the historical records below. This is **aggregate coverage across separately assembled revisions**, not seven invocations of the final integrated bundle or native plugin. The connected run's seven-name discovery is a separate observation. [Installed manifest](../fixtures/integration/installed-manifest.json) pins the exact project skill bytes used by the connected run and subsequent read-only resume; no later source fixes are retroactively included.
+
+| Skill | Actual invocation evidence | Revision/evaluation boundary |
+|---|---|---|
+| shape | [shape smoke](shape-smoke.md), new-product/online/offline observed outputs | Earlier installed technology reference differs from refined canonical reference; both hashes recorded there. Research-budget refinement NOTRUN |
+| spec | [detailed smoke](spec-detailed-smoke.md), corrected detailed and ambiguity outputs; [native lifecycle](claude-lifecycle.md) | Detailed record pins final spec/reference hashes at that run; native invocation tested a smaller historical bundle, not all seven |
+| ticket | [ticket smoke](ticket-smoke.md), green/reconcile outputs | Historical four-skill assembly; two actual Read/Skill runs. Local reasoning and host GitHub API execution remain distinct |
+| build | [build smoke](build-smoke.md), direct spec/ticket/copy/no-runtime outputs; this connected run | Historical two-skill installation, later JSON-testing source refinement not rerun there. Current connection corrected exact-serialization ACs but runtime remained NOTRUN |
+| diagnose | [diagnose smoke](diagnose-smoke.md), tool transcript and repaired artifact | Actual earlier assembly; post-observation hypothesis-equivalence wording source-only, not behaviorally rerun |
+| improve | [improve smoke](improve-smoke.md), tool calls/output | Actual restricted analysis, separate host optimization; not writable-agent optimization or final native bundle |
+| review | [review smoke](review-smoke.md), sample-a/sample-b tools and reports | Two fresh independent sessions at pinned fixture base/head; source-review evidence only, not post-fix review or final tracker transitions |
+
+No new invocation of the already-proven unrelated skills was needed for this reconciliation. Cross-platform seven-skill invocation remains blocked by the separate Codex runtime gate.
+
+
+## Fresh-session read-only resume and local frontier reconciliation
+
+A second fresh Claude process used `/build` with [resume input](../fixtures/integration/resume-input.txt), no prior conversation or session persistence, and the same installed bytes. Only Read/Skill were exposed and allowed, with `--max-turns 18`, a 240-second host timeout, project-only settings and strict MCP. No denied command was retried. The prompt requested context/status recovery only, expressly forbidding implementation, execution, writing, tracker changes, UI, Codex and subagents.
+
+Observed: success, is_error=false, 9 turns, 77.245 seconds, USD 0.3987428, zero permission denials. Slash-command loading supplied build; the [tool inventory](../fixtures/integration/resume-tools.json) contains exactly eight Reads: six task outputs, common contract and completion-evidence reference. No shell/write/network/tracker tools were called. Same model/version/authentication/inherited-instruction limits as the initial run apply.
+
+The [actual output](../fixtures/integration/resume-observed.md) reconstructs D/R/AC/T mappings, conditional A-1–A-3, nonblocking U-1 and withdrawn AC-1b/AC-5b. It distinguishes source AC-7 from NOTRUN process criteria, refusing to infer execution from test-file existence. It detects stale ready/active snapshots and T-2 active despite T-1's unresolved prerequisite. Its local recommendation is T-1 blocked on runtime availability, T-2 blocked on that gate and T-1, with empty current frontier. After authorized runtime becomes available, T-1 verification precedes T-2 completion. These are **local recommendations, not actual tracker transitions**.
+
+This establishes bounded fresh-session restoration from durable artifacts and read-only frontier reconciliation. It does not establish resumed implementation, a completed build, external tracker readback, or the new workspace lifecycle behavior. The first run's “both active” defect remains preserved; a second session detecting it is not evidence that the first run was correct. The initial agent evidence intentionally excludes the separate host oracle, so the resume's NOTRUN conclusion follows the evidence it was given.
+
+Output limitations: it mentions an inherited unrelated dashboard `report.py` as NOTRUN; this is environment contamination, not a package requirement. Raw trace/stderr files are host harness artifacts, not suspicious product changes; the reader correctly did not claim to have inspected them. No further action followed its suggested future permissions/commands. It confirmed proposal approval is not required to restore context, improving on the initial final report's wording without changing observed history.
+
+Host comparison after resume: all six task outputs match the prior committed observations after the already-documented path/newline normalization, and every installed skill/reference hash matches the manifest. No task source or installed instruction was mutated.

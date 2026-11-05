@@ -33,7 +33,7 @@ PASS below always means the named bounded evidence. PARTIAL means observed behav
 | A04 | #3 / SH | PASS existing-stack keep/migration comparison; product migration not performed |
 | A05 | #3–5 / SH, SP, TK, IN | PARTIAL: ownership/design/output and simple CLI handoff; multiple live domains/API/DB NOTRUN |
 | A06 | #5 / TK, IN | PASS bounded slices/coverage/graph reasoning; not arbitrary-spec correctness |
-| A07 | #5 / TK | PARTIAL: host GitHub exact-one-status lifecycle PASS; autonomous connected agent tracker path NOTRUN |
+| A07 | #5 / TK | PARTIAL: host GitHub exact-one-status lifecycle PASS; autonomous connected agent tracker path NOTRUN; IN fresh-session local frontier reconciliation observed |
 | A08 | #6 / BU | PASS direct spec and ticket fixtures; no mandatory prior stages |
 | A09 | #6 / BU, IN | PASS BU agent + IN separate host public CLI normal/error/boundary/recovery; IN agent runtime and API/UI/high-risk NOTRUN |
 | A10 | #6 / BU | PASS low-risk copy edit without new tests |
@@ -93,13 +93,13 @@ Each story has its own row to prevent grouping from hiding missing acceptance. E
 | US37 | #2, #8 / PK, DG provenance | PASS source research/attribution records; no third-party copied implementation |
 | US38 | #2, #11, #12 / PK | PASS deterministic assembled-reference/bundle checks at tested revision |
 | US39 | #11, #12 / CX, CL | PASS bounded local lifecycle preservation; logs/auth excluded from hash claims |
-| US40 | #13 / IN | NOTRUN interrupted fresh-session resume; durable documents prepared only |
+| US40 | #13 / IN | PARTIAL: fresh read-only session restored IDs, decisions, NOTRUN and frontier from six documents; resumed implementation NOTRUN |
 
 ## Release gates still open
 
 1. #7: authorized UI provider able to identify current URL/window, then actual UI1–UI3 and evidence-based done branch. No alternate automation bypass.
 2. #11: supported authorized environment permitting legitimate installed-skill/reference reads, then real Codex execution. Repeated denied attempts are not a remedy.
-3. #13: both priority agents discovering/invoking all seven skills and connected representative workflow; native all-skill execution, tracker-connected frontier/status/reconciliation, interruption followed by a fresh-session resume. Current local draft workflow cannot prove these.
+3. #13: both priority agents discovering/invoking all seven skills and connected representative workflow; native all-skill execution, tracker-connected frontier/status/reconciliation, fresh-session continuation through actual verification. IN now demonstrates read-only context/status restoration, but current local draft workflow cannot prove those remaining gates.
 4. Review candidate changes after this pinned run; repeat only affected evidence. Preserve known output caveats and source-only refinements. Whole-spec completion, main publication and remote-install support remain unclaimed.
 
 No issue was closed or moved to ready by this documentation work. Existing lifecycle fixtures are reused without rerunning blocked routes. No new dependency was installed. Static scans cannot prove absence of every possible secret; generated bundle byte equality and focused source validation are the demonstrated checks.
