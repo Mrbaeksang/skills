@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "<repo>\fixtures\improve\measure.py", line 75, in <module>
+    main()
+  File "<repo>\fixtures\improve\measure.py", line 43, in main
+    assert regression_before.returncode == regression_after.returncode == 0, regression_before.stderr + regression_after.stderr
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+..E.
+======================================================================
+ERROR: test_unhashable_unknown_sku (__main__.PreviewContract.test_unhashable_unknown_sku)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<fixture>\test_preview.py", line 15, in test_unhashable_unknown_sku
+    preview([([], 1)])
+  File "<fixture>\app.py", line 5, in preview
+    return {"total": quote(lines), "report": sales_report(lines)}
+                     ^^^^^^^^^^^^
+  File "<fixture>\orders.py", line 4, in quote
+    return sum(price(sku) * quantity for sku, quantity in lines)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<fixture>\orders.py", line 4, in <genexpr>
+    return sum(price(sku) * quantity for sku, quantity in lines)
+               ^^^^^^^^^^
+  File "<fixture>\pricing.py", line 8, in price
+    return _PRICES[sku]
+           ~~~~~~~^^^^^
+TypeError: unhashable type: 'list'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (errors=1)
