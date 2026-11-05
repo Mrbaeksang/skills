@@ -2,7 +2,7 @@
 
 지원 형식은 `.codex-plugin/plugin.json`과 `.agents/plugins/marketplace.json`이다. 배포되는 `plugins/skills/`에는 공통 계약이 이미 포함된다. 사용자는 Python이나 빌드가 필요 없다. 설치 이름은 `skills@baeksang-skills`다. 같은 이름의 다른 marketplace나 독립 `$spec` 스킬이 있으면 먼저 설치 목록과 스킬 선택 UI에서 출처를 확인한다. 무관한 설치를 자동 삭제하지 않는다.
 
-아래 GitHub 경로는 이 변경이 저장소에 게시된 뒤 사용할 수 있다. 이번 검증은 로컬 marketplace에서 수행했으며 GitHub 게시·원격 설치는 NOTRUN이다.
+GitHub 원격 marketplace 설치와 7개 스킬·공통 참조 포함을 확인했다. 실제 모델 실행은 기존 정책 차단 기록과 구분한다.
 
 ```powershell
 codex plugin marketplace add Mrbaeksang/skills
@@ -36,20 +36,9 @@ codex plugin marketplace remove baeksang-skills --json
 |---|---|---|---|
 | Windows, Codex CLI 0.166.0, 임시 CODEX_HOME, local marketplace | PASS, 캐시 참조 검증 | PASS | 인증 없음: NOTRUN |
 | Windows, Codex CLI 0.166.0, 기존 인증, workspace-write, 설치 캐시에서 복사한 project skills | 발견 PASS | 해당 없음 | BLOCKED: PowerShell 읽기 정책 거절 |
-| GitHub marketplace 원격 경로, Desktop UI, 다른 OS/버전 | NOTRUN | NOTRUN | NOTRUN |
+| GitHub marketplace 원격 경로 / Windows CLI | PASS | 설치·제거 PASS, 원격 업데이트 NOTRUN | NOTRUN |
+| Desktop UI, 다른 OS/버전 | NOTRUN | NOTRUN | NOTRUN |
 
 원본 설정 보존과 실제 오류는 [검증 기록](../research/codex-lifecycle.md)에 있다. [OpenAI 공식 packaging 문서](https://developers.openai.com/plugins/build/plugins)의 형식을 사용하고 CLI 0.166.0의 실제 help와 실행을 대조했다. 문서의 Desktop 안내를 CLI 미지원으로 해석하지 않는다.
 
-## 유지보수자 배포 검사
-
-`skills/`, `common/`, `adapters/`가 원본이며 `plugins/skills/`는 커밋하는 생성 산출물이다. `bundle`은 Codex와 존재하는 Claude adapter를 하나의 plugin root로 복사한다.
-
-```powershell
-python scripts/package.py check
-python scripts/package.py bundle --dest .artifacts/release-new
-python scripts/package.py check-bundle --dest plugins/skills
-python -m unittest discover -s tests -v
-python scripts/smoke_codex.py
-```
-
-`bundle`은 기존 목적지를 덮어쓰지 않는다. 새 산출물을 기존 tracked `plugins/skills/`와 비교한 뒤 소유가 확인된 생성 파일만 반영하고 `check-bundle`을 다시 통과시킨다. 사용자 설치 폴더를 이 과정에 사용하지 않는다. CI는 누락·오래된 내용·예상 밖 파일을 검출한다. `smoke_codex.py`는 임시 home에서만 설치를 변경하며 인증과 실제 모델 실행은 검사하지 않는다.
+개발·패키지 검사는 [개발 안내](development.md)를 따른다. [원격 설치 결과](../research/simple-install.md).
