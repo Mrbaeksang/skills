@@ -1,0 +1,5 @@
+Use build with the supplied local greeting fixture. Scope is the disposable fixture only; no installs, external services, accounts, deployment, deletion or payment.
+UI1: Enter Mina and submit Greet. Expect Hello, Mina!.
+UI2: Submit empty or whitespace-only input. Expect Enter a name. and preserve the previous greeting.
+UI3: After invalid input, enter Joon and submit. Expect Hello, Joon! and clear the error. Repeated submission must keep one greeting. Reload must restore No greeting yet.
+Discover available UI providers and perform the flows in a real browser or app. If the fixture fails, fix only its behavior and rerun the affected flows. Report done only with actual UI observations. If necessary tools are absent, do possible read-only validation, report blocked and NOTRUN with concrete resumption conditions; do not ask the user to do the testing.
