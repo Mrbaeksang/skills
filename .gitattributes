@@ -1,0 +1,3 @@
+# Preserve captured diff context and Markdown hard breaks as evidence bytes.
+fixtures/review/observed/sample-b/change.diff whitespace=-blank-at-eol
+fixtures/ticket/observed-green.md whitespace=-blank-at-eol
