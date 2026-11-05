@@ -14,6 +14,6 @@
 | 자원 병목 의심 | 관련 자원의 utilization, saturation, errors를 같은 시간 창에서 관찰 | 높은 사용률은 원인 후보; 요청 지연/실행 경로와 연결해야 함 |
 | 외부 서비스 오류 | 실제 응답·timeout·설정, 가능한 안전한 대조 요청 | mock 성공은 provider 복구 증거가 아님; 외부 변경/재시도 권한 확대 금지 |
 
-성능 개선은 데이터 크기·동시성·warmup/cache·반복 횟수·환경을 고정하고 baseline과 수정 후 분포를 비교한다. profile 비용과 측정 잡음을 밝힌다. 유의미한 개선이 보이지 않으면 개선 성공을 주장하지 않는다.
+성능 실험이면 [공용 측정 절차](workflows/optimize/measurement.md)를 적용한다. 이미 읽었으면 반복하지 않는다.
 
 이 절차는 Google SRE의 가설-실험 접근과 Brendan Gregg의 자원/측정 중심 진단을 적용해 새로 작성했다. 원본 문구나 실행 코드를 포함하지 않는다. 방법의 출처: [Effective Troubleshooting](https://sre.google/sre-book/effective-troubleshooting/), [USE Method](https://www.brendangregg.com/usemethod.html). 최신 도구/API 사용법이 필요할 때는 해당 환경의 공식 문서를 별도로 확인한다.

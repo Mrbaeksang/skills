@@ -6,8 +6,8 @@
 |---|---|
 | 공통화·전역 설정 | handler·인증·logger·client·config의 실제 등록과 소비자, 설정 override 순서, 중복 정책·공통 경로 우회 |
 | 도메인·모듈 경계 | 소유 데이터·공개 계약, 순환 의존, 타 모듈 내부 직접 접근, 도메인 정책이 섞인 global utility, 과도한 계층 |
-| 의존성 | 미사용·중복 후보, 해결 버전·peer/runtime 호환, 지원 종료·취약점·migration 영향. 상세 절차는 SKILL.md의 업그레이드 참조 사용 |
-| CSS·프론트 | component·token 재사용, cascade·override 충돌, route별 자원·렌더링·요청 비용. 상세 절차는 SKILL.md의 프론트 참조 사용 |
+| 의존성 | 미사용·중복 후보, 해결 버전·peer/runtime 호환, 지원 종료·취약점·migration 영향. 해당하면 [upgrade](workflows/upgrade.md) 사용 |
+| CSS·프론트 | component·token 재사용, cascade·override 충돌, route별 자원·렌더링·요청 비용. 해당하면 [프론트 진단](workflows/optimize/frontend.md) 사용 |
 | 백엔드·데이터 | 대표 요청의 query 수·실행 계획, N+1, transaction 경계, timeout·retry 중첩, cache 무효화, 중복 요청·복구 동작 |
 | 유지보수·운영 | dead code 후보의 entrypoint·동적 등록, 설정/문서 drift, CI와 실제 배포 build 차이, 관측성 누락, 핵심 use case의 테스트 공백 |
 

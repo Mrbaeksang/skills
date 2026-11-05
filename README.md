@@ -1,6 +1,6 @@
 # Skills
 
-요구사항을 구체화하고, 상세 명세와 티켓을 만들고, 구현과 검증까지 이어가는 7개 스킬입니다. DDD modular monolith, use case 중심 테스트, 짧은 보고를 기본으로 합니다.
+대화부터 구현·검증까지 이어가는 8개 작업 스킬과 필요할 때 사용하는 9개 전문 스킬입니다. DDD modular monolith, use case 중심 테스트, 짧은 보고를 기본으로 합니다.
 
 ## 설치
 
@@ -68,6 +68,7 @@ npx skills@latest update
 
 | 스킬 | 하는 일 |
 |---|---|
+| `talk` | 아이디어·고민을 가볍게 대화하며 목표·결정·열린 질문 정리 |
 | `shape` | 질문을 묶어 요구사항을 확인하고, 기술 선택지·trade-off·도메인 경계 정리 |
 | `spec` | 결정된 내용을 정상·실패 흐름과 검증 기준이 있는 상세 명세로 작성 |
 | `ticket` | 명세를 실행 가능한 티켓으로 나누고 의존성과 상태 라벨 관리 |
@@ -76,13 +77,43 @@ npx skills@latest update
 | `improve` | 코드베이스 구조·의존성·병목 조사, 근거 있는 개선 제안·실행 |
 | `review` | 명세와 고정된 변경 범위를 독립적으로 검토 |
 
-`shape → spec → ticket → build`로 이어 쓰거나 필요한 스킬만 직접 호출하세요. 작은 수정에도 전체 절차를 강제하지 않습니다. 작업 공간은 필요할 때 격리하고, 병합·변경 상태를 확인한 뒤 자신이 만든 worktree와 branch만 정리합니다.
+가벼운 구체화는 `$talk`, 개발 설계는 `$shape`, 구현은 `$build`로 시작하세요. `talk → shape → spec → ticket → build`를 매번 전부 거칠 필요는 없습니다. Claude Code에서는 `/skills:talk`처럼 호출합니다. 작업 공간은 필요할 때 격리하고, 병합·변경 상태를 확인한 뒤 자신이 만든 worktree와 branch만 정리합니다.
+
+### 필요한 전문 작업만 연결
+
+| 스킬 | 맡는 일 |
+|---|---|
+| `domain` | 용어·불변식·상태 전이·데이터 소유권 모델링 |
+| `research` | 공식 근거·기술 선택지·버전과 호환 조건 조사 |
+| `architecture` | 모듈 경계·공통 책임·의존 방향·변경 파급 설계 |
+| `test` | use case 중심 테스트 설계·구현·실행 |
+| `verify` | 실제 API·CLI·UI 실행과 완료 증거 확인 |
+| `clean` | 동작을 보존하는 코드 정리·과잉 추상화와 AI식 코드 점검 |
+| `polish` | 기존 UI·사용자 문구의 위계·일관성·완성도 개선 |
+| `optimize` | 성능·메모리·CSS·프론트 병목 측정과 개선 |
+| `upgrade` | 의존성 호환 판단·버전 변경·코드 이행·검증 |
+
+```text
+talk     → research / domain
+shape    → research / domain / architecture
+spec     → 결정 합성, 부족한 domain / research만 보완
+ticket   → 명세의 결정을 재사용해 작업 분해
+build    → 필요한 설계·조사 / test / clean / verify
+           ├─ UI·문구 정리: polish → verify
+           ├─ 성능 개선: optimize → 측정 / test
+           └─ 버전 이행: upgrade → research / test / verify
+diagnose → 가설·실험 / 필요한 research·측정 / test / verify
+improve  → 분야 선별 → 해당 전문 절차 → 실행 가능한 개선
+review   → 고정 diff·명세 → 필요한 전문 기준을 검토-only로 사용
+```
+
+화살표는 조건부 참조이며 고정 실행 순서가 아닙니다. 각 전문 스킬도 직접 호출할 수 있습니다. 같은 절차를 공유하므로 기존 답과 검증을 반복하지 않고, 별도 에이전트를 자동 생성하지 않습니다. 스킬 하나만 설치해도 필요한 참조가 함께 포함됩니다. 실제 스킬 호출 기능이 없는 호스트에서는 포함된 전문 절차를 읽어 실행합니다.
 
 각 스킬은 과잉 설계·불필요한 코드·상투적인 문구를 기본으로 점검합니다. 화면 작업에서만 UI·문구 상세 기준을 읽으며 별도 명령이나 추가 도구는 필요하지 않습니다. 설치만으로 스킬을 사용하지 않는 일반 대화까지 적용되지는 않습니다.
 
 ## 지원과 검증
 
-Windows에서 Claude Code·Codex의 GitHub 원격 플러그인 설치와 포함 파일을 확인했습니다. Claude의 실제 스킬 호출도 검증했습니다. Codex 모델 실행과 일부 브라우저 검증은 해당 테스트 환경의 도구 정책 제한으로 미완료입니다. 설치 성공과 모든 환경의 실행 성공은 구분합니다.
+기존 릴리스는 Windows에서 Claude Code·Codex 원격 설치·업데이트를 확인했고 Claude의 일부 실제 호출 증거가 있습니다. 새 전문 스킬 조합의 참조·패키징 검사와 실제 모델 행동 검증은 별개입니다. Codex 모델 실행과 일부 브라우저 검증은 기존 환경의 도구 정책 제한으로 미완료입니다. 설치 성공을 모든 환경의 실행 성공으로 확대하지 않습니다.
 
 [설치 검증 기록](research/simple-install.md) · [전체 검증 기록](research/release-receipt.md) · [개발·기여 안내](docs/development.md)
 

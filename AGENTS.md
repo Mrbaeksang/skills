@@ -2,6 +2,8 @@
 
 This repository publishes portable Markdown skills. Canonical instructions live in `skills/<name>/SKILL.md`; `common/` is the single source for shared contracts. `npm run sync` updates generated references in each skill and the native plugin bundle. Commit those copies so direct installers receive self-contained skills; edit their common source rather than generated copies.
 
+Specialist procedures live in `common/workflows/`; direct-call SKILL.md entries and parent workflows link to the same procedure. Keep triggers explicit and follow-up scope bounded. Sync recursively includes only reachable shared references, rejects cycles/missing canonical leaves, and removes unused mirrors only when their bytes still match the canonical file. `references/workflows/` is reserved for generated content. Do not add cross-skill `../other-skill` links or nested SKILL.md copies: a single selected skill must install independently without duplicate discovery.
+
 Maintainer scripts use Node.js 22+ and built-in modules; no dependency installation is required. Ordinary users install with native marketplaces or `npx skills@latest add Mrbaeksang/skills`, without running maintainer scripts.
 
 When shipped skills, shared contracts, adapters, or marketplace content changes, increment both adapter manifest versions together, update CHANGELOG.md, and sync the bundle. Run `npm run check:release -- <base-commit>` before publishing. Follow docs/development.md for releases; a new Git commit alone does not update a versioned native plugin.

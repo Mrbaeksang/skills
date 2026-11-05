@@ -64,13 +64,14 @@ function plan(source) {
     if (!shared.has(name)) throw new Error(`Missing required common contract: ${name}`);
   }
   for (const [name, data] of shared) {
-    if (!/^[^/]+\.md$/.test(name)) throw new Error(`Unsupported common file: ${name}`);
+    if (!/^(?:[a-z0-9-]+\/)*[a-z0-9-]+\.md$/.test(name)) throw new Error(`Unsupported common file: ${name}`);
     portable(name, data.toString('utf8'));
   }
   const entries = fs.readdirSync(path.join(source, 'skills')).sort();
   if (!entries.length) throw new Error('No skills found');
   const mirrors = new Map();
   const plugin = new Map();
+  const retired = [];
   for (const name of entries) {
     const dir = path.join(source, 'skills', name);
     const inventory = files(dir);
@@ -86,10 +87,43 @@ function plan(source) {
     if (!metadata.description || metadata.description.length > 1024) throw new Error(`${name}: missing or oversized description`);
     if (Object.keys(metadata).some(key => !['name', 'description', 'license', 'compatibility'].includes(key))) throw new Error(`${name}: unsupported metadata`);
     if ('compatibility' in metadata && (!metadata.compatibility.length || metadata.compatibility.length > 500)) throw new Error(`${name}: invalid compatibility`);
-    for (const [file, data] of shared) {
+    // Resolve only reachable shared references; installed siblings are never required.
+    const oldShared = new Map();
+    for (const file of shared.keys()) {
       const relative = `references/${file}`;
-      mirrors.set(`skills/${name}/${relative}`, data);
-      inventory.set(relative, data);
+      if (inventory.has(relative)) oldShared.set(relative, inventory.get(relative));
+      inventory.delete(relative);
+    }
+    for (const file of inventory.keys()) {
+      if (file.startsWith('references/workflows/')) throw new Error(`Missing canonical shared reference: ${file}`);
+    }
+    const visited = new Set();
+    const active = new Set();
+    function resolve(file) {
+      if (active.has(file)) throw new Error(`${name}: reference cycle at ${file}`);
+      if (visited.has(file) || !file.endsWith('.md')) return;
+      active.add(file);
+      for (const match of inventory.get(file).toString('utf8').matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+        if (/^https?:\/\/|^#/.test(match[1])) continue;
+        const target = path.resolve(dir, path.dirname(file), match[1].split('#')[0]);
+        if (!contained(dir, target)) throw new Error(`${name}: reference escapes skill: ${match[1]}`);
+        const relative = path.relative(dir, target).split(path.sep).join('/');
+        const key = relative.startsWith('references/') ? relative.slice('references/'.length) : null;
+        if (key && shared.has(key)) {
+          inventory.set(relative, shared.get(key));
+          mirrors.set(`skills/${name}/${relative}`, shared.get(key));
+        }
+        if (!inventory.has(relative)) throw new Error(`${name}: missing reference: ${match[1]}`);
+        resolve(relative);
+      }
+      active.delete(file);
+      visited.add(file);
+    }
+    for (const file of [...inventory.keys()]) resolve(file);
+    for (const [file, data] of oldShared) {
+      if (inventory.has(file)) continue;
+      if (!data.equals(shared.get(file.slice('references/'.length)))) throw new Error(`Modified unused shared reference: ${name}/${file}; review manually`);
+      retired.push(path.join(dir, file));
     }
     // Validate the proposed contents before any writes, including first-time mirrors.
     for (const [file, data] of inventory) {
@@ -122,7 +156,7 @@ function plan(source) {
     noLinks(path.join(source, sourceFile));
     plugin.set(target, bytes(path.join(source, sourceFile)));
   }
-  return { entries, mirrors, plugin };
+  return { entries, mirrors, plugin, retired, shared };
 }
 function compare(root, expected, exact = false) {
   const actual = exact ? files(root) : null;
@@ -156,16 +190,23 @@ function preflight(root, expected) {
 }
 export function run(command, source = ROOT, destination) {
   source = path.resolve(source);
-  const { entries, mirrors, plugin } = plan(source);
+  const { entries, mirrors, plugin, retired, shared } = plan(source);
   const shipping = path.join(source, 'plugins/skills');
   if (command === 'sync') {
     // Only known generated paths may change; preserve unexpected user files.
-    for (const file of files(shipping).keys()) if (!plugin.has(file)) throw new Error(`Unexpected generated bundle file: ${file}; review manually`);
+    for (const [file, data] of files(shipping)) {
+      if (plugin.has(file)) continue;
+      const match = file.match(/^skills\/[^/]+\/references\/(.+)$/);
+      if (!match || !shared.has(match[1]) || !data.equals(shared.get(match[1]))) throw new Error(`Unexpected generated bundle file: ${file}; review manually`);
+      retired.push(path.join(shipping, file));
+    }
     preflight(source, mirrors);
     preflight(shipping, plugin);
+    for (const file of retired) fs.unlinkSync(file);
     write(source, mirrors);
     write(shipping, plugin);
   } else if (command === 'check') {
+    if (retired.length) throw new Error('Unused shared references remain; run npm run sync');
     compare(source, mirrors);
     for (const name of entries) validateSkill(path.join(source, 'skills', name));
     compare(shipping, plugin, true);

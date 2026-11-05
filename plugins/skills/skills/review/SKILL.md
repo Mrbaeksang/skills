@@ -5,6 +5,8 @@ description: 명세와 고정된 diff의 요구 위반·문서화된 규칙 위�
 
 # Review
 
+코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 읽는다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.
+
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세와 diff만으로 직접 시작하며 다른 스킬 호출은 선행 조건이 아니다. 기본 산출물은 findings와 검토 한계다. 수정·외부 게시·상태 전환은 요청된 권한 범위에서만 한다.
 
 1. **범위 고정.** 실제 저장소/worktree와 기존 변경을 확인하고 요청된 base/head를 불변 commit ID로 해석한다. 명세·이슈·적용 지침의 버전 또는 내용을 함께 고정한다. merge-base를 쓰는지 두 commit의 tree를 비교하는지 명시한다. 미커밋 변경은 별도 snapshot/hash로 구분하고 검토 중 움직인 HEAD를 원래 범위에 섞지 않는다. 저장소 없이 제공된 diff라면 원본 이름·hash와 제공된 context의 한계를 기록한다. 완료 조건은 변경 파일 목록과 검토 계약이 확정된 상태다.

@@ -1,13 +1,16 @@
 # Baeksang Skills
 
-Seven portable development skills: `shape`, `spec`, `ticket`, `build`, `diagnose`,
-`improve`, and `review`. Each assembled skill includes the shared execution contract
-and its conditional references. Invoke any skill directly; the full workflow is not
-required for small tasks.
+Eight workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`, `diagnose`,
+`improve`, and `review`. Nine callable specialists: `domain`, `research`,
+`architecture`, `test`, `verify`, `clean`, `polish`, `optimize`, and `upgrade`.
+Each installed skill includes only its reachable shared references, including nested
+specialist procedures. Read them when their trigger applies, not all at startup.
+Invoke any skill directly; sibling installations and the full workflow are not required.
 
-On Claude Code use `/skills:shape`, `/skills:spec`, `/skills:ticket`, `/skills:build`,
-`/skills:diagnose`, `/skills:improve`, or `/skills:review`. On Codex select the installed
-skill by its source and invoke `$shape`, `$spec`, and the equivalent names.
+On Claude Code use `/skills:talk`, `/skills:build`, or the equivalent names. On Codex
+select the installed skill by its source and invoke `$talk`, `$build`, and the
+equivalent names. Specialist references share the same canonical procedures as direct
+calls. Loading a reference is not spawning a subagent or proof of a native skill call.
 
 Install through the native marketplace or `npx skills@latest add Mrbaeksang/skills`;
 see the source repository for host-specific commands. No package build is required.

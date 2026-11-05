@@ -5,6 +5,8 @@ description: 오류·잘못된 출력·성능 저하를 재현하고 구분 가�
 
 # Diagnose
 
+원인 조사에 외부 API·호환 사실이 부족하면 [research](references/workflows/research.md), 성능 저하를 측정할 때는 [optimize](references/workflows/optimize.md)의 측정 절차만 사용한다. 원인 확인 전 최적화 수정을 시작하지 않는다. 수정이 허용되면 [test](references/workflows/test.md)로 원인 회귀를 고정하고 [clean](references/workflows/clean.md)으로 diff를 점검한 뒤 [verify](references/workflows/verify.md)로 같은 실패·복구 경계를 확인한다. 이미 수행한 실험·검증은 재사용한다.
+
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 코드 수정을 시작하거나 작업 branch/worktree를 통합·정리할 때는 [작업 공간 수명주기](references/workspace-lifecycle.md)를 읽고 생성부터 안전한 정리 영수증까지 적용한다. 분석만 요청됐다면 원인과 수정 제안까지, 수정이 허용됐다면 회귀 검증까지 진행한다.
 
 1. **관찰 경계 확보.** cwd, branch/worktree, 지침, 기존 변경과 실행 도구를 확인한다. 사용자 증상의 기대값·실제값·입력·발생 환경·최초 발생 시점과 영향 범위를 기록한다. 실제 entrypoint에서 관련 모듈과 외부 의존성까지 호출/데이터 흐름을 좁혀 읽는다. 넓은 저장소는 조사한 하위 시스템과 미탐색 범위를 구분한다.
