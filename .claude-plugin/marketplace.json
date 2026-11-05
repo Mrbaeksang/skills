@@ -1,0 +1,8 @@
+{
+  "name": "baeksang-skills",
+  "description": "Portable development workflows from requirements to verified delivery",
+  "owner": {"name": "Baeksang Skills contributors"},
+  "plugins": [
+    {"name": "skills", "source": "./plugins/skills"}
+  ]
+}

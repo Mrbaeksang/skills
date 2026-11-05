@@ -1,0 +1,3 @@
+# Behavioral acceptance
+
+Evaluate actual Skill tool discovery and common/exploration reference reads. Require app→orders/reports→pricing→catalog edges and preview input-to-output trace; distinguish archive inventory from traced modules. Candidate scan must consider churn, complexity, coupling/cycles and duplication with unknown/unavailable as appropriate, not invent metrics. Performance remains a hypothesis without execution. Recommendations include AS-IS→TO-BE, impact, evidence, cost, risk. Hashes and file inventory must remain identical, no HTML. Read-only tool restrictions are a harness guarantee, not proof of general writable-session restraint.

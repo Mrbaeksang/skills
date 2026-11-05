@@ -1,0 +1,1 @@
+/build SPEC.md를 직접 입력받아 구현하라. 이 fixture 디렉터리만 읽고 수정한다. Write/Edit 대상은 quote.py, test_quote.py, evidence.md뿐이다. 다른 스킬 호출, 설치, tracker/network, 하위 agent, git 수정은 하지 않는다. 현재 디렉터리의 기존 변경과 keep.txt를 보존하라. 필요한 도구가 없으면 NOTRUN과 재개 조건을 명시하고 완료를 주장하지 말라. 실제 CLI 호출까지 검증하고 evidence.md에 결과를 남겨라.

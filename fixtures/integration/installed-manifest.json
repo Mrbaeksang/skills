@@ -1,0 +1,32 @@
+{
+  "source_base": "d06a08292eea3825c972863a595a120c3ccac9ce",
+  "sha256": {
+    "build/references/completion-evidence.md": "6962696ff038e05757e22b8fc75ef40250cfcbf6a92784137bcf77cf1ea2955b",
+    "build/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "build/references/ui-verification.md": "bcbb9688a275b3c606b91451dd08337e15e6873add5b2a936ccd03ce5bdd92ee",
+    "build/SKILL.md": "eedbe1d4328037a8c398d8b737ba48c7cbff98e122aa68ecd5230ae7cd29b711",
+    "diagnose/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "diagnose/references/experiments.md": "dd909711f7f34cf4e08a37630413b39c9c5af316dcd71a91bb2b5ef2eafc8dfb",
+    "diagnose/SKILL.md": "930c9d0638a395980617555068ce37655d2381601abf6505852f19d482105836",
+    "improve/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "improve/references/exploration.md": "53ffd7233eae2fcddf313c40d697a3eb402a88aca6a3e3b19804657d3368f558",
+    "improve/references/methods.md": "919318adac5864b2cbb56c45aae45a10161698f9ca6c51b0bc799d69153d155c",
+    "improve/references/performance.md": "d0caf9a606b62322e6f636a76fd56770ca258c757d23c7198ca68f90223449e0",
+    "improve/SKILL.md": "75c250f9e42fe6abb6874c9f62b0072cc4fd570df10ab737a27c2c33a57d4e3f",
+    "review/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "review/references/independent-review.md": "1c2fb40d1a8e6b2a165040b450f2d7e31ca39df8ba4f18586bd76f07576e1dbe",
+    "review/SKILL.md": "4fbcdcceccf2e00fcd1a5df95ff276e8f4b8823bd187c84bbe66b4ca61fe31e3",
+    "shape/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "shape/references/provenance.md": "1d41c7b25b62d3824b2c171bbeeb043e2240959b4c03ad21db6dc18e3f01c1b0",
+    "shape/references/technology.md": "18799cdc1fb138261597c92703695933b916a1d57d8780e9e9a9163e9cf30b1a",
+    "shape/references/third-party-notices.md": "b5c3c5556287569e597acdc9e531b36308d642e779dc84ba85e27da74f8d46c9",
+    "shape/SKILL.md": "e0b21725e5f10770956aad5247f5c3b564d31896c172bc833465e93bab8cbc16",
+    "spec/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "spec/references/publishing.md": "173ac416054b495e01ccd812a1076b0073d0f1dfa99bb32b23e945efe697188d",
+    "spec/references/specification.md": "c01d0a37d8f82fa2ef0ef8731cdad6d1e242a1197b61037e4a81d07d07bf1e74",
+    "spec/SKILL.md": "1dc0626b15bf851e7924795a42ea53ae94f9b448c5e99c39eb7af779a5d6179b",
+    "ticket/references/execution-contract.md": "fd3533639c70dc83ce857773b42216ce202ba63a5c8eef167efba29aee5c15d0",
+    "ticket/references/tracker.md": "56f38c3cc2ab5cd2c1a9fb139b06ba4058180975faa6c8e22564550aa94849fa",
+    "ticket/SKILL.md": "a7e86dbd976d25775996598e0a9137067d4606eff054f8e4f5b5a93bf91edb6a"
+  }
+}

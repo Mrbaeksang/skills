@@ -1,0 +1,50 @@
+[
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\decisions.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\SPEC.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\tickets.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\evidence.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\quote.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\test_quote.py"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\build\\references\\execution-contract.md"
+    }
+  },
+  {
+    "tool": "Read",
+    "input": {
+      "file_path": "<fixture>\\.claude\\skills\\build\\references\\completion-evidence.md"
+    }
+  }
+]

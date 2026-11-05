@@ -1,0 +1,13 @@
+diff --git a/transfer.py b/transfer.py
+index 62103a6..3b7ed12 100644
+--- a/transfer.py
++++ b/transfer.py
+@@ -14,7 +14,7 @@ def transfer(request):
+         return {'error': 'invalid_amount', 'balances': balances}
+     balances[source] -= amount
+     balances[target] += amount
+-    return {'ok': True, 'balances': balances}
++    return dict(ok=True, balances=balances)
+ 
+ 
+ if __name__ == '__main__':
