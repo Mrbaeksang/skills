@@ -106,14 +106,21 @@ No issue was closed or moved to ready by this documentation work. Existing lifec
 
 ## Additional requirement: autonomous workspace lifecycle
 
-The user additionally requested autonomous worktree/branch lifecycle and safe cleanup during integration. This is an amendment beyond the original US1–40 enumeration; it does not retroactively change those scenarios or the `d06a082` runtime input. The shared lifecycle instructions are being integrated separately. Their final behavioral acceptance is **NOTRUN in this receipt**.
+The user additionally requested autonomous worktree/branch lifecycle and safe cleanup during integration. This is an amendment beyond the original US1–40 enumeration; it does not retroactively change those scenarios or the `d06a082` runtime input. The shared lifecycle instructions are implemented and integrated from `cb5fc8741ae86b2fc421c99f41d0f3d9410b3214`; [review-fixes evidence](review-fixes-smoke.md) records bounded report-only cleanup decisions. Actual cleanup/integration by that fixture agent is NOTRUN and its report-file Write was denied (file output FAIL).
 
 | Amendment | Required evidence | Current boundary |
 |---|---|---|
-| WL1 reuse | Verify actual cwd/branch/worktree, ownership, dirty/untracked state; reuse an appropriate existing worktree | Existing BU/DG/IN preflight and preserved fixture changes are partial evidence only; reuse decision NOTRUN |
-| WL2 isolate | Create only necessary owned branch/worktree without mixing unrelated work | Host-created isolated fixtures exist; autonomous lifecycle selection/creation NOTRUN |
-| WL3 integrate | Follow authorized integration destination; verify branch/merge/PR state and report exact commit | This ticket commits scoped documentation; autonomous final integration behavior NOTRUN |
-| WL4 safe cleanup | Remove only owned disposable resources after checking merge/PR/reachability; preserve dirty, untracked, unmerged and unrelated resources | No destructive cleanup performed; preservation PASS for named fixture, cleanup decision matrix NOTRUN |
-| WL5 report | Record resources retained/removed and concrete blocker; no unnecessary repeat approval within authorization | Final shared lifecycle revision requires its own source checks and behavioral receipt |
+| WL1 reuse | Verify actual cwd/branch/worktree, ownership, dirty/untracked state; reuse an appropriate existing worktree | Source implemented; BU/DG/IN preflight and preserved fixture changes partial; autonomous reuse execution NOTRUN |
+| WL2 isolate | Create only necessary owned branch/worktree without mixing unrelated work | Source implemented; host-created isolated fixtures exist; autonomous creation NOTRUN |
+| WL3 integrate | Follow authorized integration destination; verify branch/merge/PR state and report exact commit | Source implemented; host merged `cb5fc874` as `1b6bc32`; fixture agent integration NOTRUN |
+| WL4 safe cleanup | Remove only owned disposable resources after checking merge/PR/reachability; preserve dirty, untracked, unmerged and unrelated resources | Bounded report-only clean/ignored/unmerged decisions PASS; actual removal and PR lookup NOTRUN; protected fixtures retained |
+| WL5 report | Record resources retained/removed and concrete blocker; no unnecessary repeat approval within authorization | Source and 5 packaging tests PASS; response distinguishes proposed/executed; cleanup.md Write denied, file absent |
 
-This amendment grants no authority to delete unrelated work or publish/deploy. An existing dirty or unmerged resource is evidence to preserve and inspect, not an invitation to force cleanup. The final release must attach the separate lifecycle evidence or keep these gates explicit.
+This amendment grants no authority to delete unrelated work or publish/deploy. An existing dirty or unmerged resource is evidence to preserve and inspect, not an invitation to force cleanup. The linked separate lifecycle evidence closes bounded decision coverage only; actual lifecycle execution gates remain explicit.
+
+
+## Final integration checks
+
+Merged integration tip `cb5fc8741ae86b2fc421c99f41d0f3d9410b3214` into ticket/13 as `1b6bc32b30c610b7fc75e8ea01d31b5772ba1afc`. Source/package and assembled bundle checks pass for seven skills, all five packaging tests pass, and diff hygiene passes. The old connected/resume runtime remains pinned to `d06a082`; these new shared-contract changes are not silently included in that invocation claim.
+
+Separate [review-fixes evidence](review-fixes-smoke.md) adds direct build local-JSON status transitions with readback (19 turns, zero denials). This is useful partial A07/US23–24 coverage, not live tracker API/concurrency acceptance. Cleanup decisions passed but report-file writing failed and actual cleanup was not executed. #7, #11 and #13 remain blocked/open.
