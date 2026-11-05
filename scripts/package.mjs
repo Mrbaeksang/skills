@@ -100,7 +100,6 @@ function plan(source) {
         if (!contained(dir, target)) throw new Error(`${name}: reference escapes skill: ${match[1]}`);
         if (!inventory.has(path.relative(dir, target).split(path.sep).join('/'))) throw new Error(`${name}: missing reference: ${match[1]}`);
       }
-      plugin.set(`skills/${name}/${file}`, data);
     }
     for (const [file, data] of inventory) plugin.set(`skills/${name}/${file}`, data);
   }

@@ -73,6 +73,9 @@ test('missing mirrors and unexpected bundle files fail check; sync preserves unk
   fs.unlinkSync(path.join(source, 'skills/spec/references/execution-contract.md'));
   assert.notEqual(cli('check', source).status, 0);
   assert.equal(cli('sync', source).status, 0);
+  fs.appendFileSync(path.join(source, 'plugins/skills/skills/spec/SKILL.md'), 'drift');
+  assert.notEqual(cli('check', source).status, 0);
+  assert.equal(cli('sync', source).status, 0);
   const note = path.join(source, 'plugins/skills/user-note');
   fs.writeFileSync(note, 'preserve');
   assert.notEqual(cli('check', source).status, 0);

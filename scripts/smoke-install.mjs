@@ -36,6 +36,9 @@ try {
     for (const name of names) {
       const dir = path.join(installed, name);
       validateSkill(dir);
+      const expectedFiles = files(path.join(ROOT, 'skills', name));
+      const installedFiles = files(dir);
+      if (installedFiles.size !== expectedFiles.size || [...expectedFiles].some(([file, data]) => !installedFiles.get(file)?.equals(data))) throw new Error(`${scope}/${name}: installed files differ from this checkout`);
       for (const [file, data] of files(path.join(ROOT, 'common'))) {
         if (!fs.readFileSync(path.join(dir, 'references', file)).equals(data)) throw new Error(`${scope}/${name}: shared contract mismatch: ${file}`);
       }
@@ -45,7 +48,7 @@ try {
     }
   }
   if (fs.readFileSync(sentinel, 'utf8') !== sentinelText) throw new Error('Unrelated project skill changed');
-  console.log(JSON.stringify({ source, node: process.version, platform: process.platform, installation: 'PASS', localReferences: 'PASS', sharedReferences: 'PASS', unrelatedSkillPreserved: true, modelRuntime: 'NOTRUN', installed: reports }, null, 2));
+  console.log(JSON.stringify({ source, node: process.version, platform: process.platform, installation: 'PASS', sourceFiles: 'PASS', localReferences: 'PASS', sharedReferences: 'PASS', unrelatedSkillPreserved: true, modelRuntime: 'NOTRUN', installed: reports }, null, 2));
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
 }
