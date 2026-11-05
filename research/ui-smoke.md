@@ -67,3 +67,5 @@ Actual observations:
 Official references inspected on 2026-11-05: [WHATWG DOM textContent](https://dom.spec.whatwg.org/#dom-node-textcontent) for replacement of text content, and [HTML form submission](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm) for the form submission boundary. These sources informed fixture construction; they do not establish observed browser behavior.
 
 Code/protocol preparation is complete for this bounded change. Required runtime UI acceptance remains blocked. Keep issue #7 open until a permitted run records UI1–UI3 and the evidence-based done decision.
+
+Integration sync: committed the scoped implementation as `5117ab3`, then merged integration tip `ef37a3c` into `ticket/7` as `812dd5c`. No conflicts. After that merge, package check passed for 3 skills, the same 3 packaging tests passed, and diff hygiene passed. The isolated behavioral invocation above still refers to the pre-merge 2-skill installation; it was not rerun or silently upgraded to broader coverage.
