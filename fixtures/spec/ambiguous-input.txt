@@ -1,0 +1,7 @@
+$spec 이것은 tracker 장애 대응 fixture다. 실제 게시/네트워크는 하지 않는다. 승인된 target은 example/booking, marker는 <!-- spec-key: booking-cancellation -->, 본문은 '예약 취소 명세 v1'이다. 최초 create 직후 timeout이 났다. 아래 각 경우를 독립적으로 평가하여 상태, 다음 동작, 추가 쓰기 횟수를 답하라. fixture의 readback 결과를 사실로 사용하고 임의의 도구 결과를 만들지 않는다.
+
+A: 전체 open/closed issues readback에 marker와 본문이 정확히 같은 issue #31 한 건. 같은 게시 요청이 다시 들어왔다.
+B: 전체 readback 0건. 검색 인덱스 반영 시간과 서버 쓰기 완료 여부는 알 수 없다.
+C: marker가 같은 issue #31과 #32 두 건.
+D: readback이 403으로 실패했다.
+E: 전체 readback에서 #31 marker는 같고 본문이 '다른 실행자의 수정 v2'로 바뀌어 있다. 사용자 요청은 v1 게시뿐이다.
