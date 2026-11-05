@@ -5,14 +5,26 @@ description: 레포 전체의 공통화·모듈 경계·의존성 업그레이�
 
 # Improve
 
-레포 전체 진단이면 [분야별 진단](references/repository-audit.md)으로 적용 영역을 먼저 선별한다. 특정 영역 요청이면 그 영역만 조사한다. 의존성 진단·업그레이드에는 [업그레이드 절차](references/dependency-upgrades.md), CSS·프론트 최적화에는 [프론트 진단](references/frontend-audit.md)을 읽는다. 해당하지 않는 절차·도구는 불러오지 않는다.
+레포 전체 진단이면 [분야별 진단](references/repository-audit.md)으로 적용 영역을 먼저 선별한다. 특정 영역 요청이면 그 영역만 조사한다. 아래 전문 절차는 해당 문제 신호가 있을 때만 실행한다.
+
+| 확인한 문제 | 전문 절차 |
+|---|---|
+| 도메인 용어·소유권 충돌 | [domain](references/workflows/domain.md) |
+| 공통화·순환·모듈 경계 | [architecture](references/workflows/architecture.md) |
+| 외부 기술 사실·대안 근거 부족 | [research](references/workflows/research.md) |
+| 의존성 호환·지원·버전 이행 | [upgrade](references/workflows/upgrade.md) |
+| CSS·프론트·데이터·자원 병목 | [optimize](references/workflows/optimize.md) |
+| 불필요한 코드·과잉 추상화 | [clean](references/workflows/clean.md) |
+| UI·문구의 위계·일관성 | [polish](references/workflows/polish.md) |
+
+진단-only 권한과 현재 근거를 전문 절차에도 전달한다. 전체 분야를 전수 실행하지 않는다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 코드 수정을 시작하거나 작업 branch/worktree를 통합·정리할 때는 [작업 공간 수명주기](references/workspace-lifecycle.md)를 읽고 생성부터 안전한 정리 영수증까지 적용한다. 분석-only 요청은 읽기와 허용된 관찰로 끝내며 코드·설정·보고서 파일을 임의로 쓰지 않는다. 실행 권한이 있으면 기존 작업을 보존하면서 근거가 있는 최소 개선까지 이어간다.
 
 1. **범위와 상태.** cwd, branch/worktree, 지침, 변경 파일, 도구와 목표를 확인한다. 분석/구현 권한, 대상 subsystem, 사용자 use case, 시간·실행 비용 한도를 기록한다. 이미 정해진 목표는 재질문하지 않는다.
 2. **지도와 coverage.** [탐색 절차](references/exploration.md)를 읽고 전체 디렉터리·manifest·entrypoint에서 시작한다. 모듈 소유 데이터, 공개 계약, 의존 edge와 주요 use case의 호출/데이터 경로를 근거 위치와 연결한다. 각 subsystem을 목록만 확인/소스 추적/실행 확인/미탐색으로 구분한다. 일부 경로 추적을 전체 코드베이스 검증이라고 부르지 않는다.
 3. **후보에서 가설로.** churn, 복잡도, fan-in/out, 순환, 중복을 조사 신호로 사용한다. 후보마다 구체적 도메인 계약, 변경 파급, 테스트 경계나 관찰된 비용으로 검증한다. 숫자가 높다는 사실만으로 결함을 선언하지 않는다. 확인되지 않은 후보는 가설로 남긴다.
-4. **개선과 검증.** 성능 목표나 병목 주장이 있으면 [측정 절차](references/performance.md)를 읽고 workload·baseline·profile을 먼저 확보한다. 분석-only에서는 관찰을 위한 실행도 허용 범위를 확인하며 수정은 제안으로만 남긴다. 구현 허용 시 최소 변경 후 같은 workload와 조건으로 측정하고 공개 use case 회귀를 확인한다. 구조 개선은 계약·소유권·호출 영향·테스트 결과로 전후를 비교한다. 고위험 변경은 독립 검토한다.
+4. **개선과 검증.** 분석-only에서는 관찰을 위한 실행도 허용 범위 안에서 수행하고 수정은 제안으로 남긴다. 구현 허용 시 작은 개선은 직접 실행하거나 build에 전달한다. 관련 [test](references/workflows/test.md)와 [verify](references/workflows/verify.md) 결과를 재사용하며 구조 개선은 계약·소유권·소비자 영향, 성능은 같은 workload의 전후 측정으로 판정한다. 고위험 변경은 독립 검토한다.
 5. **판정.** 채팅에 우선순위별 `AS-IS → TO-BE | 영향 | 근거 | 비용 | 위험 | 검증 상태`를 간결히 보고한다. 확인한 coverage와 미탐색 영역, PASS/FAIL/NOTRUN을 함께 남긴다. 근거와 목표가 충족되면 중단하며 HTML은 요청된 경우만 만든다. 도구 부족은 가능한 읽기 대체와 재개 조건을 제시하고 실행 성공으로 바꾸지 않는다.
 
 개선 후보는 `문제·근거 위치 / 보존할 계약 / 변경 범위·순서 / 수용 기준·검증 / 우선순위·위험`을 포함한 실행 항목으로 정리한다. 작은 항목은 채팅에서 build에 직접 전달할 수 있게 쓰고 큰 작업만 독립 실행 가능한 단위로 나눈다. 실행까지 요청받았다면 재인터뷰나 문서 재작성 없이 구현·검증을 이어간다. build를 사용할 수 없으면 같은 계약으로 직접 실행하며 실제 호출하지 않은 스킬을 호출했다고 보고하지 않는다. 분석-only에서는 제안으로 끝낸다. 별도 보고서·티켓 게시를 자동으로 추가하지 않는다.

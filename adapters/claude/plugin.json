@@ -1,8 +1,10 @@
 {
   "name": "skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "description": "Portable development workflows from requirements to verified delivery",
-  "author": {"name": "Baeksang Skills contributors"},
+  "author": {
+    "name": "Baeksang Skills contributors"
+  },
   "skills": "./skills/"
 }

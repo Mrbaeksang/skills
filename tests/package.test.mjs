@@ -51,12 +51,54 @@ test('standalone source contains all shared references and check detects drift',
   assert.equal(cli('sync', source).status, 0);
   assert.equal(cli('check', source).status, 0);
   for (const name of fs.readdirSync(path.join(source, 'skills'))) {
-    for (const shared of fs.readdirSync(path.join(source, 'common'))) {
-      assert.deepEqual(fs.readFileSync(path.join(source, 'skills', name, 'references', shared)), fs.readFileSync(path.join(source, 'common', shared)));
+    for (const [shared, data] of files(path.join(source, 'common'))) {
+      const target = path.join(source, 'skills', name, 'references', shared);
+      if (fs.existsSync(target)) assert.deepEqual(fs.readFileSync(target), data);
     }
   }
   fs.appendFileSync(path.join(source, 'skills/spec/references/execution-contract.md'), 'drift');
   assert.notEqual(cli('check', source).status, 0);
+});
+test('talk and build install alone with complete nested references and no unrelated workflows', t => {
+  const source = fixture(t);
+  assert.equal(cli('sync', source).status, 0);
+  for (const name of ['talk', 'build']) {
+    const isolated = path.join(source, `isolated-${name}`);
+    fs.cpSync(path.join(source, 'skills', name), isolated, { recursive: true });
+    validateSkill(isolated);
+    assert.equal(fs.existsSync(path.join(isolated, 'references/workflows/domain.md')), true);
+  }
+  assert.equal(fs.existsSync(path.join(source, 'isolated-talk/references/workflows/upgrade.md')), false);
+  assert.equal(fs.existsSync(path.join(source, 'isolated-talk/references/workflows/verify/ui.md')), false);
+  assert.equal(fs.existsSync(path.join(source, 'isolated-build/references/workflows/verify/ui.md')), true);
+});
+test('nested shared drift, missing leaves, and reference cycles fail without partial sync writes', t => {
+  const source = fixture(t);
+  assert.equal(cli('sync', source).status, 0);
+  const leaf = path.join(source, 'common/workflows/domain.md');
+  const original = fs.readFileSync(leaf);
+  for (const change of [() => fs.unlinkSync(leaf), () => fs.appendFileSync(leaf, '\n[cycle](domain.md)')]) {
+    change();
+    const before = files(source);
+    assert.notEqual(cli('sync', source).status, 0);
+    assert.deepEqual(files(source), before);
+    fs.writeFileSync(leaf, original);
+  }
+  fs.appendFileSync(path.join(source, 'skills/talk/references/workflows/domain.md'), '\ndrift');
+  assert.notEqual(cli('check', source).status, 0);
+});
+test('sync prunes an unused known mirror but preserves a modified unused mirror', t => {
+  const source = fixture(t);
+  assert.equal(cli('sync', source).status, 0);
+  const mirror = path.join(source, 'skills/talk/references/tracker-state.md');
+  fs.copyFileSync(path.join(source, 'common/tracker-state.md'), mirror);
+  assert.notEqual(cli('check', source).status, 0);
+  assert.equal(cli('sync', source).status, 0);
+  assert.equal(fs.existsSync(mirror), false);
+  fs.writeFileSync(mirror, 'User modification');
+  const before = files(source);
+  assert.notEqual(cli('sync', source).status, 0);
+  assert.deepEqual(files(source), before);
 });
 test('bundle includes manifests and license and refuses existing destinations', t => {
   const source = fixture(t);
@@ -139,7 +181,7 @@ for (const contract of ['execution-contract.md', 'tracker-state.md', 'workspace-
   });
 }
 
-for (const conflict of ['skills/spec/references/workspace-lifecycle.md', 'plugins/skills/README.md']) {
+for (const conflict of ['skills/build/references/workspace-lifecycle.md', 'plugins/skills/README.md']) {
   test(`sync rejects directory at ${conflict} before changing any bytes`, t => {
     const source = fixture(t);
     assert.equal(cli('sync', source).status, 0);
