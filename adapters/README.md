@@ -1,16 +1,25 @@
 # Baeksang Skills
 
-Portable development workflows for clarifying requirements, writing specifications,
-planning tickets, implementing changes, diagnosing problems, improving code, and
-reviewing results. The installed skills include their shared execution contract
-and conditional references. Only skills present in this bundle are available.
+Seven portable development skills: `shape`, `spec`, `ticket`, `build`, `diagnose`,
+`improve`, and `review`. Each assembled skill includes the shared execution contract
+and its conditional references. Invoke any skill directly; the full workflow is not
+required for small tasks.
 
-On Claude Code, invoke `/skills:spec` with decided requirements. On Codex, select
-the installed `spec` skill and invoke `$spec`. The host supplies file reading and
-task-specific tools. Missing tools must be reported explicitly; this plugin does
-not install tools, credentials, external services, or browser integrations.
+On Claude Code use `/skills:shape`, `/skills:spec`, `/skills:ticket`, `/skills:build`,
+`/skills:diagnose`, `/skills:improve`, or `/skills:review`. On Codex select the installed
+skill by its source and invoke `$shape`, `$spec`, and the equivalent names.
 
-Source and installation documentation: https://github.com/Mrbaeksang/skills
+This is an integration candidate, not evidence of a published main release. Windows
+Claude Code has bounded fixture evidence. Codex installation lifecycle is verified,
+but actual skill execution is policy-blocked; UI acceptance is also blocked. Remote
+marketplace installation, other hosts and other operating systems remain NOTRUN.
+Consult the source release receipt for precise evidence and remaining gates.
 
-Original content is licensed under the included MIT license. Documentation
-research does not transfer third-party licensing rights to this project.
+The host supplies file reading and task-specific shell, tracker and browser tools.
+Missing tools and policy denials must be reported; this plugin does not install
+credentials, services or browser integrations and does not bypass host policy.
+
+Source, installation routes and release receipt: https://github.com/Mrbaeksang/skills
+
+Original content is licensed under the included MIT license. Documentation research
+does not transfer third-party licensing rights to this project.
