@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { validateSkill } from '../scripts/package.mjs';
+import { files, validateSkill } from '../scripts/package.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cli = (command, source, ...args) => spawnSync(process.execPath, [path.join(root, 'scripts/package.mjs'), command, '--source', source, ...args], { encoding: 'utf8' });
@@ -91,3 +91,38 @@ test('directory links cannot redirect sync writes outside source', t => {
   assert.notEqual(cli('sync', source).status, 0);
   assert.deepEqual(fs.readdirSync(outside), []);
 });
+
+for (const contract of ['execution-contract.md', 'tracker-state.md', 'workspace-lifecycle.md']) {
+  test(`missing canonical ${contract} fails despite existing mirrors, before writes`, t => {
+    const source = fixture(t);
+    assert.equal(cli('sync', source).status, 0);
+    fs.unlinkSync(path.join(source, 'common', contract));
+    const before = files(source);
+    for (const command of ['check', 'sync', 'bundle']) {
+      const result = cli(command, source, '--dest', path.join(source, 'output'));
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /Missing required common contract/);
+      assert.deepEqual(files(source), before);
+      assert.equal(fs.existsSync(path.join(source, 'output')), false);
+    }
+  });
+}
+
+for (const conflict of ['skills/spec/references/workspace-lifecycle.md', 'plugins/skills/README.md']) {
+  test(`sync rejects directory at ${conflict} before changing any bytes`, t => {
+    const source = fixture(t);
+    assert.equal(cli('sync', source).status, 0);
+    const target = path.join(source, conflict);
+    fs.unlinkSync(target);
+    fs.mkdirSync(target);
+    fs.appendFileSync(path.join(source, 'common/execution-contract.md'), '\nUpdated contract.\n');
+    fs.writeFileSync(path.join(source, 'user-note'), 'preserve');
+    const before = files(source);
+    const result = cli('sync', source);
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /Generated file target is not a regular file/);
+    assert.deepEqual(files(source), before);
+    assert.equal(fs.lstatSync(target).isDirectory(), true);
+    assert.deepEqual(fs.readdirSync(target), []);
+  });
+}

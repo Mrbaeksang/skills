@@ -60,7 +60,9 @@ export function validateSkill(dir) {
 function plan(source) {
   noLinks(source);
   const shared = files(path.join(source, 'common'));
-  if (!shared.has('execution-contract.md')) throw new Error('Missing common execution contract');
+  for (const name of ['execution-contract.md', 'tracker-state.md', 'workspace-lifecycle.md']) {
+    if (!shared.has(name)) throw new Error(`Missing required common contract: ${name}`);
+  }
   for (const [name, data] of shared) {
     if (!/^[^/]+\.md$/.test(name)) throw new Error(`Unsupported common file: ${name}`);
     portable(name, data.toString('utf8'));
@@ -133,6 +135,20 @@ function write(root, expected) {
     fs.writeFileSync(target, data);
   }
 }
+function preflight(root, expected) {
+  for (const file of expected.keys()) {
+    const target = path.join(root, file);
+    noLinks(target);
+    if (exists(target) && !fs.lstatSync(target).isFile()) throw new Error(`Generated file target is not a regular file: ${target}`);
+    let parent = path.dirname(target);
+    while (true) {
+      if (exists(parent) && !fs.lstatSync(parent).isDirectory()) throw new Error(`Generated parent is not a directory: ${parent}`);
+      const next = path.dirname(parent);
+      if (next === parent) break;
+      parent = next;
+    }
+  }
+}
 export function run(command, source = ROOT, destination) {
   source = path.resolve(source);
   const { entries, mirrors, plugin } = plan(source);
@@ -140,8 +156,8 @@ export function run(command, source = ROOT, destination) {
   if (command === 'sync') {
     // Only known generated paths may change; preserve unexpected user files.
     for (const file of files(shipping).keys()) if (!plugin.has(file)) throw new Error(`Unexpected generated bundle file: ${file}; review manually`);
-    for (const file of mirrors.keys()) noLinks(path.join(source, file));
-    for (const file of plugin.keys()) noLinks(path.join(shipping, file));
+    preflight(source, mirrors);
+    preflight(shipping, plugin);
     write(source, mirrors);
     write(shipping, plugin);
   } else if (command === 'check') {
