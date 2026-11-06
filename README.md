@@ -1,21 +1,45 @@
 # Skills
 
-대화부터 구현·검증까지 이어가는 8개 작업 스킬과 필요할 때 사용하는 9개 전문 스킬입니다. DDD modular monolith, use case 중심 테스트, 짧은 보고를 기본으로 합니다.
+**질문은 묶어서. 기존 코드는 찾아서. 완료는 실제 검증까지.**
+
+Claude Code와 Codex에서 쓰는 개인 개발 워크플로입니다. 평소에는 **8개 작업 스킬**만 골라 쓰고, 에이전트가 필요한 **9개 전문 절차**를 그때 읽습니다. DDD modular monolith를 출발점으로 삼되 프로젝트 규모와 기존 구조에 맞춥니다.
+
+[![Checks](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml/badge.svg)](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml)
+[![Release](https://img.shields.io/github/v/release/Mrbaeksang/skills)](https://github.com/Mrbaeksang/skills/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+[설치](#설치) · [무엇을 부를까](#무엇을-부를까) · [기록 방식](#사람에게는-답을-에이전트에게는-이어갈-기록을) · [업데이트](#업데이트)
+
+## 왜 만들었나
+
+AI와 개발하면서 같은 설명을 반복하고, 공통 코드를 다시 만들고, 읽지도 않을 보고서를 받는 일이 싫었습니다. 계획을 세웠다면 실제 동작을 확인할 때까지 이어지는 도구가 필요했습니다.
+
+| 자주 겪던 문제 | 이 스킬에 넣은 기준 |
+|---|---|
+| 독립적인 질문을 하나씩 묻고, 결정한 내용을 다시 확인한다 | 질문은 묶고 확정한 결정은 재사용한다. 실행 가능한 범위는 진행한다 |
+| 규모·운영 조건을 놓친 채 기술을 고른다 | 관련 제약부터 확인하고 공식 최신 근거로 유지안·대안의 trade-off를 비교한다 |
+| 기존 handler·config·SDK client가 있는데 또 만든다 | 실제 등록·호출 경로와 소비자를 추적하고 재사용·확장·신규를 판단한다 |
+| 테스트는 통과했는데 사용자 흐름이 깨진다 | 기계적인 TDD 대신 정상·실패·복구 use case와 실제 API·CLI·UI 경계를 검증한다 |
+| 맥락 없는 추상화, 장식, 상투적인 문구가 쌓인다 | 코드의 실제 필요와 제품의 브랜드·정보 위계로 판단한다. 특정 색이나 스타일을 일괄 금지하지 않는다 |
+| 분석할 때마다 MD·HTML 보고서가 늘어난다 | 채팅에 짧게 보고하고 이어갈 결정만 기존 이슈나 `.scratch`에 연결한다 |
+| 구현 뒤 검수를 다시 사람에게 넘긴다 | 수행 가능한 검증까지 진행한다. 못 한 것은 이유와 함께 NOTRUN으로 남긴다 |
+
+승인된 일을 반복 확인하지 않는다는 뜻이지, 분석 요청만으로 코드를 고치거나 외부에 게시한다는 뜻은 아닙니다. 명세의 깊이와 검증 근거는 유지하고 중복 절차와 보고를 줄입니다.
+
+답변부터 명세·이슈·커밋·PR까지 사용자 언어를 따릅니다. 저장소가 요구하는 언어·템플릿은 해당 산출물에 적용하고 코드·식별자는 그대로 둡니다. 별도 PR 스킬을 부를 필요 없이, 승인된 커밋·PR 작업에서 변경 이유·결과·실제 검증을 읽기 쉽게 작성합니다.
 
 ## 설치
 
-사용하는 에이전트에 맞춰 하나를 선택하세요. 플러그인과 npx를 같은 에이전트에 중복 설치할 필요는 없습니다. Python이나 직접 빌드는 필요하지 않습니다.
+에이전트마다 **native plugin 또는 npx 중 하나**를 선택하세요. 둘 다 설치하면 같은 스킬이 두 번 보일 수 있습니다. 일반 사용자는 Python이나 저장소 빌드가 필요 없습니다.
 
 ### Claude Code
 
-터미널에서:
-
 ```sh
 claude plugin marketplace add Mrbaeksang/skills
-claude plugin install skills@baeksang-skills
+claude plugin install skills@baeksang-skills --scope user
 ```
 
-새 세션에서 `/skills:shape`로 시작하세요. [업데이트·제거](docs/claude.md)
+새 세션에서 `/skills:talk`, `/skills:build`처럼 호출합니다. [scope·제거 안내](docs/claude.md)
 
 ### Codex
 
@@ -24,101 +48,104 @@ codex plugin marketplace add Mrbaeksang/skills
 codex plugin add skills@baeksang-skills
 ```
 
-새 세션에서 설치된 스킬을 선택해 `$shape`로 시작하세요. [업데이트·제거](docs/codex.md)
+새 세션에서 설치 출처를 확인해 `$talk`, `$build`를 선택합니다. 호스트가 namespace를 표시하면 `$skills:build`처럼 선택할 수 있습니다. [설치·제거 안내](docs/codex.md)
 
-### 다른 에이전트 또는 편집 가능한 스킬 파일
-
-Node.js와 npm이 있는 환경에서:
+### 다른 에이전트 / 편집 가능한 설치
 
 ```sh
 npx skills@latest add Mrbaeksang/skills
 ```
 
-안내에 따라 스킬과 에이전트를 선택합니다. 모든 프로젝트에서 사용하려면 `-g`를 추가하세요. `npx skills@latest update`로 업데이트할 수 있습니다. 설치 도구는 [Vercel Skills CLI](https://github.com/vercel-labs/skills)를 사용합니다.
+설치 도구가 안내하는 에이전트를 선택합니다. 전역 설치는 `-g`를 추가하세요. 호스트마다 사용 가능한 도구와 실행 환경은 다릅니다.
+
+## 무엇을 부를까
+
+| 지금 할 일 | 스킬 | 예시 |
+|---|---|---|
+| 막연한 생각 구체화 | `talk` | “이 아이디어에서 먼저 결정할 것부터 같이 보자” |
+| 개발 방향과 선택지 정리 | `shape` | “규모·도메인·기술 선택의 trade-off까지 정리해” |
+| 이미 결정한 내용을 상세 명세로 | `spec` | “지금까지 결정한 걸 정상·실패·복구 기준까지 명세로” |
+| 명세를 실행 가능한 이슈로 | `ticket` | “독립 작업과 실제 선행 관계로 나눠” |
+| 명세·티켓·충분한 요청 구현 | `build` | “기존 공통 구현을 쓰고 실제 동작 검증까지 해” |
+| 구체적인 버그 원인 규명 | `diagnose` | “재시도하면 두 번 저장돼. 재현하고 고쳐” |
+| 기존 레포 분석·개선 | `improve` | “파일 처리 흐름과 재사용 가능한 viewer를 추적해. 지금은 분석만” |
+| 명세·변경 코드 검토 | `review` | “이 PR의 누락·회귀·검증 약화를 봐. 수정하지 마” |
+
+`talk → shape → spec → ticket → build`를 매번 완주할 필요는 없습니다. 이미 실행할 내용이 충분하면 `build`부터, 버그면 `diagnose`부터 시작합니다.
+
+### 필요한 전문 절차만 읽습니다
+
+```text
+8개 작업 스킬
+├─ 용어·불변식이 불명확       → domain
+├─ 경계·공통 책임·재사용      → architecture
+├─ 현재 기술·호환 근거 부족   → research
+├─ use case 테스트           → test
+├─ 실제 실행·상태·복구 확인   → verify
+├─ 불필요한 코드 정리        → clean
+├─ UI·문구 완성도            → polish
+├─ 측정 가능한 병목 개선     → optimize
+└─ 의존성 버전과 코드 이행   → upgrade
+```
+
+전문 스킬도 직접 호출할 수 있습니다. 부모와 전문 스킬이 같은 절차를 공유하므로 이미 확인한 답과 검증을 반복하지 않습니다. 단독 설치에도 필요한 참조가 포함됩니다. 참조를 읽는 것은 별도 에이전트 생성이나 native 스킬 호출과는 다릅니다.
+
+리뷰는 검증 기준 변경과 diff 밖 소비자까지 필요에 따라 추적합니다. `verify`는 요청 수락과 최종 저장 효과를 구분하고, `test`는 실제 보호 계약이 있는 테스트를 함부로 삭제하지 않습니다.
+
+## 사람에게는 답을, 에이전트에게는 이어갈 기록을
+
+**기본 결과는 채팅입니다.** 요청하지 않은 조사 MD·HTML 보고서·완료 영수증 파일을 만들지 않습니다. README, 사용자 안내, 요청한 명세처럼 독자와 목적이 있는 문서는 작성합니다.
+
+다음 세션에 잃으면 안 되는 정보가 있을 때만 기록합니다. 기존 이슈·ADR이 있으면 그것이 원본입니다. 없을 때의 작은 시작은 다음과 같습니다. 아래 파일을 전부 생성하는 템플릿은 아닙니다.
+
+```text
+.scratch/
+├─ viewer-reuse/
+│  └─ state.md          # 현재 목표·결정 링크·미정·다음 행동
+└─ decisions/
+   └─ D-viewer.md       # 여러 작업이 참조할 때만 분리
+
+작업 → 현재 결정 → 이유·코드·공식 근거
+               ├─ 대체한 이전 결정
+               └─ 영향받는 이슈 → 구현 PR → 검증
+```
+
+현재 기록에서 최신 결정을 바로 읽고, 필요할 때만 이전 근거를 따라갑니다. 전체 대화나 과거 기록을 매번 읽지 않습니다. 중요한 결정은 기존 이슈나 공유 가능한 버전 관리 기록에 남기고, 임시 메모를 저장했다고 다른 세션에도 자동 전달됐다고 주장하지 않습니다. 숨김 폴더도 보안 경계는 아닙니다.
+
+상세 명세와 티켓은 필요하면 분리합니다. 기존 GitHub 이슈 본문을 로컬에 다시 복제하지 않고 링크로 연결합니다. read-only 요청에서는 `.scratch`도 쓰지 않습니다. [에이전트 기록 규칙](common/agent-records.md)
 
 ## 업데이트
-
-기존 설치 방식에 맞춰 실행하고 새 세션을 시작하세요. 재설치·파일 복사·빌드는 필요 없습니다.
 
 **Claude Code**
 
 ```sh
 claude plugin marketplace update baeksang-skills
-claude plugin update skills@baeksang-skills
+claude plugin update skills@baeksang-skills --scope user
 ```
 
-매번 실행하지 않으려면 `/plugin` → Marketplaces → `baeksang-skills` → Enable auto-update를 켜세요. 제3자 marketplace의 자동 업데이트는 기본으로 꺼져 있습니다. [공식 업데이트 안내](https://code.claude.com/docs/en/discover-plugins#keep-plugins-updated)
-
-**Codex CLI**
+**Codex**
 
 ```sh
 codex plugin marketplace upgrade baeksang-skills
 codex plugin add skills@baeksang-skills
 ```
 
-**npx로 설치한 경우**
+**npx 설치**
 
 ```sh
 npx skills@latest update
 ```
 
-이 명령은 Skills CLI가 관리하는 다른 스킬도 업데이트할 수 있습니다. Native plugin 업데이트와는 별개입니다. [변경 내역](CHANGELOG.md) · [릴리스](https://github.com/Mrbaeksang/skills/releases)
+업데이트 후 새 세션을 시작하세요. npx update는 같은 도구가 관리하는 다른 스킬도 갱신할 수 있습니다. Claude marketplace 자동 업데이트는 `/plugin`에서 별도로 설정합니다. [변경 내역](CHANGELOG.md)
 
-## 사용할 스킬
+## 검증과 기여
 
-| 스킬 | 하는 일 |
-|---|---|
-| `talk` | 아이디어·고민을 가볍게 대화하며 목표·결정·열린 질문 정리 |
-| `shape` | 질문을 묶어 요구사항을 확인하고, 기술 선택지·trade-off·도메인 경계 정리 |
-| `spec` | 결정된 내용을 정상·실패 흐름과 검증 기준이 있는 상세 명세로 작성 |
-| `ticket` | 명세를 실행 가능한 티켓으로 나누고 의존성과 상태 라벨 관리 |
-| `build` | 명세나 티켓을 받아 구현하고 실제 검증 결과까지 보고 |
-| `diagnose` | 문제를 재현하고 가설을 검증해 근본 원인 수정 |
-| `improve` | 코드베이스 구조·의존성·병목 조사, 근거 있는 개선 제안·실행 |
-| `review` | 명세와 고정된 변경 범위를 독립적으로 검토 |
+설치 성공과 모델의 작업 성공은 별개입니다. Windows의 두 native plugin 업데이트, Windows·Linux 패키징 CI를 확인했습니다. 독립 에이전트 행동 평가에는 실행 사례와 실패 후 수정 기록이 있으며, 브라우저·호스트별 실제 호출 등 미검증 범위도 구분합니다. [0.5.0 평가 기록](evals/results/2026-11-06.md)
 
-가벼운 구체화는 `$talk`, 개발 설계는 `$shape`, 구현은 `$build`로 시작하세요. `talk → shape → spec → ticket → build`를 매번 전부 거칠 필요는 없습니다. Claude Code에서는 `/skills:talk`처럼 호출합니다. 작업 공간은 필요할 때 격리하고, 병합·변경 상태를 확인한 뒤 자신이 만든 worktree와 branch만 정리합니다.
+스킬은 Markdown과 로컬 참조로 구성됩니다. 에이전트의 파일 읽기·shell·browser·tracker 도구를 사용하며, 별도 상주 runtime이나 vendor SDK를 설치하지 않습니다. 유지보수 도구는 Node.js 표준 라이브러리만 사용합니다.
 
-### 필요한 전문 작업만 연결
-
-| 스킬 | 맡는 일 |
-|---|---|
-| `domain` | 용어·불변식·상태 전이·데이터 소유권 모델링 |
-| `research` | 공식 근거·기술 선택지·버전과 호환 조건 조사 |
-| `architecture` | 모듈 경계·공통 책임·의존 방향·변경 파급 설계 |
-| `test` | use case 중심 테스트 설계·구현·실행 |
-| `verify` | 실제 API·CLI·UI 실행과 완료 증거 확인 |
-| `clean` | 동작을 보존하는 코드 정리·과잉 추상화와 AI식 코드 점검 |
-| `polish` | 기존 브랜드·사용자 과제에 맞춰 UI·문구를 정리하고 상투적 AI식 장식을 맥락에 따라 개선 |
-| `optimize` | 성능·메모리·CSS·프론트 병목 측정과 개선 |
-| `upgrade` | 의존성 호환 판단·버전 변경·코드 이행·검증 |
-
-```text
-talk     → research / domain
-shape    → research / domain / architecture
-spec     → 결정 합성, 부족한 domain / research만 보완
-ticket   → 명세의 결정을 재사용해 작업 분해
-build    → 필요한 설계·조사 / test / clean / verify
-           ├─ UI·문구 정리: polish → verify
-           ├─ 성능 개선: optimize → 측정 / test
-           └─ 버전 이행: upgrade → research / test / verify
-diagnose → 가설·실험 / 필요한 research·측정 / test / verify
-improve  → 분야 선별 → 해당 전문 절차 → 실행 가능한 개선
-review   → 고정 diff·명세 → 필요한 전문 기준을 검토-only로 사용
-```
-
-화살표는 조건부 참조이며 고정 실행 순서가 아닙니다. 각 전문 스킬도 직접 호출할 수 있습니다. 같은 절차를 공유하므로 기존 답과 검증을 반복하지 않고, 별도 에이전트를 자동 생성하지 않습니다. 스킬 하나만 설치해도 필요한 참조가 함께 포함됩니다. 실제 스킬 호출 기능이 없는 호스트에서는 포함된 전문 절차를 읽어 실행합니다.
-
-각 스킬은 과잉 설계·불필요한 코드·상투적인 문구를 기본으로 점검합니다. 화면 작업에서만 UI·문구 상세 기준을 읽으며 별도 명령이나 추가 도구는 필요하지 않습니다. 설치만으로 스킬을 사용하지 않는 일반 대화까지 적용되지는 않습니다.
-
-리뷰에서는 검증 기준을 약화한 변경과 공개 계약의 소비자를, 실제 검증에서는 필요한 상태·중복·복구 흐름을 조건부로 확인합니다. 테스트의 유지 가치는 test/improve에서 다룹니다. 호출 명령은 늘어나지 않습니다. 스킬 자체의 선택·행동 평가는 [유지보수 도구](evals/README.md)로 분리하며 일반 설치에 포함하지 않습니다.
-
-## 지원과 검증
-
-기존 릴리스는 Windows에서 Claude Code·Codex 원격 설치·업데이트를 확인했고 Claude의 일부 실제 호출 증거가 있습니다. 새 전문 스킬 조합의 참조·패키징 검사와 실제 모델 행동 검증은 별개입니다. Codex 모델 실행과 일부 브라우저 검증은 기존 환경의 도구 정책 제한으로 미완료입니다. 설치 성공을 모든 환경의 실행 성공으로 확대하지 않습니다.
-
-[설치 검증 기록](research/simple-install.md) · [전체 검증 기록](research/release-receipt.md) · [개발·기여 안내](docs/development.md)
+[개발·기여](docs/development.md) · [평가 실행](evals/README.md) · [버그·제안](https://github.com/Mrbaeksang/skills/issues)
 
 ## 라이선스
 
-[MIT](LICENSE). 외부 자료의 출처와 개별 라이선스 고지는 해당 스킬에 포함되어 있습니다.
+[MIT](LICENSE)

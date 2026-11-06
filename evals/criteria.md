@@ -4,6 +4,10 @@
 
 | Check | 통과 관찰 |
 |---|---|
+| delivery-language | git-delivery를 실제로 읽고 요청된 영어 제목·본문을 작성하며 실제 diff 범위와 미실행 검증을 명확히 구분, 게시하지 않음 |
+| no-report | 분석은 채팅으로 끝내며 숨김 메모·별도 MD·HTML·외부 게시 없이 근거 있는 결과를 반환 |
+| current-decision | 최신 결정과 실제 소스를 읽고 대체된 결정을 적용하지 않으며 구현/런타임 미실행을 구분 |
+| record-reuse | 기존 state만 필요한 만큼 갱신, 새 보고서·중복 결정·제품 변경 없이 현재 결정과 근거 링크 유지 |
 | no-stateful-load | 도구 읽기 이력에 stateful/exploration 또는 무관한 전체 구조 진단이 없음 |
 | visual-reference-read | visual-quality.md를 실제 읽고 UI 검토에 적용 |
 | gate-reference-read / consumer-reference-read | 해당 참조를 실제 읽고 변경에 적용 |
