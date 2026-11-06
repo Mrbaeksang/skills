@@ -19,6 +19,7 @@ description: 명세·티켓·실행 가능한 개선 항목을 받아 구현하�
 | 도메인 규칙·소유권이 불명확 | [domain](references/workflows/domain.md) | 용어·불변식·공개 계약 |
 | 모듈 경계·공통 책임을 바꿔야 함 | [architecture](references/workflows/architecture.md) | 재사용/확장/신규 판단과 소비자 영향 |
 | API·기술 호환 사실이 부족 | [research](references/workflows/research.md) | 공식 근거와 버전·제약 |
+| 외부 기능·옵션 사용/변경 또는 실행 환경 차이 | [실행 환경 계약](references/workflows/runtime-contract.md) | 실제 조합·실효 설정의 지원 근거와 효과 |
 | 의존성 버전을 변경 | [upgrade](references/workflows/upgrade.md) | 코드 이행과 검증 결과 |
 | 성능 목표·병목 개선 | [optimize](references/workflows/optimize.md) | baseline·변경·같은 조건의 전후 결과 |
 | UI·사용자 문구를 생성/변경 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 실제 동작과 일치하는 화면·문구 |
