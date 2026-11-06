@@ -1,5 +1,9 @@
 # 개발과 검증
 
+## 지침 변경과 행동 평가
+
+새 규칙은 실제 실패 사례나 평가 과제로 필요성을 설명한다. 도구 오류·검사 개선으로 해결되면 지침을 늘리지 않고, 같은 의미가 있으면 기존 문장을 수정한다. 변경 전후 진입점/참조의 크기와 호출 조건을 검토하되 byte 감소를 실제 context 절감으로 주장하지 않는다. 큰 재구성은 동일 과제의 before/after/none 비교를 사용하고 결과에 맞춰 판정 기준을 바꾸지 않는다. [평가 절차](../evals/README.md)와 [요구·출처](quality-methods.md)를 따른다. 일반 설치본에는 평가 도구·결과·fixture를 포함하지 않는다.
+
 ## 릴리스와 업데이트
 
 배포 내용(`skills/`, `common/`, `adapters/`, `plugins/skills/`, marketplace)을 바꾸면 두 `adapters/*/plugin.json`의 version을 함께 올리고 CHANGELOG.md를 갱신합니다. 기능 추가는 minor, 호환되는 수정은 patch를 올립니다. 문서·제작 도구만 바꾸는 경우 버전 증가는 필요 없습니다.

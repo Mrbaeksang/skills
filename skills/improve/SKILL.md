@@ -15,6 +15,7 @@ description: 레포 전체의 공통화·모듈 경계·의존성 업그레이�
 | 의존성 호환·지원·버전 이행 | [upgrade](references/workflows/upgrade.md) |
 | CSS·프론트·데이터·자원 병목 | [optimize](references/workflows/optimize.md) |
 | 불필요한 코드·과잉 추상화 | [clean](references/workflows/clean.md) |
+| 테스트의 중복·구현 결합·보호 계약 불명확 | [테스트 가치](references/workflows/test/value.md) |
 | UI·문구의 위계·일관성 | [polish](references/workflows/polish.md) |
 
 진단-only 권한과 현재 근거를 전문 절차에도 전달한다. 전체 분야를 전수 실행하지 않는다.

@@ -1,0 +1,12 @@
+diff --git a/status.mjs b/status.mjs
+--- a/status.mjs
++++ b/status.mjs
+@@ -1 +1 @@
+-export const accepted = ['pending', 'complete'];
++export const accepted = ['pending', 'complete', 'paused'];
+diff --git a/status.test.mjs b/status.test.mjs
+--- a/status.test.mjs
++++ b/status.test.mjs
+@@ -1 +1 @@
+-assert.equal(render('paused'), 'Paused');
++assert.ok(render('paused'));

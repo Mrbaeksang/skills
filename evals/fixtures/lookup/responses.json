@@ -1,0 +1,5 @@
+[
+  {"query":"Does feature X exist?","status":200,"body":"<html>Upstream error</html>","expectedFormat":"json"},
+  {"query":"List supported regions","status":403,"body":{"error":"PERMISSION_DENIED"}},
+  {"query":"Search for feature X","status":200,"body":{"results":[]},"scope":"project-local index, permissions unknown"}
+]
