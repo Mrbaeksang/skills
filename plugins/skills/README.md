@@ -14,8 +14,11 @@ calls. Loading a reference is not spawning a subagent or proof of a native skill
 
 Install through the native marketplace or `npx skills@latest add Mrbaeksang/skills`;
 see the source repository for host-specific commands. No package build is required.
+Report in chat by default. Do not generate unsolicited analysis Markdown or HTML
+reports. Load the included agent-records procedure only for persistence, handoff,
+or important decisions; reuse existing issues before adding local scratch records.
 Windows Claude Code has bounded fixture evidence. Installation checks are separate
-from model execution: Codex runtime and UI acceptance remain policy-blocked.
+from model execution; unrun native-model and UI cases remain unverified.
 Consult the source verification records for tested versions and remaining gates.
 
 The host supplies file reading and task-specific shell, tracker and browser tools.
