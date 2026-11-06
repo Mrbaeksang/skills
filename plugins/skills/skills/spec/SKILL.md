@@ -7,7 +7,7 @@ description: 결정된 대화와 기존 자료를 구현 가능한 명세로 합
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다.
 
-기존 결정에서 도메인 계약이 빠졌을 때만 [domain](references/workflows/domain.md), 현재 API·호환 근거가 없을 때만 [research](references/workflows/research.md)를 사용한다. UI·문구 요구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 적용한다. 확정 설계를 다시 수행하지 않고 누락된 결과만 명세에 합친다.
+기존 결정에서 도메인 계약이 빠졌을 때만 [domain](references/workflows/domain.md), 모듈 경계·공통 책임·재사용 결정이 빠졌을 때만 [architecture](references/workflows/architecture.md), 기술 선택·현재 API·호환 근거가 없을 때만 [research](references/workflows/research.md)를 사용한다. UI·문구 요구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 적용한다. 확정 설계를 다시 수행하지 않고 누락된 결과만 명세에 합친다.
 
 1. 전달된 대화·결정과 요청된 저장 위치를 확인한다. 기존 프로젝트라면 관련 지침과 현재 파일을 읽는다. 이미 답한 사항은 재질문하지 않는다. 제품의 중요한 미결정이 실제로 작성을 막는 경우에만 질문하고, 나머지는 추정 또는 열린 항목으로 명시한다.
 2. [명세 작성 계약](references/specification.md)을 읽고 확정 요구와 근거를 합성한다. 입력이 충분하면 shape나 새 인터뷰를 선행 조건으로 삼지 않는다. 명세의 깊이는 구현자가 대화 없이 이어갈 수 있는 수준으로 맞추되, 해당하지 않는 영역은 이유와 함께 제외한다.

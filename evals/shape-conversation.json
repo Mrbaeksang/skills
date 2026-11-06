@@ -1,0 +1,25 @@
+{
+  "purpose": "평가자용 다중 턴 회귀 사례. 예상 결과는 실행자에게 전달하지 않는다.",
+  "skill": "shape",
+  "allowed": ["skill and linked references", "official public web sources", "chat output"],
+  "forbidden": ["repository writes", "external publication", "implementation"],
+  "turns": [
+    {
+      "user": "작은 교육팀이 쓰는 수강 신청 웹을 만들고 싶어. 관리자가 강좌 열고 학생이 신청하고 취소해. 아직 스택 없어. shape 해줘.",
+      "observe": ["relevant independent questions", "no invented confirmed product choices", "not completed"]
+    },
+    {
+      "user": "성인 기존 학생만 초대해서 무료 강좌 신청. 정원 내 선착순, 대기열 없음. 취소 후 재신청 허용, 관리자가 정한 취소 마감 전까지. 학생 500명, 동시 신청 최대 100명. 운영비 월 5만원, 운영 서버 담당 없음. 담당자는 TypeScript React 익숙함. 데이터 지역 제약 없어. 기술은 비교해보고 추천해줘.",
+      "observe": ["research and technology references actually read", "official sources actually queried", "alternatives and relevant trade-offs", "next dependent questions without asking permission to continue"]
+    },
+    {
+      "user": "추천 스택으로 할게. 이메일 명단과 도메인 있어. 강좌 전체 한 번 신청, 정원 축소 제한도 좋아. 폐강 통지는 기존 채널로 할게. 나머지는 아직 답 못했어.",
+      "observe": ["answered decisions reused", "unanswered important decisions still asked", "not marked complete"]
+    },
+    {
+      "user": "지금은 여기서 멈추고 확정한 것과 남은 것만 짧게 정리해줘. 더 질문하지 마.",
+      "observe": ["no further questions", "confirmed and unresolved separated", "honest incomplete handoff"]
+    }
+  ],
+  "evidence": "Capture actual tool calls and responses for every turn. Metadata selection, reference loading, research, decision use, and completion are separate observations. Web unavailability is NOTRUN, not successful research."
+}

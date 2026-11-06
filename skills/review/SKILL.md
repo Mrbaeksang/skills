@@ -1,6 +1,6 @@
 ---
 name: review
-description: 명세와 고정된 diff의 요구 위반·문서화된 규칙 위반·회귀 위험을 검토한다. 변경 리뷰와 인증·결제·데이터 변경의 독립 검토에 사용하며 전체 코드베이스 개선은 improve에서 다룬다.
+description: 명세·코드 변경·화면을 수정 없이 검토해 요구 위반과 회귀·사용성 문제를 찾는다. diff 리뷰와 인증·결제·데이터 변경의 독립 검토에 사용한다. 전체 레포 개선 탐색은 improve, UI 수정은 polish로 구분한다.
 ---
 
 # Review
@@ -12,6 +12,8 @@ description: 명세와 고정된 diff의 요구 위반·문서화된 규칙 위�
 코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 읽는다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세와 diff만으로 직접 시작하며 다른 스킬 호출은 선행 조건이 아니다. 기본 산출물은 findings와 검토 한계다. 수정·외부 게시·상태 전환은 요청된 권한 범위에서만 한다.
+
+화면·문구 검토처럼 diff가 없는 요청은 대상 화면/상태·요구·제공된 자료를 검토 범위로 고정한다. 아래 commit 고정과 변경 전후 판정은 실제 변경 리뷰에만 적용하며, 없는 diff를 요구하거나 구현 권한으로 확대하지 않는다.
 
 1. **범위 고정.** 실제 저장소/worktree와 기존 변경을 확인하고 요청된 base/head를 불변 commit ID로 해석한다. 명세·이슈·적용 지침의 버전 또는 내용을 함께 고정한다. merge-base를 쓰는지 두 commit의 tree를 비교하는지 명시한다. 미커밋 변경은 별도 snapshot/hash로 구분하고 검토 중 움직인 HEAD를 원래 범위에 섞지 않는다. 저장소 없이 제공된 diff라면 원본 이름·hash와 제공된 context의 한계를 기록한다. 완료 조건은 변경 파일 목록과 검토 계약이 확정된 상태다.
 2. **독립성 확보.** 인증·결제·데이터 변경이면 [독립 검토와 완료 gate](references/independent-review.md)를 읽고 실행자와 구분된 검토 주체/세션을 확보한다. 일반 검토도 자기 점검인지 독립 검토인지 실제 수행 방식을 밝힌다.
