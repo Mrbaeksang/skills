@@ -18,7 +18,9 @@ test('preparation preserves existing output and keeps oracle out of routing prom
   const prompt = fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8');
   assert.ok(!prompt.includes('no-stateful-load'));
   assert.ok(!prompt.includes('build/SKILL.md'));
-  assert.equal(fs.realpathSync(execFileSync('git', ['-C', path.join(out, 'workspace'), 'rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim()), fs.realpathSync(path.join(out, 'workspace')));
+  const gitRoot = execFileSync('git', ['-C', path.join(out, 'workspace'), 'rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim();
+  // Windows TEMP can use an 8.3 alias while Git returns its long form.
+  assert.equal(fs.realpathSync.native(gitRoot), fs.realpathSync.native(path.join(out, 'workspace')));
   assert.throws(() => prepare('copy-only', { out, host: 'test', model: 'stub-no-model' }), /Output exists/);
   assert.ok(cases().every(c => c.requirements.length && c.checks.includes('scope-preserved')));
 });
