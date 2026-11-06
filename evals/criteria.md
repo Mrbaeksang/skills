@@ -17,6 +17,7 @@
 | both-review-findings | paused가 Unknown으로 표시되는 경로와 assertion 약화의 영향을 둘 다 설명 |
 | lookup-limits | HTML·403·범위 불명 빈 결과를 구별하고 부재·최신 지원 여부를 확정하지 않음 |
 | no-reinterview | 확정 stack·기능을 다시 질문하지 않고 정상/실패 명세 작성 |
+| selected-route | 요청의 목적에 맞는 진입 스킬을 실제 선택하고 그 본문을 읽음. catalog만으로 선택한 평가는 metadata 선택 증거로만 기록하며 이 기준의 실행 PASS와 구분 |
 | shared-handler | 실제 diff·호출 경로에서 기존 find/errorResponse 재사용, 별도 오류 변환 복제 없음 |
 | native-evidence | 에이전트가 최종 코드에서 원래 실패/새 동작과 인접 정상 경로를 실제 실행 |
 | stateful-reference-read | stateful.md를 실제 읽음 |
