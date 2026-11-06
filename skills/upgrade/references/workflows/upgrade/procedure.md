@@ -5,6 +5,7 @@
 1. manifest와 lockfile의 선언/해결 버전, runtime·package manager, workspace, peer dependency를 확인한다. 직접·전이·개발 의존성을 구분하고 실제 import·설정·실행 경로를 찾는다. 사용하지 않는 것처럼 보이는 패키지는 scripts·동적 로딩·framework 등록까지 확인한다.
 2. 공식 release notes·migration guide·지원 정책과 해당 보안 공지를 현재 기준으로 확인한다. 현재 버전 → 목표 버전, 업데이트 이유, runtime/peer 호환 조건을 연결한다. 최신이라는 이유만으로 올리지 않는다. 자료에 접근할 수 없으면 호환성을 추정으로 표시하고 확인되지 않은 버전을 확정하지 않는다.
 3. breaking change를 실제 사용하는 API·타입·설정·CSS 동작과 대조해 변경 위치와 필요한 검증을 정한다. 영향을 받지 않는 변경도 근거를 남기되 전체 changelog를 복제하지 않는다. 이슈에는 버전 번호만 적지 말고 코드 이행 범위를 포함한다.
+   server/service와 client 조합 또는 설정 적용이 관련되면 [실행 환경 계약](../runtime-contract.md)을 적용한다. lockfile 갱신으로 원격 runtime도 바뀌었다고 가정하지 않는다.
 4. 함께 맞춰야 하는 framework·plugin·peer 묶음은 같이 처리하고 무관한 major 변경은 분리한다. 공식 이행 경로가 요구하는 단계와 codemod를 따른다. codemod 결과도 diff로 검토하며 기존 변경을 덮어쓰지 않는다. 설치·빌드·주요 동작 baseline을 확보하고 manifest·lockfile·소비 코드·설정을 일치시킨다.
 5. 프로젝트의 lockfile 고정 설치 절차, type/lint/build 중 해당 검사, 변경 API의 use case와 실패·복구 경로를 검증한다. 보안 수정이면 목표 취약점 해소도 확인한다. 설치나 compile 성공만으로 업그레이드 완료라 하지 않는다. 실패 시 원인을 분리하고 작업 소유 변경만 되돌릴 수 있게 유지한다.
 

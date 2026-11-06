@@ -12,6 +12,7 @@ description: 레포 전체의 공통화·모듈 경계·의존성 업그레이�
 | 도메인 용어·소유권 충돌 | [domain](references/workflows/domain.md) |
 | 공통화·순환·모듈 경계 | [architecture](references/workflows/architecture.md) |
 | 외부 기술 사실·대안 근거 부족 | [research](references/workflows/research.md) |
+| 실행 버전·설정 불일치, 무효 옵션·자원 누적 신호 | [실행 환경 계약](references/workflows/runtime-contract.md) |
 | 의존성 호환·지원·버전 이행 | [upgrade](references/workflows/upgrade.md) |
 | CSS·프론트·데이터·자원 병목 | [optimize](references/workflows/optimize.md) |
 | 불필요한 코드·과잉 추상화 | [clean](references/workflows/clean.md) |

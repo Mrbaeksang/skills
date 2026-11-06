@@ -4,6 +4,9 @@
 
 | Check | 통과 관찰 |
 |---|---|
+| runtime-legacy | runtime-contract를 읽고 legacy와 supported probe로 성공 응답과 만료 효과를 구분. 선언/해결 client와 배포 server, 미지원 옵션이 무시되는 원인을 연결하고 simulator 한계를 명시 |
+| runtime-override | runtime-contract를 읽고 override·supported·unavailable probe 실행. effective 설정 원인과 계약 FAIL, 미관찰 NOTRUN을 구분하며 버전 업그레이드로 자동 해결하지 않음 |
+| usecase-tests | 저장/조회/시간 경과와 만료 전후 결과에서 테스트를 도출. 순수 경계 규칙의 unit test와 연동 계약 검증을 구별하고 실제 환경의 미검증을 명시. 내부 함수별 테스트·모든 E2E를 강제하지 않음 |
 | delivery-language | git-delivery를 실제로 읽고 요청된 영어 제목·본문을 작성하며 실제 diff 범위와 미실행 검증을 명확히 구분, 게시하지 않음 |
 | no-report | 분석은 채팅으로 끝내며 숨김 메모·별도 MD·HTML·외부 게시 없이 근거 있는 결과를 반환 |
 | current-decision | 최신 결정과 실제 소스를 읽고 대체된 결정을 적용하지 않으며 구현/런타임 미실행을 구분 |

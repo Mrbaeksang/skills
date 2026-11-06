@@ -1,0 +1,11 @@
+{
+  "declaredClient": "^3.0.0",
+  "resolvedClient": "3.2.1",
+  "defaults": { "serverVersion": 2, "leaseEnabled": true },
+  "profiles": {
+    "supported": { "deployedServer": 2, "override": {} },
+    "legacy": { "deployedServer": 1, "override": {} },
+    "override": { "deployedServer": 2, "override": { "leaseEnabled": false } },
+    "unavailable": { "deployedServer": null, "override": {} }
+  }
+}
