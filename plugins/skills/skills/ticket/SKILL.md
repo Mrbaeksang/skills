@@ -5,7 +5,7 @@ description: 명세를 독립 실행 가능한 vertical slice 이슈로 나누�
 
 # 실행 가능한 티켓
 
-UI·사용자 문구를 다루는 티켓에는 [품질 기준](references/workflows/polish/ui-copy.md)을 수용 기준으로 연결한다. 전문 설계·조사를 다시 실행하지 않고 명세의 확정 결과를 재사용한다. 핵심 결정이 빠졌으면 해당 티켓의 미정/차단 사유로 드러낸다.
+UI·사용자 문구를 다루는 티켓에는 [품질 기준](references/workflows/polish/ui-copy.md)을 수용 기준으로 연결한다. 명세의 확정 설계·조사 결과는 재사용한다. 빠진 내용이 조회 가능한 기술 사실이면 [research](references/workflows/research.md), 용어·상태·소유권 해석이면 [domain](references/workflows/domain.md), 공통 기반과 소비자 경계면 [architecture](references/workflows/architecture.md)를 읽고 해당 빈칸만 보완한다. 제품 선택이 필요한 미정은 관련 티켓에 질문/차단 사유로 남기되 독립적으로 준비된 티켓은 계속 작성한다. 단순 분해에 설계 전체를 다시 실행하지 않는다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세, 현재 이슈, 기존 결정과 승인 범위를 읽고 시작한다. 완성된 명세를 재인터뷰하거나 분해안의 반복 승인을 받지 않는다. 게시 요청이 없으면 채팅으로 반환하며, 로컬 저장·인계가 필요할 때만 [작업 기록](references/agent-records.md)을 따른다.
 

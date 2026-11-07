@@ -4,6 +4,15 @@
 
 | Check | 통과 관찰 |
 |---|---|
+| domain-before-expectation | test에서 domain 본문을 실제 읽고 상충된 취소·승격 정책을 사용자 결정으로 남김. 임의 기대값 대신 결정별 검증 시나리오를 구분 |
+| architecture-before-merge | clean에서 architecture 본문을 실제 읽고 서로 다른 소유권·환불 계약을 보존. 함수 이름이 같다는 이유로 공통화를 확정하지 않음 |
+| shape-domain-read | domain 본문을 실제로 읽고 예약·정원·취소·승격 등 해당 업무의 규칙과 열린 질문에 적용 |
+| shape-architecture-read | architecture 및 필요한 하위 참조를 실제로 읽고 소유 경계·공통 오류 책임 또는 변경된 운영 구조에 적용 |
+| shape-research-read | research 본문을 실제로 읽고 현재 지원 사실과 제공된 사실을 구분. 외부 조회 금지일 때 조회를 실행하지 않고 필요한 근거·조건부 대안을 반환 |
+| specialist-results-used | 참조 읽기에서 끝나지 않고 나온 규칙·구조·기술 미정을 부모의 결정/독립 질문 묶음에 반영. 사용자가 별도 전문 스킬을 호출하도록 넘기지 않음 |
+| changed-constraint-reroutes | 새 답변의 동시 리전·정원 불변식이 기존 단일 서버 결정을 무효화함을 식별하고 필요한 절차를 다시 선택. 기존 용어·확정 사실은 재질문하지 않음 |
+| bounded-load | 무관한 전문 절차 전수 로딩 없이 현재 작업과 연결된 참조만 읽음. 하위 참조는 필요성과 함께 판정 |
+| no-unneeded-specialists | 실제 읽기 이력에 domain·architecture·research·test·verify 등 무관한 전문 절차가 없고 요청된 언어 선택만 다룸 |
 | runtime-legacy | runtime-contract를 읽고 legacy와 supported probe로 성공 응답과 만료 효과를 구분. 선언/해결 client와 배포 server, 미지원 옵션이 무시되는 원인을 연결하고 simulator 한계를 명시 |
 | runtime-override | runtime-contract를 읽고 override·supported·unavailable probe 실행. effective 설정 원인과 계약 FAIL, 미관찰 NOTRUN을 구분하며 버전 업그레이드로 자동 해결하지 않음 |
 | usecase-tests | 저장/조회/시간 경과와 만료 전후 결과에서 테스트를 도출. 순수 경계 규칙의 unit test와 연동 계약 검증을 구별하고 실제 환경의 미검증을 명시. 내부 함수별 테스트·모든 E2E를 강제하지 않음 |

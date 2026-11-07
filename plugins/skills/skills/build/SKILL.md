@@ -9,7 +9,7 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 
 1. **현재 상태.** cwd·branch/worktree·지침·tracked/untracked 변경·도구를 확인한다. tracker 입력이면 본문·수용 기준·선행 의존성을 읽고 [상태 계약](references/tracker-state.md)을 적용한다. 중요 범위·권한 불명확성만 질문하고 기존 변경을 보존한다.
 2. **완료 기준.** 각 요구를 use case·실행 경계·정상/실패 결과·검증에 연결한다. 이미 결정된 내용은 재사용하며 빠진 제품 결정과 자율 판단할 구현 선택을 구분한다. 개선 항목에 근거 위치·보존할 계약·변경 범위·수용 기준이 있으면 바로 구현 입력으로 쓴다.
-3. **기존 구현 확인.** [재사용·연결 탐색](references/workflows/architecture/integration.md)으로 관련 handler·config·client·component의 실제 경로와 소비자를 찾는다. 아래 표에서 필요한 전문 절차만 실행하고 결과를 구현에 반영한다.
+3. **기존 구현 확인.** [재사용·연결 탐색](references/workflows/architecture/integration.md)으로 관련 handler·config·client·component의 실제 경로와 소비자를 찾는다. 아래 표에서 다음 변경에 필요한 절차를 선택해 본문을 읽고 수행한 뒤 구현한다. 구현 중 새 규칙·외부 API·실패가 드러나면 그 변경 전에 다시 선택한다. 기술별 전문성이 부족하면 공통 계약의 설치된 전문 스킬 탐색을 적용한다.
 4. **동작 단위 구현.** 한 use case씩 기존 구조 안에서 구현한다. 비자명한 로직·버그·공유 계약 변경의 테스트에는 [test](references/workflows/test.md)를 사용한다. 단순 문구·설정 수정에 형식적인 TDD를 강제하지 않는다. 변경 diff는 [clean](references/workflows/clean.md)으로 점검하되 중복 검증을 만들지 않는다.
 5. **실행 확인.** [verify](references/workflows/verify.md)로 수용 기준의 실제 API·CLI·UI 경계와 기존 소비자 회귀를 확인한다. 코드 작성·테스트·실제 실행 증거를 구분한다. 실행 가능한 검증을 사용자에게 넘기지 않는다.
 6. **완료 판정.** 인증·결제·데이터 변경은 독립 검토에 고정 base/head·명세·diff를 전달한다. 같은 출처의 review 또는 독립 검토자를 사용하고 자기 점검으로 대신하지 않는다. 필요한 독립 검토·수용 기준에 미해결 FAIL/NOTRUN이 있으면 done이 아니다. 수정 후 새 head의 영향을 재검증한다. tracker 상태는 상태 계약대로 readback하고 결과·검증·남은 문제를 짧게 보고한다.

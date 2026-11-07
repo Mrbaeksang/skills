@@ -11,7 +11,7 @@ description: 명세·코드 변경·화면을 수정 없이 검토해 요구 위
 
 코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 읽는다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.
 
-먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세와 diff만으로 직접 시작하며 다른 스킬 호출은 선행 조건이 아니다. 기본 산출물은 findings와 검토 한계다. 수정·외부 게시·상태 전환은 요청된 권한 범위에서만 한다.
+먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세와 diff만으로 직접 시작하며 사용자에게 선행 스킬 호출을 요구하지 않는다. 위 조건에 맞는 참조는 해당 판단 전에 본문을 읽고 검토-only로 수행한다. 기본 산출물은 findings와 검토 한계다. 수정·외부 게시·상태 전환은 요청된 권한 범위에서만 한다.
 
 화면·문구 검토처럼 diff가 없는 요청은 대상 화면/상태·요구·제공된 자료를 검토 범위로 고정한다. 아래 commit 고정과 변경 전후 판정은 실제 변경 리뷰에만 적용하며, 없는 diff를 요구하거나 구현 권한으로 확대하지 않는다.
 

@@ -7,6 +7,8 @@ description: 오류·잘못된 출력·성능 저하를 재현하고 구분 가�
 
 코드와 실행 결과의 불일치, 환경별 차이, 제한 기능이 작동하지 않거나 자원이 누적되는 신호에는 [실행 환경 계약](references/workflows/runtime-contract.md)을 적용한다. 코드의 가정과 실제 버전·capability·실효 설정 차이도 가설에 포함한다.
 
+용어·허용 상태·소유권 충돌 때문에 기대값이 불명확하면 실험을 정하기 전에 [domain](references/workflows/domain.md)을 읽고 계약을 구분한다. 원인이 공유 책임·모듈 경계에 있어 변경이 필요하면 수정 전에 [architecture](references/workflows/architecture.md)로 기존 경로와 소비자 영향을 확인한다. 확인된 단일 조건문 오류에는 전체 도메인·구조 설계를 추가하지 않는다.
+
 원인 조사에 외부 API·호환 사실이 부족하면 [research](references/workflows/research.md), 성능 저하를 측정할 때는 [optimize](references/workflows/optimize.md)의 측정 절차만 사용한다. 원인 확인 전 최적화 수정을 시작하지 않는다. 수정이 허용되면 [test](references/workflows/test.md)로 원인 회귀를 고정하고 [clean](references/workflows/clean.md)으로 diff를 점검한 뒤 [verify](references/workflows/verify.md)로 같은 실패·복구 경계를 확인한다. 이미 수행한 실험·검증은 재사용한다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 코드 수정을 시작하거나 작업 branch/worktree를 통합·정리할 때는 [작업 공간 수명주기](references/workspace-lifecycle.md)를 읽고 생성부터 안전한 정리 영수증까지 적용한다. 분석만 요청됐다면 원인과 수정 제안까지, 수정이 허용됐다면 회귀 검증까지 진행한다.
