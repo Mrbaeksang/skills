@@ -25,4 +25,6 @@
 
 ## 완료 구분
 
+2026-11-07 조건부 연결 보강은 [Matt Pocock의 직접 합성](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md), [gstack의 목적별 라우터](https://github.com/garrytan/gstack/blob/main/SKILL.md), [Superpowers의 세션 진입 훅](https://github.com/obra/superpowers/blob/main/hooks/hooks.json), [Agent Skills의 절차·기본값 지침](https://agentskills.io/skill-creation/best-practices)을 비교했다. 이 링크의 main은 변경 가능하다. 첫 행동에 읽기 조건을 배치하고 결과를 부모에 반영하는 원리만 적용했다. 모든 요청의 강제 호출, 세션 훅·telemetry·특정 호스트 런타임은 추가하지 않았다. 새 behavior 사례 `shape-specialist-results`, `shape-new-answer`, `shape-existing-decision`은 필요한 로딩·조건 변화·불필요한 로딩을 구별한다. 후속 답변을 입력한 단일 실행 사례는 실제 다중 턴 성공 증거가 아니다.
+
 소스·패키징 통과, 모델 행동 검증, 배포/설치는 서로 다른 완료 상태다. 평가 결과가 없는 사례를 구현했다고만 해서 PASS로 표시하지 않는다. 모델·호스트를 관찰하지 못하면 미확인으로 기록한다. source SHA 외에 실제 파일 hash가 dirty snapshot을 구별한다. 사용자 설정을 직접 수정하는 자동 전환 도구는 이번 범위가 아니다.
