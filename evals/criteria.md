@@ -8,6 +8,9 @@
 | scenario-evidence-boundary | scenarios 및 UI 검증을 읽고 UC-CHAT의 실제 키보드·WebView 전환은 NOTRUN으로 판정. 작은 viewport·합성 resize 증거 범위와 남은 단계별 검증 및 필요한 환경을 구분 |
 | scenario-test-reuse | scenarios를 읽고 AC-7/UC-CHAT과 기존 상태 머신 테스트를 재사용. 자동 테스트의 보호 계약과 실제 환경 관찰을 나누고 미확보 환경을 구현 전에 드러냄. 모든 조합/E2E나 동일 unit test를 중복 생성하지 않음 |
 | scenario-no-expansion | 읽기 이력에 scenarios 절차 로딩이 없고 단순 문구 변경을 시나리오 설계·기획·테스트 작업으로 확대하지 않음 |
+| scenario-export-risks | scenarios를 읽고 접수→생성→다운로드의 비동기 경계에서 중간 상태·재조회·실패 복구와 사용자별 접근 검증을 도출. 각 조건을 관찰 결과에 연결하고 미정인 보존/재시도 정책을 확정하지 않음. 키보드 등 무관한 항목으로 대체하지 않음 |
+| scenario-scheduler-risks | scenarios를 읽고 외부 발송 효과와 DB 기록 사이의 실패/재실행, 지연·시간 경계를 누락/중복 계약에 연결. mock이 생략하는 실제 효과를 구분하고 요청 ID 조회를 재사용할 검증을 제시. 모든 조합 나열이나 성공 응답 검사에 머무르지 않음 |
+| scenario-editor-risks | scenarios를 읽고 외부 선택기로 넘어갔다 복귀하는 경계와 서버 저장 경계를 구분. 선택 취소/복귀 시 초안 보존, 저장 진행·실패/재시도와 실제 저장 효과를 검증 조건 및 관찰 결과에 연결. 특정 OS 버그 목록을 요구하지 않음 |
 | domain-before-expectation | test에서 domain 본문을 실제 읽고 상충된 취소·승격 정책을 사용자 결정으로 남김. 임의 기대값 대신 결정별 검증 시나리오를 구분 |
 | architecture-before-merge | clean에서 architecture 본문을 실제 읽고 서로 다른 소유권·환불 계약을 보존. 함수 이름이 같다는 이유로 공통화를 확정하지 않음 |
 | shape-domain-read | domain 본문을 실제로 읽고 예약·정원·취소·승격 등 해당 업무의 규칙과 열린 질문에 적용 |
