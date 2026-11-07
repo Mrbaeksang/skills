@@ -4,6 +4,10 @@
 
 | Check | 통과 관찰 |
 |---|---|
+| scenario-definition | scenarios 본문을 읽고 원본 명세 안에 actor·시작 환경·단계별 관찰·실패/복구·검증 경계를 정의. 최종 전송 성공만으로 축약하지 않고 실행 전 계획과 결과를 구분 |
+| scenario-evidence-boundary | scenarios 및 UI 검증을 읽고 UC-CHAT의 실제 키보드·WebView 전환은 NOTRUN으로 판정. 작은 viewport·합성 resize 증거 범위와 남은 단계별 검증 및 필요한 환경을 구분 |
+| scenario-test-reuse | scenarios를 읽고 AC-7/UC-CHAT과 기존 상태 머신 테스트를 재사용. 자동 테스트의 보호 계약과 실제 환경 관찰을 나누고 미확보 환경을 구현 전에 드러냄. 모든 조합/E2E나 동일 unit test를 중복 생성하지 않음 |
+| scenario-no-expansion | 읽기 이력에 scenarios 절차 로딩이 없고 단순 문구 변경을 시나리오 설계·기획·테스트 작업으로 확대하지 않음 |
 | domain-before-expectation | test에서 domain 본문을 실제 읽고 상충된 취소·승격 정책을 사용자 결정으로 남김. 임의 기대값 대신 결정별 검증 시나리오를 구분 |
 | architecture-before-merge | clean에서 architecture 본문을 실제 읽고 서로 다른 소유권·환불 계약을 보존. 함수 이름이 같다는 이유로 공통화를 확정하지 않음 |
 | shape-domain-read | domain 본문을 실제로 읽고 예약·정원·취소·승격 등 해당 업무의 규칙과 열린 질문에 적용 |

@@ -138,6 +138,8 @@ npx skills@latest add Mrbaeksang/skills
 
 상세 명세와 티켓은 필요하면 분리합니다. 기존 GitHub 이슈 본문을 로컬에 다시 복제하지 않고 링크로 연결합니다. read-only 요청에서는 `.scratch`도 쓰지 않습니다. [에이전트 기록 규칙](common/agent-records.md)
 
+사용자 행동 검증은 `shape`에서 사용 환경을 확인하고, `spec`에서 행동 순서·단계별 기대 결과·실패/복구를 정의합니다. `ticket`은 원본 시나리오를 연결하고, `build`는 자동 테스트와 실제 환경 검증을 동작 단위로 수행합니다. 모바일 화면 크기 검사와 실제 OS 키보드·WebView 검증은 구분하며, 실행하지 못한 환경은 미검증으로 남깁니다.
+
 ## 업데이트
 
 **Claude Code**
