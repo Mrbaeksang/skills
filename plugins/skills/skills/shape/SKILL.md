@@ -14,7 +14,8 @@ description: 제품의 요구·규모·운영 제약을 질문으로 구체화�
 | 새 제품의 업무 흐름, 또는 변경되는 용어·규칙·상태·소유권 | [domain](references/workflows/domain.md) | actors·용어·불변식·상태와 아직 답이 필요한 사례 |
 | 새 모듈 경계·공통 책임, 또는 기존 구조의 변경 | [architecture](references/workflows/architecture.md) | 기존 재사용·소유 경계·공통/도메인 책임과 선택 근거 |
 | 미정 스택, 지원 여부·호환성·운영 제약에 의존하는 선택 | [research](references/workflows/research.md) | 현재 공식 근거·대안·추천·선택을 바꾸는 조건 |
-| 화면·사용자 문구의 방향 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 사용자 과제·정보 위계·브랜드/문구 제약 |
+| 새 화면의 시각 방향·구조 재설계 | [디자인 방향](references/workflows/design.md) | 사용자 판단/행동을 표현 선택에 연결한 기준과 미정 |
+| 사용자 문구·기존 화면 품질 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 정보 위계·브랜드/문구 제약 |
 
 이미 정해진 결과가 현재 요구를 설명하면 재사용한다. 선택한 절차에서 제품 질문이 생기면 아래 질문 묶음에 합친다. 기술 사실을 확인할 정보가 아직 부족하면 먼저 필요한 운영 제약을 묻고, 답을 받는 턴에 해당 절차를 수행한다. 모든 행을 순서대로 실행하는 표가 아니다.
 

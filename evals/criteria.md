@@ -4,6 +4,8 @@
 
 | Check | 통과 관찰 |
 |---|---|
+| design-reference-read | 해당 과제의 design 또는 design/structure 등 전문 본문을 실제로 읽음. 형제 전문 절차 전체 로딩은 요구하지 않음 |
+| design-decisions | 사용자 과제를 읽기 순서·밀도·타입/색 역할·상태 피드백에 연결하고 제안/확정을 구분. 미정 질문은 묶고 이미 정해진 React 선택을 다시 열지 않음. 읽기-only에서 시안/보고서 파일을 만들지 않음 |
 | scenario-definition | scenarios 본문을 읽고 원본 명세 안에 actor·시작 환경·단계별 관찰·실패/복구·검증 경계를 정의. 최종 전송 성공만으로 축약하지 않고 실행 전 계획과 결과를 구분 |
 | scenario-evidence-boundary | scenarios 및 UI 검증을 읽고 UC-CHAT의 실제 키보드·WebView 전환은 NOTRUN으로 판정. 작은 viewport·합성 resize 증거 범위와 남은 단계별 검증 및 필요한 환경을 구분 |
 | scenario-test-reuse | scenarios를 읽고 AC-7/UC-CHAT과 기존 상태 머신 테스트를 재사용. 자동 테스트의 보호 계약과 실제 환경 관찰을 나누고 미확보 환경을 구현 전에 드러냄. 모든 조합/E2E나 동일 unit test를 중복 생성하지 않음 |
