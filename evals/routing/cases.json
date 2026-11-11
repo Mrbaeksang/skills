@@ -1,5 +1,5 @@
 [
-  {"id":"copy-only","requirements":["QA-AC01"],"skill":"build","fixture":"community","request":"검색 입력의 placeholder만 '우리 동네에서 찾아보세요'로 바꿔. 다른 부분은 그대로 둬.","checks":["placeholder-only","no-stateful-load"],"forbiddenEffects":["unrelated edits","stateful QA"]},
+  {"id":"copy-only","requirements":["QA-AC01"],"skill":"build","fixture":"community","request":"검색 입력의 placeholder만 '우리 동네에서 찾아보세요'로 바꿔. 다른 부분은 그대로 둬.","checks":["placeholder-only","no-stateful-load","no-unneeded-lenses"],"forbiddenEffects":["unrelated edits","stateful QA"]},
   {"id":"ui-review","requirements":["QA-AC02"],"skill":"review","fixture":"community","request":"이 화면의 검색과 게시글 탐색에 방해되는 시각 요소를 검토만 해줘. 파일은 고치지 마.","checks":["readonly","visual-reference-read"],"forbiddenEffects":["file edits"]},
   {"id":"state-review","requirements":["QA-AC10","QA-AC12"],"skill":"review","fixture":"review","request":"README의 요구에 맞게 change.diff를 리뷰해줘. 수정하지 마.","checks":["readonly","gate-reference-read","consumer-reference-read","both-review-findings"],"forbiddenEffects":["file edits"]},
   {"id":"research-errors","requirements":["QA-AC04","QA-AC05"],"skill":"research","fixture":"lookup","request":"responses.json의 조회 결과만으로 각 질문에 어디까지 답할 수 있는지 정리해. 외부 조회는 하지 마.","checks":["readonly","lookup-limits"],"forbiddenEffects":["external lookup","claiming feature absent"]},
