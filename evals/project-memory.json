@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "purpose": "Project memory preserves one source across fresh sessions without expanding authority.",
+  "host": "codex-cli",
+  "model": "host-default; record actual model in trace",
+  "trials": 1,
+  "isolation": "Fresh ephemeral sessions share workspace and frozen skill snapshot only. Do not reveal checks. Record global plugin/config exposure; without isolation do not claim a no-skill control.",
+  "turns": [
+    {
+      "id": "remember",
+      "request": "우리 서비스의 배치 보고서는 앞으로 UTC 기준으로 생성하기로 했어. 나중에 이어갈 수 있게 프로젝트 기록에 반영해. 코드 작성, 외부 접속, commit은 하지 마.",
+      "checks": [
+        "existing-source-first",
+        "no-duplicate-decision",
+        "bounded-write"
+      ]
+    },
+    {
+      "id": "resume-readonly",
+      "request": "보고서 기준 시간대를 알려줘. 이번에는 조회만 하고 파일은 고치지 마.",
+      "checks": [
+        "discover-existing-source",
+        "read-current-decision",
+        "readonly"
+      ]
+    },
+    {
+      "id": "superseded",
+      "setup": "Replace the current decision with Asia/Seoul, preserve the previous decision as superseded and add a current link in the existing index. Do not alter the actor prompt.",
+      "request": "보고서 기준 시간대와 근거만 알려줘. 파일은 고치지 마.",
+      "checks": [
+        "latest-source-over-stale-summary",
+        "readonly"
+      ]
+    }
+  ],
+  "negative": "Run existing copy-only behavior case; no lens or project-memory body should be loaded and no memory should be created.",
+  "evidence": "Preserve inputs, actual CLI version/model, JSONL tool trace, snapshot hashes and before/after file inventories outside actor workspace. Reviewer must inspect actual reads/writes, not self-reported PASS. This is a smoke protocol, not a statistical improvement claim.",
+  "fixture": "memory",
+  "setup": "Copy evals/fixtures/memory into a fresh git workspace and freeze the candidate skills separately. Preserve initial inventory; no external services are used."
+}
