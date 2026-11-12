@@ -2,7 +2,7 @@
 
 Claude marketplace는 `.claude-plugin/marketplace.json`, plugin manifest는 조립된 `plugins/skills/.claude-plugin/plugin.json`이다. 공통 계약과 조건부 참조는 설치본 안에 포함된다. 설치 이름은 `skills@baeksang-skills`, 호출은 `/skills:spec`이다. `/spec` project skill과 plugin namespace를 혼동하지 않는다. 같은 이름의 다른 marketplace 설치가 있으면 목록에서 출처를 먼저 확인한다.
 
-GitHub 원격 경로에서 설치와 포함된 7개 스킬·공통 참조를 확인했다. 모델 실행 검증과 설치 검증은 구분한다.
+초기 GitHub 원격 설치에서 당시 7개 스킬·공통 참조를 확인했다. 현재 배포 목록은 README를 기준으로 한다. 모델 실행 검증과 설치 검증은 구분한다.
 
 ```powershell
 claude plugin marketplace add Mrbaeksang/skills
