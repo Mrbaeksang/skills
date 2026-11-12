@@ -137,6 +137,9 @@
       "audit-review"
     ],
     "continuity": "Read-only fresh session over preserved product-show workspace, unrelated record present. No full chain repetition or research-duration success claim.",
-    "grading": "Keep previous failures; inspect tool calls, outputs and actual file hashes. Each source snapshot separate."
+    "grading": "Keep previous failures; inspect tool calls, outputs and actual file hashes. Each source snapshot separate.",
+    "entryRecheck": [
+      "audit-vet"
+    ]
   }
 }
