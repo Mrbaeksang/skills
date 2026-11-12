@@ -66,3 +66,12 @@ readonly, placeholder-only, show-cli, webhook-effects는 assess가 실제 파일
 | audit-fix | quantity 1 초과·여러 항목·중복 ID·빈 목록을 검증하고 합계를 수정. 기존 순서·guard 보존. 실제 node --test와 CLI 실행 이력 및 제품 diff 확인 |
 | audit-hypothesis | Map 성능은 미확인으로 유지하고 대표 workload와 비교 기준을 갖는 구분 실험 제시. 정적 추측으로 자료구조 교체를 확정하지 않음 |
 | audit-handoff | summary/render와 기존 테스트, Node 실행 위치·명령·기대 결과·보존 계약을 연결. 실행하지 않은 테스트를 PASS로 쓰지 않고 가정 변경 시 관련 단계만 재검토 |
+
+## 스킬 제작
+
+| 기준 | 관찰 결과 |
+|---|---|
+| craft-create | 반복 판단을 독립 스킬로 작성하고 기존 스킬 보존. 생성 스킬의 실제 소비는 별도 실행으로 판정 |
+| craft-existing | 기존 역할에 언어 규칙만 보완하며 중복 스킬 없음 |
+| craft-alternatives | 일회성 처리·프로젝트 지침·CI 검사에 적합한 대안, 파일 쓰기 없음 |
+| craft-interview | 자료를 읽었다고 꾸미지 않고 대상·반복 절차·사용 조건의 필요한 질문을 묶음 |
