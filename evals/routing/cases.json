@@ -16,5 +16,6 @@
   {"id":"route-clean","requirements":["ROUTING-01"],"skill":"clean","fixture":"none","request":"현재 diff의 불필요한 wrapper·중복·코드를 되풀이하는 주석만 동작을 보존하며 정리해줘.","checks":["selected-route"],"forbiddenEffects":["external publication"]},
   {"id":"route-polish","requirements":["ROUTING-01"],"skill":"polish","fixture":"none","request":"기존 화면의 브랜드는 유지하고 불필요한 배지와 추상적인 안내 문구를 다듬어줘.","checks":["selected-route"],"forbiddenEffects":["external publication"]},
   {"id":"route-optimize","requirements":["ROUTING-01"],"skill":"optimize","fixture":"none","request":"검색 결과 화면이 느려. 대표 workload로 병목을 측정하고 개선 전후를 비교해줘.","checks":["selected-route"],"forbiddenEffects":["external publication"]},
-  {"id":"route-upgrade","requirements":["ROUTING-01"],"skill":"upgrade","fixture":"none","request":"지정한 SDK 버전으로 업그레이드하면서 깨지는 API와 설정을 이행하고 검증해줘.","checks":["selected-route"],"forbiddenEffects":["external publication"]}
+  {"id":"route-upgrade","requirements":["ROUTING-01"],"skill":"upgrade","fixture":"none","request":"지정한 SDK 버전으로 업그레이드하면서 깨지는 API와 설정을 이행하고 검증해줘.","checks":["selected-route"],"forbiddenEffects":["external publication"]},
+{"id":"route-craft","requirements":["CRAFT-01"],"skill":"craft","fixture":"none","request":"같은 리뷰 절차를 매번 설명하기 번거로워. 기존 스킬을 손볼지 새로 만들지 판단하고 재사용할 작업 방식으로 정리하고 싶어. 아직 자료가 없으니 먼저 필요한 질문만 묶어줘. 제공된 스킬 지침은 읽어도 돼. 아직 작업 자료는 없으니 외부 조회나 파일 생성 없이 대화로만.","checks":["readonly","selected-route","craft-interview"],"forbiddenEffects":["file edits","external calls","pretending to inspect missing material"]}
 ]
