@@ -2,7 +2,7 @@
 
 **질문은 묶어서. 기존 코드는 찾아서. 완료는 실제 검증까지.**
 
-Claude Code와 Codex에서 쓰는 개인 개발 워크플로입니다. 평소에는 **8개 작업 스킬**만 골라 쓰고, 에이전트가 필요한 **9개 전문 절차**를 그때 읽습니다. DDD modular monolith를 출발점으로 삼되 프로젝트 규모와 기존 구조에 맞춥니다.
+Claude Code와 Codex에서 쓰는 개인 개발 워크플로입니다. 제품 개발과 스킬 제작을 위한 **9개 작업 스킬**을 직접 골라 쓰고, 에이전트가 필요한 **9개 전문 절차**를 그때 읽습니다. DDD modular monolith를 출발점으로 삼되 프로젝트 규모와 기존 구조에 맞춥니다.
 
 [![Checks](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml/badge.svg)](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml)
 [![Release](https://img.shields.io/github/v/release/Mrbaeksang/skills)](https://github.com/Mrbaeksang/skills/releases)
@@ -84,12 +84,15 @@ npx skills@latest add Mrbaeksang/skills
 | 구체적인 버그 원인 규명 | `diagnose` | “재시도하면 두 번 저장돼. 재현하고 고쳐” |
 | 기존 레포 분석·개선 | `improve` | “파일 처리 흐름과 재사용 가능한 viewer를 추적해. 지금은 분석만” |
 | 명세·변경 코드 검토 | `review` | “이 PR의 누락·회귀·검증 약화를 봐. 수정하지 마” |
+| 반복 작업을 스킬로 제작·기존 스킬 개선 | `craft` | “이 작업 방식을 재사용하고 싶어. 기존 스킬을 고칠지 새로 만들지 판단하고 실제 요청으로 검증해” |
 
 `talk → shape → spec → ticket → build`를 매번 완주할 필요는 없습니다. 이미 실행할 내용이 충분하면 `build`부터, 버그면 `diagnose`부터 시작합니다.
 
 ### 작업 방식을 스킬로 만들고 싶다면
 
 별도의 제작 스킬 `craft`를 사용합니다. “이 반복 작업을 재사용하고 싶어”, “이 스킬이 필요한 참조를 자꾸 놓쳐”처럼 요청하면 됩니다. 기존 스킬 수정·프로젝트 지침·스크립트로 해결할 수 있는지 먼저 판단하고, 필요한 경우에만 새 스킬을 만듭니다. 실제 요청에서의 선택·수행·결과와 비적용 사례를 검증하며, 파일 생성이나 설치 성공만으로 효과를 주장하지 않습니다. 일반 개발 중 자동으로 스킬을 늘리지는 않습니다.
+
+Codex에서는 `$skills:craft`(namespace를 표시하지 않는 호스트는 `$craft`), Claude Code에서는 `/skills:craft`로 직접 호출합니다. `shape`나 `build`를 먼저 실행할 필요는 없습니다.
 
 ### shape는 어디까지 하나요?
 
@@ -102,7 +105,11 @@ npx skills@latest add Mrbaeksang/skills
 ### 필요한 전문 절차만 읽습니다
 
 ```text
-8개 작업 스킬
+직접 고르는 작업 스킬 9개
+├─ 제품 개발 8개: talk · shape · spec · ticket · build · diagnose · improve · review
+└─ 스킬 제작·개선: craft
+
+현재 작업에 필요한 전문 절차만 연결
 ├─ 용어·불변식이 불명확       → domain
 ├─ 경계·공통 책임·재사용      → architecture
 ├─ 현재 기술·호환 근거 부족   → research

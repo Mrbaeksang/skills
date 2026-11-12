@@ -1,7 +1,9 @@
 # Baeksang Skills
 
-Eight workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`, `diagnose`,
-`improve`, and `review`. Nine callable specialists: `domain`, `research`,
+Nine directly callable workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`,
+`diagnose`, `improve`, `review`, and `craft`. Use `craft` to create or improve reusable
+skills and verify their behavior; no prior shape or build invocation is required.
+Nine callable specialists: `domain`, `research`,
 `architecture`, `test`, `verify`, `clean`, `polish`, `optimize`, and `upgrade`.
 Each installed skill includes only its reachable shared references, including nested
 specialist procedures. Read them when their trigger applies, not all at startup.
