@@ -8,7 +8,7 @@
 
 배포 내용(`skills/`, `common/`, `adapters/`, `plugins/skills/`, marketplace)을 바꾸면 두 `adapters/*/plugin.json`의 version을 함께 올리고 CHANGELOG.md를 갱신합니다. 기능 추가는 minor, 호환되는 수정은 patch를 올립니다. 문서·제작 도구만 바꾸는 경우 버전 증가는 필요 없습니다.
 
-`npm run sync` 후 `npm run check:release -- <변경 전 commit>`과 아래 검증을 수행합니다. CI는 PR의 base 또는 push 이전 commit과 비교해 배포 내용이 바뀌었는데 버전이 같거나 낮으면 실패합니다. 생성된 배포본도 함께 커밋합니다. 공개 권한이 있는 릴리스는 검증된 변경을 main에 반영하고 같은 commit에 `v<version>` tag와 GitHub Release를 만듭니다. tag와 Release만 만들고 main을 갱신하지 않으면 기본 marketplace 사용자는 새 파일을 받지 못합니다.
+`npm run sync` 후 `npm run check:release -- <변경 전 commit>`과 아래 검증을 수행합니다. CI는 PR의 base 또는 main push 이전 commit과 비교해 배포 내용이 바뀌었는데 버전이 같거나 낮으면 실패합니다. 작업 브랜치의 중간 push에는 별도 릴리스 증가를 요구하지 않고 PR 전체를 검사합니다. 생성된 배포본도 함께 커밋합니다. 공개 권한이 있는 릴리스는 검증된 변경을 main에 반영하고 같은 commit에 `v<version>` tag와 GitHub Release를 만듭니다. tag와 Release만 만들고 main을 갱신하지 않으면 기본 marketplace 사용자는 새 파일을 받지 못합니다.
 
 일반 사용자는 README의 업데이트 경로를 사용합니다. Claude의 자동 업데이트는 사용자가 marketplace별로 켜며, 플러그인은 사용자 설정을 임의로 바꾸지 않습니다. Codex CLI는 marketplace upgrade 후 plugin add로 갱신합니다. 둘 다 새 세션에서 확인합니다.
 
