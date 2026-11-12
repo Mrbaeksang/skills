@@ -4,6 +4,8 @@
 
 ## 실행
 
+[Luna max 평가 계획](luna-max.json)은 17개 스킬의 기존 라우팅·행동 사례와 실제 코드 개선 fixture, 설계 대화·새 세션 인계 프로토콜을 묶는다. CLI 모델은 `gpt-6-luna`, reasoning effort는 `max`로 고정한다. 먼저 격리 workspace의 파일 읽기·쓰기 사전 점검을 통과해야 한다. 정책 차단이면 전체 사례를 성공으로 추정하거나 제한을 끄지 말고 NOTRUN으로 남긴다. 모델 호출 수·시간 한도와 단일 trial은 성능 우월성 증명이 아닌 smoke 범위다.
+
 ```sh
 node scripts/evaluate.mjs list
 node scripts/evaluate.mjs prepare copy-only --host codex --model MODEL_ID --arm after --trial 1 --out .artifacts/evals/copy-after-1
@@ -11,6 +13,8 @@ node scripts/evaluate.mjs assess .artifacts/evals/copy-after-1
 ```
 
 prepare는 모델을 실행하지 않고 독립 Git workspace·스킬 snapshot·prompt.txt와 평가자용 run.json을 만든다. Git이 필요하며 초기화 실패 시 평가를 시작하지 않는다. 기존 목적지는 거절한다. 평가자는 prompt.txt와 그 파일이 지정한 입력만 새 세션에 전달한다. routing은 이름/설명만 제공하며 정답 스킬·참조를 알려주지 않는다. behavior는 해당 스킬을 지정해 절차 자체를 평가한다. run.json·다른 평가 결과·의도한 답은 실행자에게 제공하지 않는다.
+
+라우팅 metadata는 호스트의 발견 단계처럼 모든 스킬의 이름·설명·정확한 진입 경로를 prompt에 직접 제공한다. 목록 파일을 찾아 읽거나 경로를 조립하는 능력과 선택 능력을 혼동하지 않는다. 스킬 snapshot은 작업 폴더 밖의 읽기 전용 입력임을 명시한다. 실제 native plugin 자동 발견을 검증한 것은 아니며 호스트·전역 지침 노출을 별도로 기록한다. `inline-catalog-v3` 이전 prompt 결과와는 case hash가 달라 비교하지 않는다.
 
 라우팅 사례는 17개 진입 스킬의 대표 요청을 포함한다. catalog만 보고 고르는 빠른 점검은 metadata 선택 평가이며 실제 참조 수행 성공이 아니다. 공통 계약 변경은 관련 전문 절차를 읽어야 하는 사례와 읽지 않아야 하는 작은 요청을 함께 실행한다. 대화형 절차는 첫 질문뿐 아니라 부분 답변·후속 답변·명시적 중단까지 여러 턴으로 확인한다. 필요한 참조의 실제 읽기, 결과의 부모 반영, 남은 작업과 완료 판단을 이력에서 확인하고 과거 버전의 PASS를 새 버전으로 이월하지 않는다.
 
@@ -21,6 +25,8 @@ prepare는 모델을 실행하지 않고 독립 Git workspace·스킬 snapshot·
 before는 이전 checkout을 `--source`로 지정한다. after는 현재 checkout을 사용하며 commit SHA 외에 실제 스킬 파일 hash를 보존한다. none은 스킬 snapshot을 만들지 않는다. none은 호스트의 전역 플러그인·자동 지침이 없는 격리 프로필에서 실행해야 한다. 그 격리를 확보하지 못하면 대조군은 NOTRUN이다. 단순히 프롬프트에 사용 금지를 썼다고 격리를 입증하지 않는다.
 
 과제·판정 기준·모델·trial 수·실행 한도는 결과를 보기 전에 고정한다. 첫 실행은 소수 사례로 실행 가능성을 확인한다. 기본 자동 유료 실행은 없으며 비용을 확인할 수 없으면 추정 대신 미확인으로 기록한다. 수정으로 기준이 바뀌면 새 평가이며 이전 결과와 합치지 않는다. 실패 후 성공한 시도만 골라 보고하지 않는다.
+
+Luna 후속 평가는 최초 300초 실행과 분리해 600초 한도로 기록한다. 최초 판정은 보존한다. 부분 실패 probe 자체가 재시도를 수행하는데 명령을 두 번 요구하거나, 이미 관찰한 제품 실패를 무시하고 새 테스트의 red 실행만 요구하거나, 짧은 완료 판정 요청에 무관한 체크리스트를 요구하는 기준은 제품 계약과 맞지 않는다. 이 기준을 수정한 실행은 새 case hash로 구분하며 최초 실패를 소급해 PASS로 바꾸지 않는다. 스킬 이름을 주지 않는 실제 호스트 발견 시험은 격리 프로젝트의 `.agents/skills`를 사용하고, 이것을 native marketplace 업데이트 검증으로 부르지 않는다.
 
 ## 판정과 증거
 

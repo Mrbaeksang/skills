@@ -17,12 +17,33 @@ test('preparation preserves existing output and keeps oracle out of routing prom
   const out = setup(t, 'copy-only');
   const prompt = fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8');
   assert.ok(!prompt.includes('no-stateful-load'));
-  assert.ok(!prompt.includes('build/SKILL.md'));
+  for (const name of fs.readdirSync(path.join(out, 'skills'))) {
+    assert.ok(prompt.includes(path.join(out, 'skills', name, 'SKILL.md')));
+  }
+  assert.ok(prompt.includes('build:'));
+  assert.ok(prompt.includes('diagnose:'));
+  assert.ok(prompt.includes('talk:'));
   const gitRoot = execFileSync('git', ['-C', path.join(out, 'workspace'), 'rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim();
   // Windows TEMP can use an 8.3 alias while Git returns its long form.
   assert.equal(fs.realpathSync.native(gitRoot), fs.realpathSync.native(path.join(out, 'workspace')));
   assert.throws(() => prepare('copy-only', { out, host: 'test', model: 'stub-no-model' }), /Output exists/);
   assert.ok(cases().every(c => c.requirements.length && c.checks.includes('scope-preserved')));
+});
+
+test('audit fixture separates an existing guard from a real quantity defect', t => {
+  const out = setup(t, 'audit-fix');
+  const workspace = path.join(out, 'workspace');
+  const childEnv = { ...process.env };
+  delete childEnv.NODE_TEST_CONTEXT;
+  const existing = execFileSync(process.execPath, ['--test'], { cwd: workspace, encoding: 'utf8', env: childEnv });
+  assert.match(existing, /pass 1/);
+  const observed = JSON.parse(execFileSync(process.execPath, ['summary.mjs'], { cwd: workspace, encoding: 'utf8' }));
+  assert.deepEqual(observed.labels, ['Apple']);
+  assert.equal(observed.total, 1);
+  assert.notEqual(observed.total, 3, 'baseline must retain the defect the actor is asked to fix');
+  const run = JSON.parse(fs.readFileSync(path.join(out, 'run.json'), 'utf8'));
+  assert.ok(run.case.checks.includes('audit-fix'));
+  assert.ok(!fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8').includes('audit-fix'));
 });
 test('no-skill arm contains no skill snapshot and missing evidence never passes', t => {
   const out = setup(t, 'missing-service', 'none');

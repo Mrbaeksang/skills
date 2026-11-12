@@ -2,7 +2,7 @@
 
 지원 형식은 `.codex-plugin/plugin.json`과 `.agents/plugins/marketplace.json`이다. 배포되는 `plugins/skills/`에는 공통 계약이 이미 포함된다. 사용자는 Python이나 빌드가 필요 없다. 설치 이름은 `skills@baeksang-skills`다. 같은 이름의 다른 marketplace나 독립 `$spec` 스킬이 있으면 먼저 설치 목록과 스킬 선택 UI에서 출처를 확인한다. 무관한 설치를 자동 삭제하지 않는다.
 
-GitHub 원격 marketplace 설치와 7개 스킬·공통 참조 포함을 확인했다. 실제 모델 실행은 기존 정책 차단 기록과 구분한다.
+당시 GitHub 원격 marketplace 설치와 7개 스킬·공통 참조 포함을 확인했다. 현재 배포 스킬 목록은 README를 기준으로 한다. 실제 모델 실행은 기존 정책 차단 기록과 구분한다.
 
 ```powershell
 codex plugin marketplace add Mrbaeksang/skills
@@ -42,3 +42,5 @@ codex plugin marketplace remove baeksang-skills --json
 원본 설정 보존과 실제 오류는 [검증 기록](../research/codex-lifecycle.md)에 있다. [OpenAI 공식 packaging 문서](https://developers.openai.com/plugins/build/plugins)의 형식을 사용하고 CLI 0.166.0의 실제 help와 실행을 대조했다. 문서의 Desktop 안내를 CLI 미지원으로 해석하지 않는다.
 
 개발·패키지 검사는 [개발 안내](development.md)를 따른다. [원격 설치 결과](../research/simple-install.md).
+
+평가용 CLI에서 `--ignore-user-config`를 쓰면 Windows sandbox 선택도 제외될 수 있다. 2026-11-12 로컬 점검에서는 `workspace-write`만 지정한 실행의 파일 명령이 거절됐고, 기존에 설정된 `windows.sandbox="elevated"`를 함께 명시한 실행은 격리 폴더 읽기·쓰기·readback에 성공했다. 이 결과는 도구 사전 점검이며 스킬 행동 성공은 아니다. 환경에 이미 허용·설정된 sandbox를 사용하고 관리 정책이나 파일·네트워크 제한을 해제하지 않는다. [공식 Windows sandbox 안내](https://learn.chatgpt.com/docs/windows/windows-sandbox).

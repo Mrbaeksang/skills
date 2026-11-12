@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "model": "gpt-6-luna",
+  "reasoningEffort": "max",
+  "trials": 1,
+  "limits": {
+    "maxSessions": 124,
+    "perSessionSeconds": 300,
+    "concurrency": 3
+  },
+  "preflight": "Actual CLI must read fixture input and write/read output under workspace-write; policy rejection blocks the suite without bypass. Record effective config/model and global skill exposure.",
+  "calibration": "Retain superseded file-catalog and incomplete-path runs separately; never pool them with inline-catalog-v3. The session cap includes calibration, protocols and targeted retests.",
+  "arms": {
+    "after": [
+      "copy-only",
+      "ui-review",
+      "state-review",
+      "research-errors",
+      "confirmed-spec",
+      "route-talk",
+      "route-shape",
+      "route-ticket",
+      "route-diagnose",
+      "route-improve",
+      "route-domain",
+      "route-architecture",
+      "route-test",
+      "route-verify",
+      "route-clean",
+      "route-polish",
+      "route-optimize",
+      "route-upgrade",
+      "test-ambiguous-rule",
+      "clean-ownership",
+      "optimize-runtime-support",
+      "shape-specialist-results",
+      "shape-new-answer",
+      "shape-existing-decision",
+      "runtime-legacy",
+      "runtime-override",
+      "usecase-tests",
+      "delivery-language",
+      "records-readonly",
+      "records-resume",
+      "reuse-handler",
+      "state-recovery",
+      "state-repair",
+      "brand-preservation",
+      "test-value",
+      "justified-gate",
+      "missing-service",
+      "scenario-mobile-spec",
+      "scenario-mobile-evidence",
+      "scenario-reuse-plan",
+      "scenario-small-copy",
+      "scenario-export-boundaries",
+      "scenario-scheduler-boundaries",
+      "scenario-editor-boundaries",
+      "design-direction",
+      "design-feedback",
+      "lens-sample-scope",
+      "lens-delivery-path",
+      "lens-evidence-coverage",
+      "lens-recurring-cost",
+      "lens-subtract-first",
+      "lens-primary-sources",
+      "lens-decisions-ledger",
+      "lens-authority-boundary",
+      "audit-vet",
+      "audit-fix",
+      "audit-hypothesis",
+      "audit-handoff"
+    ],
+    "before": [
+      "audit-vet",
+      "audit-fix",
+      "audit-hypothesis",
+      "audit-handoff"
+    ],
+    "none": "NOTRUN until a profile without global instructions/plugins is verified"
+  },
+  "protocols": [
+    "shape-conversation.json",
+    "continuity.json",
+    "project-memory.json"
+  ],
+  "acceptance": "Inspect actual entry and specialist reads, parent use, outputs, source diff, tests and scope. Metadata choice alone is not invocation success. Each case reports PASS/FAIL/NOTRUN; failed setup is NOTRUN. Single trials establish smoke observations only.",
+  "evidence": "Frozen skills hash, prompt, JSONL trace, CLI version, actual model/effort, file inventories and measured token use. Do not expose grading files to actor.",
+  "cost": "No price estimate claimed; preserve usage. Stop after failed preflight, auth/rate-limit or policy rejection.",
+  "windowsSandbox": "elevated; preserve workspace-write and managed policy",
+  "followup": {
+    "perSessionSeconds": 600,
+    "cases": [
+      "audit-fix",
+      "ui-review",
+      "route-architecture",
+      "records-resume",
+      "shape-specialist-results",
+      "state-recovery",
+      "state-repair",
+      "brand-preservation",
+      "scenario-reuse-plan",
+      "design-feedback",
+      "lens-evidence-coverage",
+      "audit-vet",
+      "audit-handoff"
+    ],
+    "reason": "Target actual failures, timeouts, relative references, contract reuse and corrected semantic criteria. Preserve original results; changed time cap and oracle prevent pooled comparison.",
+    "discovery": [
+      "copy-only",
+      "audit-vet"
+    ],
+    "protocolsPerTurnSeconds": 600
+  },
+  "safetyFollowup": {
+    "cases": [
+      "design-feedback"
+    ],
+    "perSessionSeconds": 600,
+    "reason": "One fresh trial after observed unverified process-ownership cleanup; new UI procedure snapshot, no pooling with previous outcomes."
+  }
+}

@@ -42,25 +42,25 @@ export function prepare(id, { source = ROOT, arm = 'after', host, model, trial =
   } else if (c.fixture !== 'none') copy(path.join(ROOT, 'evals/fixtures', c.fixture), workspace);
   if (arm !== 'none') copy(path.join(source, 'skills'), path.join(out, 'skills'));
   const baseline = inventory(workspace);
+  const catalog = arm === 'none' ? '' : fs.readdirSync(path.join(out, 'skills')).sort().map(name => {
+    const text = fs.readFileSync(path.join(out, 'skills', name, 'SKILL.md'), 'utf8');
+    return `${name}: ${text.match(/^description: (.+)$/m)?.[1] || ''} (entry: ${path.join(out, 'skills', name, 'SKILL.md')})`;
+  }).join('\n');
   // The evaluator's oracle is outside the task workspace and absent from prompt.txt.
   const prompt = [
-    `Work only in ${workspace}. External services, credentials, installs and publication are out of scope.`,
+    `Task files are in ${workspace}; only that workspace may be modified. The supplied skill snapshot and catalog are additional read-only inputs outside the workspace. External services, credentials, installs and publication are out of scope.`,
     arm === 'none' ? 'Use no skills or installed plugins; this is the no-skill control.' :
       c.kind === 'behavior' ? `Use the skill at ${path.join(out, 'skills', c.skill, 'SKILL.md')}.` :
-      `Available skill name/description metadata is in ${path.join(out, 'catalog.txt')}. Choose only if needed; skill folders are under ${path.join(out, 'skills')}.`,
+      `Available skill name/description metadata:\n${catalog}\nChoose relevant skills when needed and read their entry before applying them. Skill folders are under ${path.join(out, 'skills')}.`,
     c.request,
     'Report actual actions, observations and unrun boundaries. Do not read run.json or evaluation files outside the supplied task inputs.'
   ].join('\n\n');
   if (arm !== 'none') {
-    const catalog = fs.readdirSync(path.join(out, 'skills')).sort().map(name => {
-      const text = fs.readFileSync(path.join(out, 'skills', name, 'SKILL.md'), 'utf8');
-      return `${name}: ${text.match(/^description: (.+)$/m)?.[1] || ''}`;
-    }).join('\n');
     fs.writeFileSync(path.join(out, 'catalog.txt'), catalog);
   }
   fs.writeFileSync(path.join(out, 'prompt.txt'), prompt);
   const revision = spawnSync('git', ['-C', source, 'rev-parse', 'HEAD'], { encoding: 'utf8' });
-  const run = { schema: 1, case: c, caseHash: digest(JSON.stringify({ case: c, baseline,
+  const run = { schema: 1, case: c, caseHash: digest(JSON.stringify({ case: c, baseline, promptContract: 'inline-catalog-v3',
     criteria: digest(fs.readFileSync(path.join(ROOT, 'evals/criteria.md'))) })), arm, host, model, trial,
     sourceRevision: revision.status === 0 ? revision.stdout.trim() : null,
     sourceHash: digest(JSON.stringify(snapshot)), skillSnapshot: snapshot, baseline, createdAt: new Date().toISOString() };
