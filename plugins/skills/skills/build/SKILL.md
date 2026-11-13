@@ -7,12 +7,12 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 
 [공통 실행 계약](references/execution-contract.md)과 코드 변경 시 [작업 공간 수명주기](references/workspace-lifecycle.md)를 적용한다. 직접 입력이 충분하면 shape·spec·ticket을 다시 거치지 않는다.
 
-1. **현재 상태.** cwd·branch/worktree·지침·tracked/untracked 변경·도구를 확인한다. tracker 입력이면 본문·수용 기준·선행 의존성을 읽고 [상태 계약](references/tracker-state.md)을 적용한다. 중요 범위·권한 불명확성만 질문하고 기존 변경을 보존한다.
+1. **현재 상태.** cwd·branch/worktree·지침·tracked/untracked 변경·도구를 확인한다. tracker 입력이면 본문·수용 기준·선행 의존성을 읽고 [상태 계약](references/tracker-state.md)을 적용한다. 입력이 대화·shape에서 정한 여러 단계의 결정인데 tracker에 없고 프로젝트가 요구사항을 tracker에 두면, 구현 전에 결정 전체와 단계를 저장하거나 저장 여부를 확인하고 이번 작업이 그중 어느 단계인지 정한다. 중요 범위·권한 불명확성만 질문하고 기존 변경을 보존한다.
 2. **완료 기준.** 사용자 행동·상태 전이·환경 의존 요구는 [행동 시나리오](references/workflows/scenarios.md)를 읽고 원본 시나리오와 검증 환경을 이어받는다. 없으면 필요한 범위만 보완한다. 구현 전에 자동 테스트 경계와 실제 환경 검증의 실행 가능성을 확인한다. 이미 결정된 내용은 재사용하며 빠진 제품 결정과 자율 판단할 구현 선택을 구분한다. 개선 항목에 근거 위치·보존할 계약·변경 범위·수용 기준이 있으면 바로 구현 입력으로 쓴다.
 3. **기존 구현 확인.** [재사용·연결 탐색](references/workflows/architecture/integration.md)으로 관련 handler·config·client·component의 실제 경로와 소비자를 찾는다. 아래 표에서 다음 변경에 필요한 절차를 선택해 본문을 읽고 수행한 뒤 구현한다. 구현 중 새 규칙·외부 API·실패가 드러나면 그 변경 전에 다시 선택한다. 기술별 전문성이 부족하면 공통 계약의 설치된 전문 스킬 탐색을 적용한다.
 4. **동작 단위 구현.** 한 use case씩 기존 구조 안에서 구현한다. 비자명한 로직·버그·공유 계약 변경의 테스트에는 [test](references/workflows/test.md)를 사용한다. 단순 문구·설정 수정에 형식적인 TDD를 강제하지 않는다. 변경 diff는 [clean](references/workflows/clean.md)으로 점검하되 중복 검증을 만들지 않는다.
 5. **실행 확인.** 동작 단위가 준비될 때마다 [verify](references/workflows/verify.md)로 원본 시나리오의 실제 API·CLI·UI 경계와 기존 소비자 회귀를 확인하고 4–5를 반복한다. 코드 작성·테스트·실제 실행 증거를 구분한다. 실행 가능한 검증을 사용자에게 넘기지 않는다.
-6. **완료 판정.** 인증·결제·데이터 변경은 독립 검토에 고정 base/head·명세·diff를 전달한다. 같은 출처의 review 또는 독립 검토자를 사용하고 자기 점검으로 대신하지 않는다. 필요한 독립 검토·수용 기준에 미해결 FAIL/NOTRUN이 있으면 done이 아니다. 수정 후 새 head의 영향을 재검증한다. tracker 상태는 상태 계약대로 readback하고 결과·검증·남은 문제를 짧게 보고한다.
+6. **완료 판정.** 인증·결제·데이터 변경은 독립 검토에 고정 base/head·명세·diff를 전달한다. 같은 출처의 review 또는 독립 검토자를 사용하고 자기 점검으로 대신하지 않는다. 필요한 독립 검토·수용 기준에 미해결 FAIL/NOTRUN이 있으면 done이 아니다. 수정 후 새 head의 영향을 재검증한다. tracker 상태는 상태 계약대로 readback하고 결과·검증·남은 문제를 짧게 보고한다. 여러 단계 결정의 일부를 구현했으면 끝낸 단계와 아직 하지 않은 단계를 함께 말한다.
 
 | 조건 | 전문 절차 | 필요한 결과 |
 |---|---|---|
