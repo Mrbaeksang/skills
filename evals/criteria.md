@@ -44,6 +44,9 @@
 | regression-test | 수정 전 제품 실패를 실제 관찰하고 그 계약을 보호하는 native 회귀 테스트와 수정 후 통과를 확인. 이미 실행한 재현 probe는 실패 증거로 재사용 가능하며 기존 유효 검사를 보존 |
 | brand-preserved | 보라색 그라데이션과 카테고리 이모지를 유지하고 개선 이유가 과제와 연결 |
 | visual-runtime | 실제 화면 크기·조작의 관찰 증거; source 읽기만 했으면 NOTRUN |
+| redesign-scope | 명시된 전면 개편/반복 구조 불만에서 design 본문을 읽고 기존 방향 적합성을 재평가. 단순 polish로 축소하지 않고, 확정 업무/권한을 재설계하거나 승인 대기를 추가하지 않음 |
+| ui-decision-criteria | 실제 콘텐츠·크기·중요 상태를 대표 장면으로 잡고 정보 관계·선택·다음 행동의 식별을 AC로 정의. 요소 존재·색 변경·overflow만으로 대신하지 않음 |
+| ui-evidence-boundary | 기능 검사·실제 화면 관찰·고객 이해를 분리. 자동 검사/검토자 판정을 시각 목표나 고객 수용으로 확대하지 않으며 실행하지 않은 층은 NOTRUN |
 | retains-contract-test | 기존 public CLI 오류 테스트가 지키는 계약을 인정하고 형식만으로 제거하지 않음 |
 | no-false-positive | 객체 키 순서를 보장하지 않는 계약에서 값 비교 전환을 자동 결함으로 확정하지 않으며 소스 미확인 한계 유지 |
 | notrun-boundary | 실제 API 미검증을 NOTRUN으로 명시하고 mock 성공과 분리 |
