@@ -25,6 +25,10 @@
 | UI-01 요청된 재설계를 부분 정리로 축소하지 않음 | improve/polish 진입점, workflows/polish.md·design.md | ui-redesign-repeat, ui-related-context, 기존 brand-preservation/copy-only |
 | UI-02 대표 장면에서 사용자 판단을 수용 기준으로 연결 | design.md, spec 진입점 | 실제 콘텐츠·크기·기본/선택/스크롤·전환의 관계·선택·다음 행동 |
 | UI-03 기능·시각·고객 관찰의 증거 경계 | visual-quality.md, verify/ui.md | source/계획·실제 화면·고객 수용의 분리. 패키징/준비만으로 행동 PASS 불가 |
+| UI-04 기능 구현의 문구 필요성과 대상별 예외 | build 진입점, polish/ui-copy.md | build-product-ui, product-role-copy, 기존 copy-only |
+| UI-05 전면 조사 지도와 명세/티켓 인계 | design.md, improve의 repository-audit.md, spec/ticket 진입점 | product-ui-audit, product-ui-ticket-handoff |
+| UI-06 이미지의 의미·소비·제작·비용 | design/media.md, visual-quality.md의 조건부 연결 | product-media-spec; 생성 파일과 실제 적용 수락 구분 |
+| UI-07 실제 대상과 시간축 피드백 | design/structure.md·interaction.md, verify/ui.md | build-product-ui의 지연·유실·복원·동명 대상, 기존 brand-preservation |
 
 실행 과제와 합성 입력은 [시각 fixture D/E](../fixtures/visual-quality/cases.md), 분석-only 행동 사례는 `evals/behavior/cases.json`에 둔다. 입력/평가 정답을 분리하고 같은 과제의 이전/이후와 작은 변경·명시된 브랜드 보존을 확인한다. 특정 색·레이아웃·라이브러리를 범용 정답으로 강제하지 않는다. 단일 사례의 판단 결과를 미적 품질 개선이나 고객 이해의 증명으로 해석하지 않는다.
 

@@ -1,0 +1,20 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>오늘의 작은 실천</title><link rel="stylesheet" href="styles.css">
+<nav><a href="tasks.html">오늘</a><a href="topics.html">주제</a><a href="operator.html">운영</a></nav>
+<h1>오늘의 작은 실천</h1><section class="panel"><div class="panel"><h2>오늘 할 일</h2><div class="panel">
+<label class="row"><input type="checkbox" value="walk"><span>밖에서 10분 걷기</span></label>
+<label class="row"><input type="checkbox" value="call"><span>고마운 사람에게 연락하기</span></label>
+<label class="row"><input type="checkbox" value="tidy"><span>책상 위 물건 세 개 정리하기</span></label>
+<output id="count">0/3 완료</output><p class="note">체크한 기록은 서버 저장소에 저장됩니다.</p><p id="message" role="status"></p>
+</div></div></section>
+<script>
+let profileId = 'p1';
+fetch('/api/profiles').then(response => response.json()).then(data => { profileId = data.profiles[0].id; });
+document.querySelectorAll('input').forEach(input => input.addEventListener('change', async () => {
+  const done = input.checked;
+  document.querySelector('#count').textContent = `${document.querySelectorAll('input:checked').length}/3 완료`;
+  try {
+    const response = await fetch('/api/tasks', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ profileId, taskId: input.value, done }) });
+    if (!response.ok) throw Error();
+  } catch { document.querySelector('#message').textContent = '처리하지 못했어요.'; }
+}));
+</script></html>

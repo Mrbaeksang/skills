@@ -6,6 +6,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { Script } from 'node:vm';
 import { cases, prepare, assess, compare } from '../scripts/evaluate.mjs';
+import '../evals/fixtures/product-ui/server.test.mjs';
 
 function setup(t, id, arm = 'after') {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'skills-eval-test-'));

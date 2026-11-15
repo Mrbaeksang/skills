@@ -23,7 +23,7 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 | 외부 기능·옵션 사용/변경 또는 실행 환경 차이 | [실행 환경 계약](references/workflows/runtime-contract.md) | 실제 조합·실효 설정의 지원 근거와 효과 |
 | 의존성 버전을 변경 | [upgrade](references/workflows/upgrade.md) | 코드 이행과 검증 결과 |
 | 성능 목표·병목 개선 | [optimize](references/workflows/optimize.md) | baseline·변경·같은 조건의 전후 결과 |
-| UI·사용자 문구를 생성/변경 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 실제 동작과 일치하는 화면·문구 |
+| 기능 구현 중을 포함해 UI·사용자 문구를 생성/변경 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 문구의 필요성·실제 대상·상태별 표현과 관찰 결과 |
 | 기존 UI·문구의 완성도 개선 요청 | [polish](references/workflows/polish.md) | 브랜드·동작을 보존한 정리 |
 
 인계된 개선 항목은 수정·구분 실험·제외·보류 중 판정과 근거부터 확인한다. 미확인 가설이면 필요한 실험을 먼저 하고 수정 요구로 승격하지 않는다. 다른 세션의 계획은 재사용할 실제 경로·테스트 예시와 실행 위치·명령·기대 관찰·기존 실패를 확인한다. 가정이 깨지면 영향받는 단계만 재계획하고, 중대한 제품 결정·권한 밖 변경만 질문한다. 사소한 코드 이동이나 명령 경로 수정 때문에 전체 작업을 중단하지 않는다.

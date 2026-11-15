@@ -1,0 +1,9 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>하고 싶은 일</title><link rel="stylesheet" href="styles.css">
+<nav><a href="tasks.html">오늘</a><a href="topics.html">주제</a><a href="operator.html">운영</a></nav><h1>하고 싶은 일</h1>
+<section class="panel"><h2>주제 선택</h2><div class="chips" id="topics"><button>산책</button><button>휴식</button><button>공부</button><button>친구</button><button>정리</button><button>운동</button><button>새로운 시작</button></div><p id="chosen">주제를 골라 주세요.</p><button id="next">다음</button></section>
+<section id="continue" class="panel" hidden><h2>선택한 주제</h2><p id="summary"></p><button id="open">이 주제 보기</button></section><section id="result" class="panel" hidden><h2>작은 시작</h2><p>오늘 가능한 만큼 하나씩 해 보세요.</p></section>
+<script>
+let chosen='';document.querySelectorAll('#topics button').forEach(button=>button.onclick=()=>{chosen=button.textContent;document.querySelector('#chosen').textContent=chosen;});
+document.querySelector('#next').onclick=()=>{if(!chosen)return;document.querySelector('#continue').hidden=false;document.querySelector('#summary').textContent=chosen;};
+document.querySelector('#open').onclick=()=>{document.querySelector('#result').hidden=false;};
+</script></html>
