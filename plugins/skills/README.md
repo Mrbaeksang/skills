@@ -1,8 +1,10 @@
 # Baeksang Skills
 
-Nine directly callable workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`,
-`diagnose`, `improve`, `review`, and `craft`. Use `craft` to create or improve reusable
+Ten directly callable workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`,
+`diagnose`, `improve`, `review`, `craft`, and `present`. Use `craft` to create or improve reusable
 skills and verify their behavior; no prior shape or build invocation is required.
+Use `present` for source-grounded, self-contained HTML presentations with visual,
+interaction and offline checks; no development workflow prerequisite is required.
 Nine callable specialists: `domain`, `research`,
 `architecture`, `test`, `verify`, `clean`, `polish`, `optimize`, and `upgrade`.
 Each installed skill includes only its reachable shared references, including nested
