@@ -18,6 +18,7 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 |---|---|---|
 | 도메인 규칙·소유권이 불명확 | [domain](references/workflows/domain.md) | 용어·불변식·공개 계약 |
 | 모듈 경계·공통 책임을 바꿔야 함 | [architecture](references/workflows/architecture.md) | 재사용/확장/신규 판단과 소비자 영향 |
+| 웹 UI·CSS·브라우저 API의 구현 방식이나 지원 범위를 판단 | [웹 플랫폼 근거](references/workflows/web-platform.md) | 관련 가이드·대상 환경·채택 근거 |
 | API·기술 호환 사실이 부족 | [research](references/workflows/research.md) | 공식 근거와 버전·제약 |
 | 외부 기능·옵션 사용/변경 또는 실행 환경 차이 | [실행 환경 계약](references/workflows/runtime-contract.md) | 실제 조합·실효 설정의 지원 근거와 효과 |
 | 의존성 버전을 변경 | [upgrade](references/workflows/upgrade.md) | 코드 이행과 검증 결과 |
