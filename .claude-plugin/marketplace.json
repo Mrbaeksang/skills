@@ -1,6 +1,6 @@
 {
   "name": "baeksang-skills",
-  "description": "Portable development workflows from requirements to verified delivery",
+  "description": "Portable workflows for product development, skill creation, and HTML presentations",
   "owner": {"name": "Baeksang Skills contributors"},
   "plugins": [
     {"name": "skills", "source": "./plugins/skills"}
