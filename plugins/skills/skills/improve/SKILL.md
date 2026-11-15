@@ -17,6 +17,7 @@ description: 레포 전체의 공통화·모듈 경계·의존성 업그레이�
 | CSS·프론트·데이터·자원 병목 | [optimize](references/workflows/optimize.md) |
 | 불필요한 코드·과잉 추상화 | [clean](references/workflows/clean.md) |
 | 테스트의 중복·구현 결합·보호 계약 불명확 | [테스트 가치](references/workflows/test/value.md) |
+| 요청된 UI 전면 개편·반복된 디자인 불만·정보 관계나 읽기 순서의 부적합 | [디자인 방향](references/workflows/design.md) |
 | UI·문구의 위계·일관성 | [polish](references/workflows/polish.md) |
 
 각 후보를 깊게 조사하기 전에 위 표의 해당 절차를 읽고, 문제 근거·보존할 계약·검증 결과를 개선 항목에 합친다. 조사 중 새 원인 신호가 나오면 해당 후보에 대해서만 다시 선택한다. 진단-only 권한과 현재 근거를 전문 절차에도 전달한다. 전체 분야를 전수 실행하지 않는다.

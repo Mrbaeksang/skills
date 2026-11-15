@@ -37,7 +37,7 @@ export function prepare(id, { source = ROOT, arm = 'after', host, model, trial =
   fs.mkdirSync(workspace, { recursive: true });
   const init = spawnSync('git', ['-C', workspace, 'init', '--quiet'], { encoding: 'utf8' });
   if (init.status !== 0) throw new Error(`Cannot isolate Git workspace: ${init.stderr || init.error?.message}`);
-  if (['community', 'brand'].includes(c.fixture)) {
+  if (['community', 'brand', 'mapping'].includes(c.fixture)) {
     fs.copyFileSync(path.join(ROOT, 'fixtures/visual-quality', c.fixture + '.html'), path.join(workspace, c.fixture + '.html'));
   } else if (c.fixture !== 'none') copy(path.join(ROOT, 'evals/fixtures', c.fixture), workspace);
   if (arm !== 'none') copy(path.join(source, 'skills'), path.join(out, 'skills'));

@@ -16,6 +16,18 @@
 | QA-R10 단독 설치·이식성 | 기존 package.mjs의 closure | package tests, smoke:install |
 | QA-R11 지침 증식 억제 | docs/development.md | 기존 규칙·변경 사례·크기 차이 검토 |
 
+## UI 재설계 후속 기준
+
+기능 검사·overflow·입력칸 존재는 통과했지만 실제 업무 관계·선택·옵션 의미에 대한 피드백이 반복된 사례를 반영한다. 기존 지침에도 관계·정렬·focus 검증이 있었으므로 실행 누락과 절차의 모호함을 구분한다. 규칙을 더 강하게 반복하기보다 요청 범위의 재진입과 명세/시각 수용의 빈틈을 보완한다.
+
+| 요구 | 구현 원본 | 검증 |
+|---|---|---|
+| UI-01 요청된 재설계를 부분 정리로 축소하지 않음 | improve/polish 진입점, workflows/polish.md·design.md | ui-redesign-repeat, ui-related-context, 기존 brand-preservation/copy-only |
+| UI-02 대표 장면에서 사용자 판단을 수용 기준으로 연결 | design.md, spec 진입점 | 실제 콘텐츠·크기·기본/선택/스크롤·전환의 관계·선택·다음 행동 |
+| UI-03 기능·시각·고객 관찰의 증거 경계 | visual-quality.md, verify/ui.md | source/계획·실제 화면·고객 수용의 분리. 패키징/준비만으로 행동 PASS 불가 |
+
+실행 과제와 합성 입력은 [시각 fixture D/E](../fixtures/visual-quality/cases.md), 분석-only 행동 사례는 `evals/behavior/cases.json`에 둔다. 입력/평가 정답을 분리하고 같은 과제의 이전/이후와 작은 변경·명시된 브랜드 보존을 확인한다. 특정 색·레이아웃·라이브러리를 범용 정답으로 강제하지 않는다. 단일 사례의 판단 결과를 미적 품질 개선이나 고객 이해의 증명으로 해석하지 않는다.
+
 ## 차용과 제외
 
 외부 구현을 복사하거나 설치하지 않고 다음 원리를 우리 권한·보고·설치 계약에 맞춰 새로 작성했다. 원문 업데이트는 자동 실행 지침이 아니며 갱신 때 적용 가능성을 재검토한다.

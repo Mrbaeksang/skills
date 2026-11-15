@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>열 연결 평가용 합성 자료</title>
+<style>
+body { font:14px/1.5 system-ui,sans-serif; color:#24324b; margin:0; background:white }
+main { max-width:1024px; padding:24px; margin:auto }
+label { display:block; margin:16px 0 }
+input,select { font:inherit; padding:10px; border:1px solid #a5b1c3; border-radius:6px; max-width:100% }
+input:focus-visible,select:focus-visible { outline:3px solid #2855d9; outline-offset:4px }
+.source { height:240px; overflow:auto; border:1px solid #dce2ec }
+table { width:100%; border-collapse:collapse; font-size:14px }
+th,td { text-align:left; padding:10px; border:1px solid #dce2ec; white-space:nowrap }
+thead th { background:#f5f7fb }
+.source thead th { position:sticky; top:0 }
+.connections { overflow:auto; margin-top:32px }
+.connections table { min-width:680px }
+.connections input { width:150px }
+.options input { padding:0 }
+small { color:#617087 }
+</style>
+</head>
+<body>
+<main>
+<h1>열 연결을 확인해 주세요</h1>
+<label>원본 파일 <select id="file"><option value="0">다온상사.xlsx</option><option value="1">가온유통.xlsx</option></select></label>
+<div class="source" tabindex="0" role="region" aria-label="원본 미리보기"><table id="source"></table></div>
+<div class="connections"><table><thead><tr><th>결과 열 이름</th><th>형식</th><th>가져올 원본 열</th><th>첫 값 예시</th></tr></thead><tbody id="connections"></tbody></table></div>
+<section class="options"><h2>숨김 행·표시 형식 옵션</h2>
+<label><input id="hidden" type="checkbox"> 선택한 시트의 숨긴 행을 포함하고 숨김 시트 선택을 허용합니다</label>
+<label><input id="display" type="checkbox"> 이 파일의 날짜·금액을 보이는 그대로 사용하고 모든 결과 열을 문자로 저장합니다</label>
+<small>표시값 사용을 해제해도 문자 형식은 유지됩니다.</small>
+</section>
+<p><small>평가용 합성 자료입니다. 파일 전송·서버 변환·네트워크 요청은 없습니다.</small></p>
+</main>
+<script>
+const fields = ['주문일', '주문번호', '상품코드', '상품명', '수량', '단위'];
+const sheets = [
+  { headers:['상품명','상품번호','주문일자','주문수량','주문번호','수량단위'], columns:[3,5,2,1,4,6], values:['무지 노트','0012','2026-11-15T00:00:00.000Z','0','DA-001','개'] },
+  { headers:['주문일','주문번호','상품코드','상품명','수량','단위'], columns:[1,2,3,4,5,6], values:['2026-11-15T00:00:00.000Z','GA-001','0012','무지 노트','0','개'] },
+];
+const kinds = fields.map((_, index) => index === 4 ? 'number' : 'text');
+const node = (tag, text) => { const element=document.createElement(tag); if(text !== undefined) element.textContent=text; return element; };
+const current = () => sheets[Number(document.querySelector('#file').value)];
+function render() {
+  const sheet=current(), source=document.querySelector('#source'), body=document.querySelector('#connections');
+  source.replaceChildren(); body.replaceChildren();
+  const head=node('thead'), letters=node('tr');
+  for(const value of ['행','A','B','C','D','E','F']) letters.append(node('th',value));
+  head.append(letters); source.append(head);
+  const rows=node('tbody');
+  for(let index=0;index<=40;index++) {
+    const row=node('tr'); row.append(node('th',String(index+1)));
+    for(const value of index===0 ? sheet.headers : sheet.values) row.append(node('td',value.includes('T00:') ? value.slice(0,10) : value));
+    rows.append(row);
+  }
+  source.append(rows);
+  fields.forEach((name,index) => {
+    const row=node('tr'), nameCell=node('td'), kindCell=node('td'), sourceCell=node('td'), sample=node('td');
+    const input=node('input'); input.value=name; input.setAttribute('aria-label',`결과 열 ${index+1} 이름`);
+    input.addEventListener('input',() => { fields[index]=input.value; }); nameCell.append(input);
+    const kind=node('select'); kind.setAttribute('aria-label',`${name} 형식`);
+    for(const [value,label] of [['text','문자'],['number','숫자']]) { const option=node('option',label); option.value=value; kind.append(option); }
+    kind.value=kinds[index]; kind.addEventListener('change',() => { kinds[index]=kind.value; }); kindCell.append(kind);
+    const select=node('select'); select.setAttribute('aria-label',`${name} 원본 열`);
+    sheet.headers.forEach((title,column) => { const option=node('option',`${String.fromCharCode(65+column)} ${title}`); option.value=String(column+1); select.append(option); });
+    select.value=String(sheet.columns[index]); sourceCell.append(select);
+    const updateSample=() => { const value=sheet.values[sheet.columns[index]-1]; sample.textContent=document.querySelector('#display').checked && value.includes('T00:') ? value.slice(0,10) : value; };
+    select.addEventListener('change',() => { sheet.columns[index]=Number(select.value); updateSample(); }); updateSample();
+    row.append(nameCell,kindCell,sourceCell,sample); body.append(row);
+  });
+}
+document.querySelector('#file').addEventListener('change',render);
+document.querySelector('#display').addEventListener('change',event => { if(event.target.checked) kinds.fill('text'); render(); });
+render();
+</script>
+</body>
+</html>

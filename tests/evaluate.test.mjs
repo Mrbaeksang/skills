@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { Script } from 'node:vm';
 import { cases, prepare, assess, compare } from '../scripts/evaluate.mjs';
 
 function setup(t, id, arm = 'after') {
@@ -13,6 +14,18 @@ function setup(t, id, arm = 'after') {
   prepare(id, { out, host: 'test', model: 'stub-no-model', arm });
   return out;
 }
+test('UI redesign cases prepare real mapping input without leaking judgment criteria', t => {
+  const out = setup(t, 'ui-redesign-repeat');
+  const file = path.join(out, 'workspace/mapping.html');
+  const html = fs.readFileSync(file, 'utf8');
+  assert.doesNotThrow(() => new Script(html.match(/<script>([\s\S]*?)<\/script>/)[1]));
+  assert.ok(html.includes('0012') && html.includes('주문일자'));
+  const prompt = fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8');
+  assert.ok(!prompt.includes('redesign-scope') && !prompt.includes('ui-evidence-boundary'));
+  assert.equal(assess(out).status, 'NOTRUN', 'prepared files alone never establish agent behavior');
+  const heldOut = setup(t, 'ui-related-context');
+  assert.deepEqual(fs.readdirSync(path.join(heldOut, 'workspace')).filter(name => name !== '.git'), []);
+});
 test('preparation preserves existing output and keeps oracle out of routing prompts', t => {
   const out = setup(t, 'copy-only');
   const prompt = fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8');
