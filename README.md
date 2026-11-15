@@ -207,7 +207,7 @@ npx skills@latest update
 
 스킬은 Markdown과 로컬 참조로 구성됩니다. 에이전트의 파일 읽기·shell·browser·tracker 도구를 사용하며, 별도 상주 runtime이나 vendor SDK를 설치하지 않습니다. 유지보수 도구는 Node.js 표준 라이브러리만 사용합니다.
 
-[개발·기여](docs/development.md) · [평가 실행](evals/README.md) · [버그·제안](https://github.com/Mrbaeksang/skills/issues)
+[기여 안내](CONTRIBUTING.md) · [개발·릴리스](docs/development.md) · [평가 실행](evals/README.md) · [버그·제안](https://github.com/Mrbaeksang/skills/issues)
 
 ## 라이선스
 

@@ -1,5 +1,7 @@
 # Project instructions
 
+For changes and PR preparation, follow CONTRIBUTING.md. Keep behavior evidence and applicable/non-applicable cases proportional to the change; do not treat packaging checks as agent behavior verification.
+
 This repository publishes portable Markdown skills. Canonical instructions live in `skills/<name>/SKILL.md`; `common/` is the single source for shared contracts. `npm run sync` updates generated references in each skill and the native plugin bundle. Commit those copies so direct installers receive self-contained skills; edit their common source rather than generated copies.
 
 This is an independent plugin. Explain its purpose through its own user needs, behavior, and contracts. Do not frame the README, marketplace description, or release notes as an adaptation of other skill collections or advertise research references there. Keep actual dependency instructions and required license notices accurate. Preserve existing historical evidence; new working notes follow `common/agent-records.md` rather than becoming public research reports.
