@@ -8,6 +8,7 @@
 | 도메인·모듈 경계 | 소유 데이터·공개 계약, 순환 의존, 타 모듈 내부 직접 접근, 도메인 정책이 섞인 global utility, 과도한 계층 |
 | 의존성 | 미사용·중복 후보, 해결 버전·peer/runtime 호환, 지원 종료·취약점·migration 영향. 해당하면 [upgrade](workflows/upgrade.md) 사용 |
 | CSS·프론트 | component·token 재사용, cascade·override 충돌, route별 자원·렌더링·요청 비용. 해당하면 [프론트 진단](workflows/optimize/frontend.md) 사용 |
+| UI·사용자 흐름 | 요청 범위의 실제 화면/콘텐츠·진입·선택 대상·중요 상태, 문구 필요성·조작 단계·상태 피드백·이미지 소비. 해당하면 [polish](workflows/polish.md)를 적용하고 전면 조사에서는 그 디자인 지도를 명세·티켓에 이어 준다. 미탐색을 정상 유지로 처리하지 않음 |
 | 백엔드·데이터 | 대표 요청의 query 수·실행 계획, N+1, transaction 경계, timeout·retry 중첩, cache 무효화, 중복 요청·복구 동작 |
 | 유지보수·운영 | dead code 후보의 entrypoint·동적 등록, 설정/문서 drift, CI와 실제 배포 build 차이, 관측성 누락, 핵심 use case의 테스트 공백 |
 

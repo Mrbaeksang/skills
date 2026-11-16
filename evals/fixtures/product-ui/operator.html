@@ -1,0 +1,8 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>발송 작업 운영</title><link rel="stylesheet" href="styles.css">
+<nav><a href="tasks.html">오늘</a><a href="topics.html">주제</a><a href="operator.html">운영</a></nav><h1>발송 작업 운영</h1>
+<section class="panel"><h2>재시도할 작업</h2><p>Synthetic Queue · job-001 · FAILED</p><p>서버 응답을 받지 못했어요. 발송 기록을 확인한 뒤 재시도하세요.</p><p class="note">최고의 안정성으로 완벽한 운영을 지원합니다.</p><button id="remove">작업 삭제</button><div id="confirm" hidden><p>job-001을 삭제할까요? 이 작업은 되돌릴 수 없습니다.</p><button id="cancel">취소</button><button id="confirm-remove">삭제 확인</button></div><p id="result" role="status"></p></section>
+<script>
+document.querySelector('#remove').onclick=()=>document.querySelector('#confirm').hidden=false;
+document.querySelector('#cancel').onclick=()=>document.querySelector('#confirm').hidden=true;
+document.querySelector('#confirm-remove').onclick=()=>{document.querySelector('#confirm').hidden=true;document.querySelector('#result').textContent='job-001을 삭제했어요.';};
+</script></html>
