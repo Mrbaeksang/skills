@@ -1,0 +1,31 @@
+{
+  "kind": "manual-procedure",
+  "protocol": "새 CLI 세션마다 선택 스킬 snapshot과 아래 요청만 제공한다. 평가 기준은 실행자에게 주지 않는다. before/after는 같은 요청·호스트·모델로 실행하고 trace의 실제 참조 읽기와 결과를 따로 판정한다. read-only 제안 평가를 구현·브라우저 실행 또는 native 자동 발견으로 보고하지 않는다. 각 실행 300초, 1 trial; 실패와 미실행도 보존한다.",
+  "cases": [
+    {
+      "id": "reference-transfer",
+      "skill": "build",
+      "request": "새 고객 문의 작업면을 만들려고 해. 구현 전 읽기-only로 설계 방향만 정해줘. 참고 화면 설명: 흑백의 좁은 왼쪽 목록과 오른쪽 상세, 선택한 행은 색 대신 세로 선으로 구분. 거긴 영문 제목 10자와 항목 3개지만 우리는 한국어 제목 최대 120자, 항목 500개, 미처리/처리 중 구분이 중요해. 기존 브랜드는 보라색과 시스템 폰트야. 아직 고객 후기나 성과 수치는 없어. 참고 이미지나 URL은 제공할 수 없어.",
+      "checks": ["design 실제 읽기", "reference 실제 읽기", "설명만 본 근거 경계", "선택/밀도 원리를 긴 한국어와 상태에 대응", "기존 브랜드와 사실 보존"]
+    },
+    {
+      "id": "ui-states",
+      "skill": "test",
+      "request": "읽기-only로 UI 테스트 계획을 세워줘. 기존 주문 목록 컴포넌트는 props로 orders와 loading과 error를 받아. 주문명은 최대 120자, 목록은 0~100개, 금액은 0 이상이고 loading과 error는 동시에 true가 될 수 없어. 요청 실패 시 이전 목록은 남아. 브라우저나 API는 지금 연결 안 돼. 긴 주문명, 조회 지연과 실패에서도 현재 목록과 재시도 버튼을 잘 쓸 수 있는지 확인하고 싶어.",
+      "checks": ["ui-states 실제 읽기", "가능한 상태만 선택", "실제 컴포넌트 props 주입", "실패 중 기존 목록 보존", "계획과 실제 실행 구분"]
+    },
+    {
+      "id": "copy-only",
+      "skill": "build",
+      "request": "index.html에서 검색 입력의 placeholder만 '우리 동네에서 찾아보세요'로 바꿔줘. 다른 영역은 그대로 둬.",
+      "fixture": "fixtures/visual-quality/community.html",
+      "checks": ["placeholder만 변경", "design/reference와 ui-states 미로딩", "새 디자인/의존성/보고 파일 없음"]
+    },
+    {
+      "id": "product-demo",
+      "skill": "present",
+      "request": "제품 발표에 들어갈 1개 시연 장면의 구성만 읽기-only로 제안해줘. 사용자가 파일을 올리면 분류 결과를 보여주는 제품이야. 실제 연동 화면은 아직 없고 설명용 모의 화면을 쓸 거야. 반복 재생하며 말로 설명하려고 하고, 모션을 못 보는 환경에서도 의미는 보여야 해. HTML 제작은 아직 하지 마.",
+      "checks": ["product-demo 실제 읽기", "행동/변화/결과", "모의 시연과 실제 연동 구분", "정지 장면/loop 복원", "제작으로 권한 확장 없음"]
+    }
+  ]
+}
