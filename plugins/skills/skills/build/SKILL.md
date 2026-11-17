@@ -23,6 +23,7 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 | 외부 기능·옵션 사용/변경 또는 실행 환경 차이 | [실행 환경 계약](references/workflows/runtime-contract.md) | 실제 조합·실효 설정의 지원 근거와 효과 |
 | 의존성 버전을 변경 | [upgrade](references/workflows/upgrade.md) | 코드 이행과 검증 결과 |
 | 성능 목표·병목 개선 | [optimize](references/workflows/optimize.md) | baseline·변경·같은 조건의 전후 결과 |
+| 새 화면의 시각 방향 또는 구조·표현을 재설계 | [디자인](references/workflows/design.md) | 사용자 과제·실제 콘텐츠에 맞는 방향과 대표 장면; 지정 문구 치환은 제외 |
 | 기능 구현 중을 포함해 UI·사용자 문구를 생성/변경 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 문구의 필요성·실제 대상·상태별 표현과 관찰 결과 |
 | 기존 UI·문구의 완성도 개선 요청 | [polish](references/workflows/polish.md) | 브랜드·동작을 보존한 정리 |
 
