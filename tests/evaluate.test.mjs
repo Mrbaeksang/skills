@@ -8,6 +8,13 @@ import { Script } from 'node:vm';
 import { cases, prepare, assess, compare } from '../scripts/evaluate.mjs';
 import '../evals/fixtures/product-ui/server.test.mjs';
 
+test('routing cases cover every shipped entry', () => {
+  const entries = fs.readdirSync(new URL('../skills/', import.meta.url), { withFileTypes: true })
+    .filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const targets = cases().filter(c => c.kind === 'routing').map(c => c.skill);
+  assert.deepEqual([...new Set(targets)].sort(), entries.sort());
+});
+
 function setup(t, id, arm = 'after') {
   const root = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-eval-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
