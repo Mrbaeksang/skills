@@ -109,3 +109,26 @@ test('comparison rejects mixed cases and duplicates, missing arms remain unrun',
   assess(other);
   assert.throws(() => compare([out, other]), /same case/);
 });
+
+test('comparison reports check regressions and lost evidence even in already failing runs', t => {
+  const dirs = ['before', 'after', 'none'].map(arm => setup(t, 'missing-service', arm));
+  const writeVerdict = (dir, results) => {
+    const verdict = assess(dir);
+    verdict.status = 'FAIL';
+    verdict.results = Object.entries(results).map(([id, status]) => ({ id, status }));
+    fs.writeFileSync(path.join(dir, 'verdict.json'), JSON.stringify(verdict));
+  };
+  writeVerdict(dirs[0], { scope: 'PASS', visual: 'FAIL', observed: 'PASS' });
+  writeVerdict(dirs[1], { scope: 'FAIL', visual: 'PASS', observed: 'NOTRUN' });
+  writeVerdict(dirs[2], { scope: 'FAIL' });
+  const comparison = compare(dirs);
+  assert.equal(comparison.status, 'FAIL');
+  assert.deepEqual(comparison.regressions, [{ trial: 1, id: 'scope' }]);
+  assert.deepEqual(comparison.lostEvidence, [{ trial: 1, id: 'observed' }]);
+
+  writeVerdict(dirs[1], { scope: 'PASS', visual: 'FAIL' });
+  const incomplete = compare(dirs);
+  assert.equal(incomplete.status, 'NOTRUN');
+  assert.equal(incomplete.regression, false);
+  assert.deepEqual(incomplete.lostEvidence, [{ trial: 1, id: 'observed' }]);
+});

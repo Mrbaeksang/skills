@@ -48,6 +48,6 @@ assess는 일부 파일·CLI 결과를 직접 검사하고 나머지를 평가�
 node scripts/evaluate.mjs compare .artifacts/evals/copy-before-1 .artifacts/evals/copy-after-1 .artifacts/evals/copy-none-1
 ```
 
-동일 사례 hash·호스트·모델·trial을 비교한다. 누락 arm과 NOTRUN을 감추지 않으며 개별 회귀를 보고한다. COMPARED는 비교표 완성이지 품질 향상 PASS가 아니다. 소수 관찰로 통계적 개선을 주장하지 않는다. 공유 fixture나 명세를 바꾸면 과제도 다시 고정해야 한다.
+동일 사례 hash·호스트·모델·trial을 비교한다. 같은 trial의 check ID별 PASS → FAIL은 regressions에, PASS → NOTRUN 또는 판정 누락은 lostEvidence에 기록한다. 회귀가 있으면 FAIL, 회귀 없이 근거만 사라졌거나 arm이 부족하면 NOTRUN이다. COMPARED는 비교표 완성이지 품질 향상 PASS가 아니다. 소수 관찰로 통계적 개선을 주장하지 않는다. 공유 fixture나 명세를 바꾸면 과제도 다시 고정해야 한다.
 
 설치 전환은 [별도 시나리오](installation/cases.md)를 따른다. 기존 [시각 fixture](../fixtures/visual-quality/README.md)는 재사용하며 복제하지 않는다.
