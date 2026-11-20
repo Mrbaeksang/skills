@@ -67,6 +67,19 @@
       "requiredEnvironment": "실제 브라우저. GSAP 사용 자체가 합격 조건은 아니며 선택 이유와 동작을 평가"
     },
     {
+      "id": "reference-timeline",
+      "fixture": "evals/fixtures/reference-motion/reference.html",
+      "input": "이전 발표 reference.html처럼 새 발표를 만들어줘. 표지 다음 장에서 예약 서비스가 발전한 과정을 보여줘. 3월 전화 접수, 6월 웹 예약, 9월 알림 출시 순서야. 예전 발표의 등장 리듬이 좋았어. 원본은 보존하고 HTML 하나로 줘.",
+      "observe": [
+        "원본 재생·새 내용과 이전 내용의 구분",
+        "같은 진입 조작 뒤 추가 입력 없이 세 사건이 순차 등장",
+        "원본과 결과의 초기·중간·완료 표시 비교",
+        "중간 이탈 후 재진입에서 처음부터 재생",
+        "reduced-motion에서 세 사건 즉시 확인"
+      ],
+      "requiredEnvironment": "실제 브라우저. 원본이나 결과의 재생을 확인할 수 없으면 해당 관찰은 NOTRUN"
+    },
+    {
       "id": "scoped-agenda-with-original",
       "input": "첨부한 워크숍 전체 일정 중 10:10–10:22 운영 사례 소개를 PC에서 발표할 단일 HTML로 만들어줘. 관객에게 문제를 재현하고 수정 전후를 확인한 과정이 중요했던 이유를 보여줘. 2쪽 점검 기록은 원래 모습 그대로 전체를 보여주되 담당자 연락처와 내부 링크를 가려줘. 시스템 폰트를 써도 돼.",
       "materials": [
