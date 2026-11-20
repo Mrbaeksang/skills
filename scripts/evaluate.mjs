@@ -141,8 +141,23 @@ export function compare(dirs) {
   }
   const trials = [...new Set(rows.map(r => r.trial))];
   const complete = trials.every(t => ['before', 'after', 'none'].every(a => rows.some(r => r.trial === t && r.arm === a && r.status !== 'NOTRUN')));
-  const regression = trials.some(t => rows.some(r => r.arm === 'before' && r.trial === t && r.status === 'PASS') && rows.some(r => r.arm === 'after' && r.trial === t && r.status === 'FAIL'));
-  return { caseId: first.caseId, status: regression ? 'FAIL' : complete ? 'COMPARED' : 'NOTRUN', regression, rows,
+  const regressions = [];
+  const lostEvidence = [];
+  for (const trial of trials) {
+    const before = rows.find(r => r.trial === trial && r.arm === 'before');
+    const after = rows.find(r => r.trial === trial && r.arm === 'after');
+    if (!before || !after) continue;
+    const afterChecks = new Map(after.results.map(check => [check.id, check.status]));
+    for (const check of before.results) {
+      if (check.status !== 'PASS') continue;
+      const status = afterChecks.get(check.id) ?? 'NOTRUN';
+      if (status === 'FAIL') regressions.push({ trial, id: check.id });
+      if (status === 'NOTRUN') lostEvidence.push({ trial, id: check.id });
+    }
+  }
+  // Preserve the overall verdict, including failures added only in the after run.
+  const regression = regressions.length > 0 || trials.some(t => rows.some(r => r.arm === 'before' && r.trial === t && r.status === 'PASS') && rows.some(r => r.arm === 'after' && r.trial === t && r.status === 'FAIL'));
+  return { caseId: first.caseId, status: regression ? 'FAIL' : complete && !lostEvidence.length ? 'COMPARED' : 'NOTRUN', regression, regressions, lostEvidence, rows,
     limitation: 'Per-case observations; no statistical improvement claim. Reviewer judgments are not automatic proof.' };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
