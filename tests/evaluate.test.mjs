@@ -9,7 +9,7 @@ import { cases, prepare, assess, compare } from '../scripts/evaluate.mjs';
 import '../evals/fixtures/product-ui/server.test.mjs';
 
 function setup(t, id, arm = 'after') {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'skills-eval-test-'));
+  const root = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-eval-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const out = path.join(root, 'run');
   prepare(id, { out, host: 'test', model: 'stub-no-model', arm });

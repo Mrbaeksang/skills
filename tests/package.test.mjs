@@ -12,7 +12,7 @@ import { execFileSync } from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cli = (command, source, ...args) => spawnSync(process.execPath, [path.join(root, 'scripts/package.mjs'), command, '--source', source, ...args], { encoding: 'utf8' });
 function fixture(t) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'skills-test-'));
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-test-'));
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   for (const name of ['skills', 'common', 'adapters', 'LICENSE']) fs.cpSync(path.join(root, name), path.join(dir, name), { recursive: true });
   return dir;
@@ -157,7 +157,7 @@ test('missing mirrors and unexpected bundle files fail check; sync preserves unk
 });
 test('directory links cannot redirect sync writes outside source', t => {
   const source = fixture(t);
-  const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'skills-outside-'));
+  const outside = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-outside-'));
   t.after(() => fs.rmSync(outside, { recursive: true, force: true }));
   fs.mkdirSync(path.join(source, 'plugins'));
   fs.symlinkSync(outside, path.join(source, 'plugins/skills'), process.platform === 'win32' ? 'junction' : 'dir');
