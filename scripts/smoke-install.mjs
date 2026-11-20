@@ -10,7 +10,7 @@ const source = process.argv[2] || ROOT;
 const selection = process.argv[3] || '*';
 if (process.argv.length > 4) throw new Error('Usage: npm run smoke:install -- [repository-or-local-path] [skill-name]');
 if (selection !== '*' && !fs.readdirSync(path.join(ROOT, 'skills')).includes(selection)) throw new Error(`Unknown skill: ${selection}`);
-const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'skills-install-'));
+const temp = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-install-'));
 try {
   const work = path.join(temp, 'project');
   const home = path.join(temp, 'home');
