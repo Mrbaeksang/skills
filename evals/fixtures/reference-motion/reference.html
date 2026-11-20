@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>현장 실험 기록</title>
+<style>
+  body { max-width: 60rem; margin: 10vh auto; padding: 1rem; font: 1.5rem system-ui }
+  #story, body:has(#story:target) #intro { display: none }
+  #story:target { display: block }
+  #story:target li { animation: enter 220ms both }
+  #story:target li:nth-child(2) { animation-delay: 500ms }
+  #story:target li:nth-child(3) { animation-delay: 1s }
+  @keyframes enter { from { opacity: 0; transform: translateY(.4em) } }
+  @media (prefers-reduced-motion: reduce) { #story:target li { animation: none } }
+</style>
+<section id="intro"><h1>현장 실험</h1><a href="#story">기록 보기</a></section>
+<section id="story"><h1>실험 기록</h1>
+  <ol><li>재료 수집</li><li>시제품 조립</li><li>현장 관찰</li></ol>
+  <a href="#intro">처음으로</a>
+</section>
+</html>
