@@ -3,7 +3,7 @@
 Ten directly callable workflow skills: `talk`, `shape`, `spec`, `ticket`, `build`,
 `diagnose`, `improve`, `review`, `craft`, `visual-brief`, and `present`. Use `craft` to create or improve reusable
 skills and verify their behavior; no prior shape or build invocation is required.
-Use `visual-brief` for one-page shareable explanations and standalone HTML.
+Use `visual-brief` for readable personal notes and shared documents and standalone HTML.
 Use `present` for source-grounded, self-contained HTML presentations with visual,
 interaction and offline checks; no development workflow prerequisite is required.
 Nine callable specialists: `domain`, `research`,
