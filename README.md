@@ -85,6 +85,7 @@ npx skills@latest add Mrbaeksang/skills
 | 기존 레포 분석·개선 | `improve` | “파일 처리 흐름과 재사용 가능한 viewer를 추적해. 지금은 분석만” |
 | 명세·변경 코드 검토 | `review` | “이 PR의 누락·회귀·검증 약화를 봐. 수정하지 마” |
 | 반복 작업을 스킬로 제작·기존 스킬 개선 | `craft` | “이 작업 방식을 재사용하고 싶어. 기존 스킬을 고칠지 새로 만들지 판단하고 실제 요청으로 검증해” |
+| 읽기 쉬운 개인·공유 문서와 단일 HTML | `visual-brief` | “계획과 변경 흐름을 팀이 한눈에 볼 수 있는 한 페이지 HTML로 정리해줘” |
 | 단일 HTML 발표자료 제작·개선 | `present` | “이 자료를 한국어 발표용으로 다듬고, 이미지·모션·가독성을 검수해서 HTML 하나로 줘” |
 
 `talk → shape → spec → ticket → build`를 매번 완주할 필요는 없습니다. 이미 실행할 내용이 충분하면 `build`부터, 버그면 `diagnose`부터 시작합니다.
@@ -117,6 +118,7 @@ Codex에서는 `$skills:craft`(namespace를 표시하지 않는 호스트는 `$c
 직접 고르는 작업 스킬 10개
 ├─ 제품 개발 8개: talk · shape · spec · ticket · build · diagnose · improve · review
 ├─ 스킬 제작·개선: craft
+├─ 개인·공유 문서와 설명 HTML: visual-brief
 └─ 발표자료 제작·개선: present
 
 현재 작업에 필요한 전문 절차만 연결
