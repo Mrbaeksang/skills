@@ -7,6 +7,8 @@ description: 명세·코드 변경·화면을 수정 없이 검토해 요구 위
 
 테스트·CI·snapshot·허용 오차 등 검증 기준이 바뀌면 [검증 기준 변경](references/workflows/review/gate-integrity.md), enum·입력·공개 계약이 바뀌면 [소비자 추적](references/workflows/review/consumers.md)을 읽는다. 해당 변경이 없으면 추가 검토를 강제하지 않는다.
 
+프로젝트 지침·검증 명령·정본 경로가 바뀐 diff는 [프로젝트 지침 관리](references/workflows/project-guide.md)의 대조 절차만 적용한다. 리뷰 중 사용자 파일을 생성·수정하지 않는다.
+
 외부 기능·옵션·버전·실효 설정에 영향을 주는 변경이면 [실행 환경 계약](references/workflows/runtime-contract.md)으로 지원 근거와 실제 효과 검증을 검토-only로 확인한다. 실행 증거가 없다는 사실과 확인된 호환성 결함은 구분한다.
 
 코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 읽는다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.

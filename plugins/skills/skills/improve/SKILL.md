@@ -9,6 +9,7 @@ description: 레포 전체의 공통화·모듈 경계·의존성 업그레이�
 
 | 확인한 문제 | 전문 절차 |
 |---|---|
+| 에이전트가 같은 실수를 반복 | 실패한 작업에서 원본 부재·탐색 실패·판단 오류·검증 누락을 구분한다. 프로젝트 지침 문제만 [지침 관리](references/workflows/project-guide.md), 재사용 스킬 문제는 해당 스킬, 기계적으로 판정 가능한 회귀는 기존 테스트·CI에서 다룬다. |
 | 도메인 용어·소유권 충돌 | [domain](references/workflows/domain.md) |
 | 공통화·순환·모듈 경계 | [architecture](references/workflows/architecture.md) |
 | 외부 기술 사실·대안 근거 부족 | [research](references/workflows/research.md) |

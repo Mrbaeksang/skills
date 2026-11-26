@@ -15,6 +15,18 @@ test('routing cases cover every shipped entry', () => {
   assert.deepEqual([...new Set(targets)].sort(), entries.sort());
 });
 
+test('README task catalog and counts match the shipped skills', () => {
+  const readme = fs.readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+  const table = readme.split('## 무엇을 부를까')[1].split(/\r?\n\r?\n/).find(section => section.startsWith('|'));
+  const tasks = [...table.matchAll(/^\|[^|]+\| `([a-z-]+)` \|/gm)].map(match => match[1]);
+  const tree = readme.split('현재 작업에 필요한 전문 절차만 연결')[1].split('```')[0];
+  const specialists = [...tree.matchAll(/→ ([a-z-]+)/g)].map(match => match[1]);
+  const shipped = fs.readdirSync(new URL('../skills/', import.meta.url)).sort();
+  assert.deepEqual([...tasks, ...specialists].sort(), shipped);
+  assert.ok(readme.includes(`**${tasks.length}개 작업 스킬**`));
+  assert.ok(readme.includes(`**${specialists.length}개 전문 절차**`));
+});
+
 function setup(t, id, arm = 'after') {
   const root = fs.mkdtempSync(path.join(fs.realpathSync.native(os.tmpdir()), 'skills-eval-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
