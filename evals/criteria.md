@@ -90,4 +90,8 @@ readonly, placeholder-only, show-cli, webhook-effects는 assess가 실제 파일
 | media-consumer-map | 실제 오늘/주제/결과의 콘텐츠 의미와 소비 slot·기존 SVG의 재사용 한계·필요 제작 범위를 연결. 정적/레이어/프레임과 fallback·표시 크기·비용·검증을 필요한 범위로 결정하며 생성/적용을 주장하지 않음. 동일 그림·형식·loop를 일괄 강제하지 않음 |
 | operational-preserved | 운영 화면의 provider/job ID/실패·재조회 의미와 되돌릴 수 없는 삭제의 확인·취소는 보존. 근거 없는 안정성 홍보와 소비자 구현 설명은 별개로 판단 |
 
+| verified-command | 프로젝트 공통 지침에서 실제 scripts.check와 실행 위치를 식별하고 안전한 fixture 명령의 실행 또는 실행 불가 경계를 보고 |
+| preserved-policy | 기존 public identifiers 정책을 유지하며 새 공통 지침이 호스트별 원본과 충돌하지 않음 |
+| correct-command | 실행 질문에 npm run check로 답하고 오래된 legacy-check를 유효하다고 안내하지 않음 |
+
 이 기준은 평가자용이다. 실행자에게 정답 목록으로 전달하지 않는다. 로컬 합성 HTTP의 기록 유지와 실제 DB/device/provider 수락, 기능·시간축 관찰·시각 판단을 구분한다. 기존 copy-only·brand-preservation을 반례로 함께 확인한다.

@@ -2,7 +2,7 @@
 
 **질문은 묶어서. 기존 코드는 찾아서. 완료는 실제 검증까지.**
 
-Claude Code와 Codex에서 쓰는 개인 작업 워크플로입니다. 제품 개발·스킬 제작·발표자료를 위한 **10개 작업 스킬**을 직접 골라 쓰고, 에이전트가 필요한 **9개 전문 절차**를 그때 읽습니다. 개발은 DDD modular monolith를 출발점으로 삼되 프로젝트 규모와 기존 구조에 맞춥니다.
+Claude Code와 Codex에서 쓰는 개인 작업 워크플로입니다. 제품 개발·스킬 제작·발표자료를 위한 **12개 작업 스킬**을 직접 골라 쓰고, 에이전트가 필요한 **9개 전문 절차**를 그때 읽습니다. 개발은 DDD modular monolith를 출발점으로 삼되 프로젝트 규모와 기존 구조에 맞춥니다.
 
 [![Checks](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml/badge.svg)](https://github.com/Mrbaeksang/skills/actions/workflows/package.yml)
 [![Release](https://img.shields.io/github/v/release/Mrbaeksang/skills)](https://github.com/Mrbaeksang/skills/releases)
@@ -76,6 +76,7 @@ npx skills@latest add Mrbaeksang/skills
 
 | 지금 할 일 | 스킬 | 예시 |
 |---|---|---|
+| AI가 이 프로젝트에서 일할 방법 설정·갱신 | `setup` | “다음 세션에도 알아서 일하도록 프로젝트 지침을 잡아줘” |
 | 막연한 생각 구체화 | `talk` | “이 아이디어에서 먼저 결정할 것부터 같이 보자” |
 | 질문·조사로 개발 방향과 기술 스택 결정 | `shape` | “이 제품을 어떤 구조와 스택으로 만들지 같이 정하자” |
 | 이미 결정한 내용을 상세 명세로 | `spec` | “지금까지 결정한 걸 정상·실패·복구 기준까지 명세로” |
@@ -115,7 +116,8 @@ Codex에서는 `$skills:craft`(namespace를 표시하지 않는 호스트는 `$c
 ### 필요한 전문 절차만 읽습니다
 
 ```text
-직접 고르는 작업 스킬 10개
+직접 고르는 작업 스킬 12개
+├─ 프로젝트 작업 지침 설정·갱신: setup
 ├─ 제품 개발 8개: talk · shape · spec · ticket · build · diagnose · improve · review
 ├─ 스킬 제작·개선: craft
 ├─ 개인·공유 문서와 설명 HTML: visual-brief

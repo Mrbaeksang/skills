@@ -1,5 +1,7 @@
 # Project instructions
 
+Start with the failing task. For entry selection or missed references, inspect the entry under `skills/` and the matching case in `evals/routing/`. For handoff failures, start at `common/agent-records.md` and `evals/continuity.json`. For packaging or releases, use `docs/development.md`.
+
 For changes and PR preparation, follow CONTRIBUTING.md. Keep behavior evidence and applicable/non-applicable cases proportional to the change; do not treat packaging checks as agent behavior verification.
 
 This repository publishes portable Markdown skills. Canonical instructions live in `skills/<name>/SKILL.md`; `common/` is the single source for shared contracts. `npm run sync` updates generated references in each skill and the native plugin bundle. Commit those copies so direct installers receive self-contained skills; edit their common source rather than generated copies.
