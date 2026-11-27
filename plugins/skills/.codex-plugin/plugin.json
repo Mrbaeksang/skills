@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": "Portable workflows for product development, skill creation, and standalone HTML",
   "skills": "./skills/"
 }
