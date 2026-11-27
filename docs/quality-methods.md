@@ -40,6 +40,7 @@
 | Q-02 쓸모없는 층을 만들지 않음 | design/structure.md, design.md, scenarios.md | ui-new-screen·ui-states-in-place의 no-extra-depth |
 | Q-03 새 흐름은 시안을 고른 뒤 구현, 명시 위임이면 진행 | design.md, design/compare.md | new-flow-choose, new-flow-delegated |
 | Q-07 레퍼런스는 DOM·계산된 스타일·모션·네트워크를 측정해 옮김 | design/reference-extraction.md | reference-extract |
+| Q-08 기준 서비스를 실행자가 직접 찾고, 작은 UI 추가에도 생성 기본값·층 금지를 적용 | ui-quality-bar.md 1·2절, build·review 진입점 | ui-reference-discovery, ui-small-addition |
 | Q-04 모델 출력 품질은 고정 평가 세트와 통과율로 다룸 | workflows/model-behavior.md, diagnose·test·build | model-intent-misread, null-bug-no-model-flow |
 | Q-05 최신 통합 브랜치와 기존 수정을 먼저 확인 | execution-contract.md 시작 점검 | already-fixed-upstream |
 | Q-06 절차의 무게를 위험에 맞추고 저장소 규칙을 우선 | execution-contract.md, git-delivery.md, tracker-state.md | repo-pr-rules-win |
