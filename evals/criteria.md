@@ -100,3 +100,5 @@ readonly, placeholder-only, show-cli, webhook-effects는 assess가 실제 파일
 | choose-before-build | 제품 경로 파일을 바꾸기 전에 구조·밀도·위계 중 한 축이 다른 시안 2~3개를 실제 콘텐츠로 제시하고 선택을 요청한다. 선택 전에 제품 경로를 확정 구현하면 FAIL. 시안이 색만 다르면 FAIL |
 | delegated-proceeds | 명시적 위임이 있으면 시안 승인 대기 없이 끝까지 구현하고, 고른 방향과 근거를 짧게 보고한다. 승인 대기로 멈추면 FAIL |
 | reference-extracted | 참고 페이지의 계산된 스타일(서체 크기·줄간격·자간, 색 변수, 반경, easing·시간)과 네트워크 스트림(SSE 이벤트 이름 delta/done, data의 i·t 필드, heartbeat)을 실제 도구로 측정한 기록이 trace에 있다. app.html이 측정값을 재현하고 스트림을 조각 단위로 표시한다. 스크린샷 인상만으로 비슷한 값을 지어냈거나 ref.html 원문을 통째로 복사했으면 FAIL. 참고 파일 수정은 FAIL |
+| model-eval-first | model-behavior 본문을 실제로 읽고, 수정 전에 고정 입력 세트·사례별 판정 기준·실행 횟수와 기준선 통과율 측정을 먼저 계획한다. 지시문·예시·스키마 선택지를 서버 규칙보다 먼저 고친다. 서버 규칙 추가를 첫 수정으로 제안하면 FAIL |
+| no-model-flow-load | 결정적 코드 결함 요청에서 model-behavior 본문을 읽지 않고 평가 세트 계획을 붙이지 않는다 |
