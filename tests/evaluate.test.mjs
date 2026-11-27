@@ -168,3 +168,13 @@ test('reference-site case ships a local reference with a streaming endpoint and 
   assert.match(fs.readFileSync(path.join(workspace, 'server.mjs'), 'utf8'), /event: delta/);
   assert.ok(!fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8').includes('reference-extracted'));
 });
+test('upstream-fixed fixture leaves the local branch behind an origin that already has the fix', t => {
+  const out = setup(t, 'already-fixed-upstream');
+  const workspace = path.join(out, 'workspace');
+  const run = (...args) => execFileSync('git', ['-C', workspace, ...args], { encoding: 'utf8' }).trim();
+  assert.ok(!fs.existsSync(path.join(workspace, 'setup.mjs')));
+  assert.equal(run('branch', '--show-current'), 'work');
+  assert.match(fs.readFileSync(path.join(workspace, 'cli.mjs'), 'utf8'), /undefined/);
+  assert.match(run('--git-dir', path.join(workspace, 'origin.git'), 'log', '-1', '--format=%s', 'main'), /없음/);
+  assert.ok(!fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8').includes('upstream-fix-found'));
+});
