@@ -30,6 +30,16 @@
 | UI-06 이미지의 의미·소비·제작·비용 | design/media.md, visual-quality.md의 조건부 연결 | product-media-spec; 생성 파일과 실제 적용 수락 구분 |
 | UI-07 실제 대상과 시간축 피드백 | design/structure.md·interaction.md, verify/ui.md | build-product-ui의 지연·유실·복원·동명 대상, 기존 brand-preservation |
 
+## 결과 품질 기준
+
+절차 준수(참조 읽기·범위 제한)만 판정하던 평가에 결과물 자체의 판정을 더한다. 실제 제품 저장소에서 기능을 만든 뒤 사용자가 다시 제거하는 왕복과 평균적인 생성 UI가 반복된 사례를 반영한다. 사례 입력은 제품명이 없는 합성 앱(`evals/fixtures/screen-content`)이다.
+
+| 요구 | 구현 원본 | 검증 |
+|---|---|---|
+| Q-01 운영 중인 서비스와 나란히 놓아 뒤지지 않는 화면 | visual-quality.md, design.md, verify/ui.md | ui-new-screen의 outcome-quality |
+| Q-02 쓸모없는 층을 만들지 않음 | design/structure.md, design.md, scenarios.md | ui-new-screen·ui-states-in-place의 no-extra-depth |
+| Q-03 새 흐름은 시안을 고른 뒤 구현, 명시 위임이면 진행 | design.md, design/compare.md | new-flow-choose, new-flow-delegated |
+
 실행 과제와 합성 입력은 [시각 fixture D/E](../fixtures/visual-quality/cases.md), 분석-only 행동 사례는 `evals/behavior/cases.json`에 둔다. 입력/평가 정답을 분리하고 같은 과제의 이전/이후와 작은 변경·명시된 브랜드 보존을 확인한다. 특정 색·레이아웃·라이브러리를 범용 정답으로 강제하지 않는다. 단일 사례의 판단 결과를 미적 품질 개선이나 고객 이해의 증명으로 해석하지 않는다.
 
 ## 차용과 제외
