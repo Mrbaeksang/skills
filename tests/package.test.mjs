@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { files, validateSkill } from '../scripts/package.mjs';
+import { files, validateSkill, referenceDepths, MAX_REFERENCE_DEPTH } from '../scripts/package.mjs';
 import { checkRelease } from '../scripts/check-release.mjs';
 import { execFileSync } from 'node:child_process';
 
@@ -213,5 +213,13 @@ test('visual quality reference follows UI skills without leaking into unrelated 
   }
   for (const name of ['talk', 'optimize']) {
     assert.equal(fs.existsSync(path.join(source, 'skills', name, 'references/workflows/polish/visual-quality.md')), false, name);
+  }
+});
+test('reference depth stays bounded and the UI quality bar sits one link from UI entry skills', () => {
+  for (const name of fs.readdirSync(path.join(root, 'skills'))) {
+    assert.ok(Math.max(...referenceDepths(path.join(root, 'skills', name)).values()) <= MAX_REFERENCE_DEPTH, name);
+  }
+  for (const name of ['build', 'polish', 'review', 'spec', 'shape', 'ticket', 'improve']) {
+    assert.equal(referenceDepths(path.join(root, 'skills', name)).get('references/workflows/ui-quality-bar.md'), 1, name);
   }
 });

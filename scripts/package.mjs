@@ -40,6 +40,24 @@ function portable(file, content) {
   if (/(?:[A-Z]:[\\/](?:Users|Baeksang)[\\/]|\/(?:Users|home)\/[^/\s]+\/)/i.test(content)) throw new Error(`${file}: personal absolute path`);
   if (/(?:sk-proj-[a-z0-9]{12,}|gh[pousr]_[a-z0-9]{20,}|(?:api_key|access_token)\s*[=:]\s*["']?[a-z0-9_-]{16,})/i.test(content)) throw new Error(`${file}: possible credential`);
 }
+// Deep reference chains bury decisive rules; keep the maximum from growing (see docs/development.md).
+export const MAX_REFERENCE_DEPTH = 5;
+export function referenceDepths(dir) {
+  const depth = new Map([['SKILL.md', 0]]);
+  const queue = ['SKILL.md'];
+  while (queue.length) {
+    const file = queue.shift();
+    const content = fs.readFileSync(path.join(dir, file), 'utf8');
+    for (const match of content.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+      if (/^https?:\/\/|^#/.test(match[1])) continue;
+      const target = path.relative(dir, path.resolve(dir, path.dirname(file), match[1].split('#')[0])).split(path.sep).join('/');
+      if (!target.endsWith('.md') || depth.has(target) || !exists(path.join(dir, target))) continue;
+      depth.set(target, depth.get(file) + 1);
+      queue.push(target);
+    }
+  }
+  return depth;
+}
 export function validateSkill(dir) {
   const inventory = files(dir);
   for (const [file, data] of inventory) {
@@ -209,6 +227,10 @@ export function run(command, source = ROOT, destination) {
     if (retired.length) throw new Error('Unused shared references remain; run npm run sync');
     compare(source, mirrors);
     for (const name of entries) validateSkill(path.join(source, 'skills', name));
+    const depths = entries.map(name => [name, Math.max(...referenceDepths(path.join(source, 'skills', name)).values())]);
+    const deep = depths.filter(([, max]) => max > MAX_REFERENCE_DEPTH);
+    if (deep.length) throw new Error(`Reference depth above ${MAX_REFERENCE_DEPTH}: ${deep.map(([n, d]) => `${n}=${d}`).join(', ')}`);
+    console.log(`reference depth: ${depths.map(([n, d]) => `${n}=${d}`).join(' ')}`);
     compare(shipping, plugin, true);
   } else if (command === 'bundle') {
     if (!destination) throw new Error('bundle requires --dest');
