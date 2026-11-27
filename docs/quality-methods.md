@@ -42,6 +42,7 @@
 | Q-07 레퍼런스는 DOM·계산된 스타일·모션·네트워크를 측정해 옮김 | design/reference-extraction.md | reference-extract |
 | Q-08 기준 서비스를 실행자가 직접 찾고, 작은 UI 추가에도 생성 기본값·층 금지를 적용 | ui-quality-bar.md 1·2절, build·review 진입점 | ui-reference-discovery, ui-small-addition |
 | Q-09 완료 전 맥락 없는 검토자와의 나란히 비교 루프, 데이터 부족 분리 | ui-quality-bar.md 1절, build·polish 진입점 | ui-reference-discovery의 compare-loop |
+| Q-10 띄운 프로세스·임시 파일을 끝내기 전에 좁은 명령으로 정리하고 재확인 | execution-contract.md 완료 점검 | ui-reference-discovery의 owned-cleanup |
 | Q-04 모델 출력 품질은 고정 평가 세트와 통과율로 다룸 | workflows/model-behavior.md, diagnose·test·build | model-intent-misread, null-bug-no-model-flow |
 | Q-05 최신 통합 브랜치와 기존 수정을 먼저 확인 | execution-contract.md 시작 점검 | already-fixed-upstream |
 | Q-06 절차의 무게를 위험에 맞추고 저장소 규칙을 우선 | execution-contract.md, git-delivery.md, tracker-state.md | repo-pr-rules-win |
