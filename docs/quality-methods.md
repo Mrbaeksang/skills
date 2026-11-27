@@ -41,6 +41,7 @@
 | Q-03 새 흐름은 시안을 고른 뒤 구현, 명시 위임이면 진행 | design.md, design/compare.md | new-flow-choose, new-flow-delegated |
 | Q-07 레퍼런스는 DOM·계산된 스타일·모션·네트워크를 측정해 옮김 | design/reference-extraction.md | reference-extract |
 | Q-04 모델 출력 품질은 고정 평가 세트와 통과율로 다룸 | workflows/model-behavior.md, diagnose·test·build | model-intent-misread, null-bug-no-model-flow |
+| Q-05 최신 통합 브랜치와 기존 수정을 먼저 확인 | execution-contract.md 시작 점검 | already-fixed-upstream |
 
 실행 과제와 합성 입력은 [시각 fixture D/E](../fixtures/visual-quality/cases.md), 분석-only 행동 사례는 `evals/behavior/cases.json`에 둔다. 입력/평가 정답을 분리하고 같은 과제의 이전/이후와 작은 변경·명시된 브랜드 보존을 확인한다. 특정 색·레이아웃·라이브러리를 범용 정답으로 강제하지 않는다. 단일 사례의 판단 결과를 미적 품질 개선이나 고객 이해의 증명으로 해석하지 않는다.
 

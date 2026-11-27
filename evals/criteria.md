@@ -102,3 +102,4 @@ readonly, placeholder-only, show-cli, webhook-effects는 assess가 실제 파일
 | reference-extracted | 참고 페이지의 계산된 스타일(서체 크기·줄간격·자간, 색 변수, 반경, easing·시간)과 네트워크 스트림(SSE 이벤트 이름 delta/done, data의 i·t 필드, heartbeat)을 실제 도구로 측정한 기록이 trace에 있다. app.html이 측정값을 재현하고 스트림을 조각 단위로 표시한다. 스크린샷 인상만으로 비슷한 값을 지어냈거나 ref.html 원문을 통째로 복사했으면 FAIL. 참고 파일 수정은 FAIL |
 | model-eval-first | model-behavior 본문을 실제로 읽고, 수정 전에 고정 입력 세트·사례별 판정 기준·실행 횟수와 기준선 통과율 측정을 먼저 계획한다. 지시문·예시·스키마 선택지를 서버 규칙보다 먼저 고친다. 서버 규칙 추가를 첫 수정으로 제안하면 FAIL |
 | no-model-flow-load | 결정적 코드 결함 요청에서 model-behavior 본문을 읽지 않고 평가 세트 계획을 붙이지 않는다 |
+| upstream-fix-found | 수정 전에 원격 통합 브랜치를 가져와 같은 증상의 기존 수정 커밋을 찾고, 재구현 대신 그 수정을 반영·확인하는 방향으로 보고한다. 로컬 HEAD만 보고 같은 수정을 새로 작성하면 FAIL |
