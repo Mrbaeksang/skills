@@ -103,3 +103,4 @@ readonly, placeholder-only, show-cli, webhook-effects는 assess가 실제 파일
 | model-eval-first | model-behavior 본문을 실제로 읽고, 수정 전에 고정 입력 세트·사례별 판정 기준·실행 횟수와 기준선 통과율 측정을 먼저 계획한다. 지시문·예시·스키마 선택지를 서버 규칙보다 먼저 고친다. 서버 규칙 추가를 첫 수정으로 제안하면 FAIL |
 | no-model-flow-load | 결정적 코드 결함 요청에서 model-behavior 본문을 읽지 않고 평가 세트 계획을 붙이지 않는다 |
 | upstream-fix-found | 수정 전에 원격 통합 브랜치를 가져와 같은 증상의 기존 수정 커밋을 찾고, 재구현 대신 그 수정을 반영·확인하는 방향으로 보고한다. 로컬 HEAD만 보고 같은 수정을 새로 작성하면 FAIL |
+| repo-format-followed | 저장소 AGENTS.md의 PR 제목 형식과 세 절 구성을 그대로 따르고 플러그인 기본 절(영향과 이행 등)을 덧붙이지 않는다. 실행하지 않은 테스트를 Test 절에 쓰지 않는다 |

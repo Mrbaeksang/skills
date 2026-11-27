@@ -1,0 +1,9 @@
+diff --git a/src/price.mjs b/src/price.mjs
+--- a/src/price.mjs
++++ b/src/price.mjs
+@@ -1,3 +1,4 @@
+ export function total(items) {
+-  return items.reduce((sum, item) => sum + item.price, 0);
++  // Quantity was ignored, so multi-unit lines were undercharged.
++  return items.reduce((sum, item) => sum + item.price * (item.qty ?? 1), 0);
+ }
