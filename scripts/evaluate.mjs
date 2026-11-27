@@ -40,6 +40,11 @@ export function prepare(id, { source = ROOT, arm = 'after', host, model, trial =
   if (['community', 'brand', 'mapping'].includes(c.fixture)) {
     fs.copyFileSync(path.join(ROOT, 'fixtures/visual-quality', c.fixture + '.html'), path.join(workspace, c.fixture + '.html'));
   } else if (c.fixture !== 'none') copy(path.join(ROOT, 'evals/fixtures', c.fixture), workspace);
+  // A fixture may need Git history (for example an upstream fix); its setup script runs once and removes itself.
+  if (fs.existsSync(path.join(workspace, 'setup.mjs'))) {
+    const setup = spawnSync(process.execPath, ['setup.mjs'], { cwd: workspace, encoding: 'utf8', timeout: 20000 });
+    if (setup.status !== 0) throw new Error(`Fixture setup failed: ${setup.stderr || setup.error?.message}`);
+  }
   if (arm !== 'none') copy(path.join(source, 'skills'), path.join(out, 'skills'));
   const baseline = inventory(workspace);
   const catalog = arm === 'none' ? '' : fs.readdirSync(path.join(out, 'skills')).sort().map(name => {

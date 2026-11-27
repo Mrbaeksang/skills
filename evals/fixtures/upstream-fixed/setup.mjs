@@ -1,0 +1,21 @@
+// Fixture setup (run by evaluate.mjs prepare, then removed): builds ./origin.git whose main already fixes the empty-list output, and leaves the workspace on an older local branch.
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+const git = (...args) => execFileSync('git', args, { stdio: 'pipe', encoding: 'utf8' });
+const buggy = "const items = JSON.parse(process.argv[2] || '[]');\nconsole.log(items.length ? items.join(', ') : undefined);\n";
+const fixed = "const items = JSON.parse(process.argv[2] || '[]');\nconsole.log(items.length ? items.join(', ') : '(없음)');\n";
+git('config', 'user.email', 'fixture@example.invalid'); git('config', 'user.name', 'fixture');
+fs.writeFileSync('cli.mjs', buggy);
+git('add', 'cli.mjs'); git('commit', '-qm', 'Add list CLI');
+git('branch', '-M', 'main');
+git('init', '--bare', '-q', 'origin.git');
+git('remote', 'add', 'origin', './origin.git');
+git('switch', '-qc', 'work');
+git('switch', '-q', 'main');
+fs.writeFileSync('cli.mjs', fixed);
+git('commit', '-qam', 'Print (없음) for an empty list');
+git('push', '-q', 'origin', 'main');
+git('reset', '-q', '--hard', 'HEAD~1');
+git('switch', '-q', 'work');
+git('branch', '-q', '-D', 'main');
+fs.rmSync('setup.mjs');
