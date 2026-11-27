@@ -11,7 +11,7 @@ description: 명세·코드 변경·화면을 수정 없이 검토해 요구 위
 
 외부 기능·옵션·버전·실효 설정에 영향을 주는 변경이면 [실행 환경 계약](references/workflows/runtime-contract.md)으로 지원 근거와 실제 효과 검증을 검토-only로 확인한다. 실행 증거가 없다는 사실과 확인된 호환성 결함은 구분한다.
 
-코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을, 새 화면·흐름·재설계에는 [UI 품질 기준](references/workflows/ui-quality-bar.md)을 읽는다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.
+코드 품질 후보에는 [clean](references/workflows/clean.md), 테스트의 경계·기대값 문제에는 [test](references/workflows/test.md)를 검토-only로 적용한다. 도메인 계약 또는 구조 해석이 불명확할 때만 [domain](references/workflows/domain.md)·[architecture](references/workflows/architecture.md), UI·문구에는 [품질 기준](references/workflows/polish/ui-copy.md)을 읽는다. 화면 요소를 더하거나 바꾼 변경에는 [UI 품질 기준](references/workflows/ui-quality-bar.md)을 읽고, 근거 없는 생성 기본값(칩·상자·카드·장식 모션 등)과 근거 없는 층을 finding으로 보고한다. 공개 실행 증거를 확인해야 하면 [verify](references/workflows/verify.md)의 해당 경계만 검증한다. 전문 절차를 읽었다는 이유로 수정 권한이나 독립 검토 완료를 주장하지 않는다.
 
 먼저 [공통 실행 계약](references/execution-contract.md)을 읽는다. 명세와 diff만으로 직접 시작하며 사용자에게 선행 스킬 호출을 요구하지 않는다. 위 조건에 맞는 참조는 해당 판단 전에 본문을 읽고 검토-only로 수행한다. 기본 산출물은 findings와 검토 한계다. 수정·외부 게시·상태 전환은 요청된 권한 범위에서만 한다.
 

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>동네서가</title>
+<style>
+  body { margin: 0; font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif; color: #191f28; background: #fff; }
+  header { padding: 16px 20px 8px; font-size: 22px; font-weight: 700; }
+  h2 { margin: 16px 20px 4px; font-size: 15px; color: #4e5968; font-weight: 600; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { padding: 14px 20px; border-bottom: 1px solid #f2f4f6; }
+  .t { font-size: 17px; font-weight: 600; }
+  .m { font-size: 14px; color: #6b7684; }
+</style>
+</head>
+<body>
+<header>동네서가</header>
+<h2>빌린 책</h2>
+<ul id="loans"></ul>
+<h2>예약한 책</h2>
+<ul id="holds"></ul>
+<script id="data" type="application/json"></script>
+<script>
+  fetch('content.json').then(r => r.json()).then(d => {
+    document.getElementById('loans').innerHTML = d.loans.map(l => `<li><div class="t">${l.title}</div><div class="m">${l.author} · 반납 ${l.dueDate}</div></li>`).join('');
+    document.getElementById('holds').innerHTML = d.holds.map(h => `<li><div class="t">${h.title}</div><div class="m">${h.branch} · ${h.status === 'ready' ? '도착' : '대기 ' + h.queue + '번째'}</div></li>`).join('');
+  });
+</script>
+</body>
+</html>
