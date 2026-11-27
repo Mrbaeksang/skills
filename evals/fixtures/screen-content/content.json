@@ -1,0 +1,20 @@
+{
+  "member": { "name": "김하늘", "cardNo": "0217-3381", "maxLoans": 7 },
+  "today": "2026-11-27",
+  "loans": [
+    { "id": "L1", "title": "물고기는 존재하지 않는다", "author": "룰루 밀러", "branch": "중앙관", "loanedAt": "2026-11-13", "dueDate": "2026-11-27", "renewable": true },
+    { "id": "L2", "title": "우리가 빛의 속도로 갈 수 없다면", "author": "김초엽", "branch": "중앙관", "loanedAt": "2026-11-06", "dueDate": "2026-11-20", "renewable": false, "renewBlockedReason": "연체 중인 책은 연장할 수 없어요" },
+    { "id": "L3", "title": "도시를 걷는 사람을 위한 아주 긴 제목의 산책 안내서: 골목과 시장과 오래된 극장 편", "author": "박서연", "branch": "강변분관", "loanedAt": "2026-11-20", "dueDate": "2026-12-04", "renewable": true },
+    { "id": "L4", "title": "아주 작은 습관의 힘", "author": "제임스 클리어", "branch": "강변분관", "loanedAt": "2026-11-15", "dueDate": "2026-11-29", "renewable": false, "renewBlockedReason": "다른 회원이 예약한 책이에요" },
+    { "id": "L5", "title": "코스모스", "author": "칼 세이건", "branch": "중앙관", "loanedAt": "2026-11-25", "dueDate": "2026-12-09", "renewable": true }
+  ],
+  "holds": [
+    { "id": "H1", "title": "소년이 온다", "author": "한강", "branch": "중앙관", "status": "ready", "pickupBy": "2026-11-30" },
+    { "id": "H2", "title": "불편한 편의점", "author": "김호연", "branch": "강변분관", "status": "waiting", "queue": 3 }
+  ],
+  "notices": [
+    { "id": "N1", "at": "2026-11-27T09:00", "kind": "due", "text": "‘물고기는 존재하지 않는다’ 반납일이 오늘이에요." },
+    { "id": "N2", "at": "2026-11-26T18:20", "kind": "hold-ready", "text": "예약한 ‘소년이 온다’가 중앙관에 도착했어요. 11월 30일까지 찾아가세요." },
+    { "id": "N3", "at": "2026-11-21T08:00", "kind": "overdue", "text": "‘우리가 빛의 속도로 갈 수 없다면’이 연체됐어요. 반납 전까지 대출이 제한돼요." }
+  ]
+}

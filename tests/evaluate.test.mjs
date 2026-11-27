@@ -151,3 +151,13 @@ test('comparison reports check regressions and lost evidence even in already fai
   assert.equal(incomplete.regression, false);
   assert.deepEqual(incomplete.lostEvidence, [{ trial: 1, id: 'observed' }]);
 });
+test('outcome UI cases copy real screen content and keep outcome checks out of the prompt', t => {
+  for (const id of ['ui-new-screen', 'ui-states-in-place', 'new-flow-choose', 'new-flow-delegated']) {
+    const out = setup(t, id);
+    const workspace = path.join(out, 'workspace');
+    assert.ok(JSON.parse(fs.readFileSync(path.join(workspace, 'content.json'), 'utf8')).loans.length === 5);
+    const prompt = fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8');
+    for (const check of ['outcome-quality', 'no-extra-depth', 'choose-before-build', 'delegated-proceeds']) assert.ok(!prompt.includes(check));
+    assert.equal(assess(out).status, 'NOTRUN', 'prepared files alone never establish agent behavior');
+  }
+});
