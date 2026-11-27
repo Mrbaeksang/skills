@@ -23,7 +23,7 @@
 | 완료 근거가 일부 조건에 한정돼 있고, 변경 결과에 영향을 주는 다른 조건이 있음 | [증거의 대표성](lenses/evidence-coverage.md) |
 | 검사 계획이 변경과 무관한 영역까지 덮거나, 반대로 바뀐 공통 진입점의 소비자를 빼려 함 | [변경 영향 범위](lenses/change-impact.md) |
 | 사용자·주기·요청마다 반복되는 작업을 만들거나 바꿈 | [반복 비용](lenses/recurring-cost.md) |
-| 중복 안내·불필요한 단계·옵션·분기가 발견되거나 단순화를 요청받음 | [빼기 먼저](lenses/subtract-first.md) |
+| 중복 안내·불필요한 단계·옵션·분기가 발견되거나 단순화를 요청받음, UI에 화면·모달·메뉴·안내를 새로 더하려 함 | [빼기 먼저](lenses/subtract-first.md) |
 | 사용자가 자료·저장소·선행 구현을 지목함, 다른 방법을 차용함 | [지목된 원본은 끝까지](lenses/primary-sources.md) |
 | 승인 전에 기존 위임이 발견되거나 현재 요청과 기록의 범위가 다름 | [결정과 위임](lenses/decisions-ledger.md) |
 

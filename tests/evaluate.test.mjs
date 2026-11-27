@@ -161,3 +161,10 @@ test('outcome UI cases copy real screen content and keep outcome checks out of t
     assert.equal(assess(out).status, 'NOTRUN', 'prepared files alone never establish agent behavior');
   }
 });
+test('reference-site case ships a local reference with a streaming endpoint and hides the oracle', t => {
+  const out = setup(t, 'reference-extract');
+  const workspace = path.join(out, 'workspace');
+  for (const name of ['server.mjs', 'ref.html', 'app.html']) assert.ok(fs.existsSync(path.join(workspace, name)), name);
+  assert.match(fs.readFileSync(path.join(workspace, 'server.mjs'), 'utf8'), /event: delta/);
+  assert.ok(!fs.readFileSync(path.join(out, 'prompt.txt'), 'utf8').includes('reference-extracted'));
+});

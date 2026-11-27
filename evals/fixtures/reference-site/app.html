@@ -1,0 +1,6 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>동네서가 도우미</title>
+<style>body{font-family:sans-serif;margin:16px}.q{background:#eee;padding:8px}.a{margin-top:12px}</style></head><body>
+<h1>동네서가 도우미</h1><div class="q">이번 주 반납할 책 있어?</div><div class="a" id="a">불러오는 중…</div>
+<input placeholder="질문"><button>보내기</button>
+<script>fetch('/app/answer.json').then(r=>r.json()).then(d=>{document.getElementById('a').textContent=d.text})</script>
+</body></html>

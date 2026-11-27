@@ -7,6 +7,8 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 
 [공통 실행 계약](references/execution-contract.md)과 코드 변경 시 [작업 공간 수명주기](references/workspace-lifecycle.md)를 적용한다. 직접 입력이 충분하면 shape·spec·ticket을 다시 거치지 않는다.
 
+**새 화면이나 새 사용자 흐름**(기존 흐름의 구조 변경 포함)이면 코드를 쓰기 전에 [UI 품질 기준](references/workflows/ui-quality-bar.md)을 읽는다. 사용자가 결정을 명시적으로 맡기지 않았다면, 실제 콘텐츠로 만든 시안 2~3개를 보여 주고 선택을 받은 뒤 제품 파일을 만든다. 층(모달·시트·탭·접기·안내 패널)은 제자리에서 할 수 없는 판단이 있을 때만 더한다.
+
 **대상과 새 문구가 모두 지정된 단순 치환**은 현재 작업본과 기존 변경을 확인하고 해당 문구가 쓰이는 위치를 찾는다. 한 곳에서만 쓰면 지정한 값만 바꾸고 diff와 그 위치의 실제 표시를 확인한 뒤 끝낸다. 실행할 수 없는 표시는 미확인으로 남긴다. 공유 번역 키·컴포넌트라면 소비 범위를 먼저 확인하고 요청한 화면에만 적용할 방법을 고른다. 문구 선택을 위임받았거나 동작·데이터 계약도 바뀌면 아래 절차에서 해당 조건을 따른다.
 
 1. **현재 상태.** cwd·branch/worktree·지침·tracked/untracked 변경·도구를 확인한다. tracker 입력이면 본문·수용 기준·선행 의존성을 읽고 [상태 계약](references/tracker-state.md)을 적용한다. 입력이 대화·shape에서 정한 여러 단계의 결정인데 tracker에 없고 프로젝트가 요구사항을 tracker에 두면, 구현 전에 결정 전체와 단계를 저장하거나 저장 여부를 확인하고 이번 작업이 그중 어느 단계인지 정한다. 중요 범위·권한 불명확성만 질문하고 기존 변경을 보존한다.
@@ -24,8 +26,9 @@ description: 명세·티켓·충분한 요청을 구현하고 실제 동작을 �
 | API·기술 호환 사실이 부족 | [research](references/workflows/research.md) | 공식 근거와 버전·제약 |
 | 외부 기능·옵션 사용/변경 또는 실행 환경 차이 | [실행 환경 계약](references/workflows/runtime-contract.md) | 실제 조합·실효 설정의 지원 근거와 효과 |
 | 의존성 버전을 변경 | [upgrade](references/workflows/upgrade.md) | 코드 이행과 검증 결과 |
+| 참고 서비스의 디자인·효과·동작(스트리밍 등)을 옮김 | [레퍼런스 분해](references/workflows/design/reference-extraction.md) | 측정한 시각 값·모션·프로토콜과 재구현 대응 |
 | 성능 목표·병목 개선 | [optimize](references/workflows/optimize.md) | baseline·변경·같은 조건의 전후 결과 |
-| 새 화면의 시각 방향 또는 구조·표현을 재설계 | [디자인](references/workflows/design.md) | 사용자 과제·실제 콘텐츠에 맞는 방향과 대표 장면; 지정 문구 치환은 제외 |
+| 새 화면·새 흐름 또는 구조·표현을 재설계 | [UI 품질 기준](references/workflows/ui-quality-bar.md), [디자인](references/workflows/design.md) | 비교 기준 서비스, 구현 전 시안 선택, 층 근거와 대표 장면; 지정 문구 치환은 제외 |
 | 기능 구현 중을 포함해 UI·사용자 문구를 생성/변경 | [UI·문구 기준](references/workflows/polish/ui-copy.md) | 문구의 필요성·실제 대상·상태별 표현과 관찰 결과 |
 | 기존 UI·문구의 완성도 개선 요청 | [polish](references/workflows/polish.md) | 브랜드·동작을 보존한 정리 |
 
